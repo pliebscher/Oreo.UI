@@ -1,19 +1,49 @@
 <script setup lang="ts">
+
 defineProps<{
   msg: string
 }>()
+
 </script>
 
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      You’ve successfully created a project with!
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
+      {{ city }}
     </h3>
   </div>
 </template>
+
+<script lang="ts">
+
+import { defineComponent } from 'vue'
+import axios from 'axios'
+
+interface Weather {
+  City: string
+}
+
+export default defineComponent({
+        name: 'Weather',
+        data() {
+            return {
+                city: '',
+                fetchingWeather: false
+            }
+        },
+        methods: {
+            async fetchWeather() {
+                const weatherResponse = await axios.get<Weather>('http://localhost:36416/api/Weather?Lat=37.82&Lon=-122.23')
+                this.city = weatherResponse.data.City
+            }
+        },
+        async mounted() {
+            await this.fetchWeather()
+        }
+    })
+
+</script>
 
 <style scoped>
 h1 {
