@@ -21,21 +21,25 @@ import { defineComponent } from 'vue'
 import axios from 'axios'
 
 interface Weather {
-  City: string
+  city: City
+}
+
+interface City {
+  name: string
 }
 
 export default defineComponent({
         name: 'Weather',
         data() {
             return {
-                city: '',
+                city: 'None',
                 fetchingWeather: false
             }
         },
         methods: {
             async fetchWeather() {
                 const weatherResponse = await axios.get<Weather>('http://localhost:36416/api/Weather?Lat=37.82&Lon=-122.23')
-                this.city = weatherResponse.data.City
+                this.city = weatherResponse.data.city.name
             }
         },
         async mounted() {
