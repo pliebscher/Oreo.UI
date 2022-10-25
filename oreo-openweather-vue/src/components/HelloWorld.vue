@@ -60,9 +60,16 @@ h3 {
   font-size: 1.2rem;
 }
 
+.greetings {
+  border: 2px;
+  border-color: aqua;
+}
+
 .greetings h1,
 .greetings h3 {
   text-align: center;
+  border: 2px;
+  color: rgb(255, 241, 240);
 }
 
 @media (min-width: 1024px) {

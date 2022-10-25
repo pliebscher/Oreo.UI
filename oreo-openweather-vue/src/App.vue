@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import HelloWorld from './components/Location.vue'
+import TheWelcome from './components/Weather.vue'
 </script>
 
 <template>
@@ -20,11 +20,15 @@ import TheWelcome from './components/TheWelcome.vue'
 <style scoped>
 header {
   line-height: 1.5;
+  border: 2px;
+  border-color: aliceblue;
 }
 
 .logo {
   display: block;
   margin: 0 auto 2rem;
+  border: 2px;
+  border-color: aliceblue;
 }
 
 @media (min-width: 1024px) {
