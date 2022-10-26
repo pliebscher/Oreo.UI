@@ -1,14 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
-<template>
-    <h2>{{city.name}}</h2>
-    <!-- <img :src="getWeatherIconUrl()"> -->
-    <div>Temp: {{forcast.metrics.temp}}</div>
-
-</template>
-
 <script lang="ts">
 
 import { defineComponent } from 'vue'
@@ -19,18 +8,22 @@ export default defineComponent({
         data() {
             return {
                 city: {} as City,
-                forcast: {} as Forecast
+                metrics: {} as Metrics,
+                weather: {} as Weather,
+                weatherIconUrl: ""
             }
         },
         methods: {
             async fetchWeather() {
                 const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=37.82&Lon=-122.23')
                 this.city = weatherResponse.data.city
-                this.forcast = weatherResponse.data.forecast[0]
+                this.metrics = weatherResponse.data.forecast[0].metrics
+                this.weather = weatherResponse.data.forecast[0].weather[0]
+                this.weatherIconUrl = weatherResponse.data.forecast[0].weather[0].icon
             },
-            // getWeatherIconUrl() {
-            //     return 'http://openweathermap.org/img/wn/' + this.forcast.weather[0].icon + '@2x.png';
-            // }
+            getWeatherIconUrl() {
+                return 'http://openweathermap.org/img/wn/' + this.weatherIconUrl + '@2x.png';
+            }
         },
         async mounted() {
             await this.fetchWeather()
@@ -38,3 +31,11 @@ export default defineComponent({
     })
 
 </script>
+
+<template>
+    <h2>{{city.name}}</h2>    
+    <img :src='getWeatherIconUrl()' />
+    <div>Temp: {{metrics.temp}} </div>
+ 
+</template>
+
