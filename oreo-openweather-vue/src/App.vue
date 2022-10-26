@@ -10,22 +10,19 @@ import Weather from './components/Weather.vue'
     </div>
   </header>
   <main>
-    <Weather />
+    <Weather/>
   </main>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
-  border: 2px;
-  border-color: aliceblue;
+  --background-color: dimgray;
 }
 
 .logo {
   display: block;
   margin: 0 auto 2rem;
-  border: 2px;
-  border-color: aliceblue;
 }
 
 @media (min-width: 1024px) {
@@ -39,6 +36,8 @@ header {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+    border: 2px;
+    border-color: aliceblue;
   }
 }
 </style>
