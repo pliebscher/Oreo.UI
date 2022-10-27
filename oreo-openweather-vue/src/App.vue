@@ -10,7 +10,7 @@ import Weather from './components/Weather.vue'
     </div>
   </header>
   <main>
-    <Weather/>
+    <Weather lat="37.82" lon="-122.23" />
   </main>
 </template>
 
