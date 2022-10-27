@@ -1,3 +1,16 @@
+
+
+<template>
+    <div id="weather">
+        <h2>{{city.name}}</h2>    
+
+        <img :src='getWeatherIconUrl()' />
+        <div>{{weather.description}}</div>
+
+        <div>Temp: {{metrics.temp}} </div>
+    </div>
+</template>
+
 <script lang="ts">
 
 import { defineComponent } from 'vue'
@@ -10,7 +23,7 @@ export default defineComponent({
                 city: {} as City,
                 metrics: {} as Metrics,
                 weather: {} as Weather,
-                weatherIconUrl: ""
+                weatherIconUrl: "01n" // https://openweathermap.org/weather-conditions#Icon-list
             }
         },
         methods: {
@@ -32,10 +45,12 @@ export default defineComponent({
 
 </script>
 
-<template>
-    <h2>{{city.name}}</h2>    
-    <img :src='getWeatherIconUrl()' />
-    <div>Temp: {{metrics.temp}} </div>
- 
-</template>
-
+<style scoped>
+#weather {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  --width: 200px;
+  --height: 150px;
+}
+</style>
