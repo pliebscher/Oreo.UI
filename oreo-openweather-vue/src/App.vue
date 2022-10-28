@@ -6,7 +6,7 @@ import Weather from './components/Weather.vue'
 <template>
   <header>
     <div class="wrapper">
-      <Location msg="You did it!" />
+      <Location />
     </div>
   </header>
   <main>
