@@ -20,11 +20,6 @@ header {
   --background-color: dimgray;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -36,8 +31,6 @@ header {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-    border: 2px;
-    border-color: aliceblue;
   }
 }
 </style>
