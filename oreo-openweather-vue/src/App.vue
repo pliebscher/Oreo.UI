@@ -17,7 +17,7 @@ export default defineComponent({
         },
         methods: {
             async locationChanged(lat?: number, lon?: number) {
-              console.info('App.locationChanged: ' + lat?.toString() + ' ' + lon?.toString())
+              console.info('App.locationChanged: ' + lat?.toString() + ', ' + lon?.toString())
               if (lat && lon) {
                 this.lat = lat
                 this.lon = lon
