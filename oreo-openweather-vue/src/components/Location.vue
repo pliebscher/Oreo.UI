@@ -1,30 +1,34 @@
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import axios from 'axios'
 
 export default defineComponent({
         name: 'Location',
         data() {
             return {
-                lat: '',
-                lon: ''
+                location: {} as Location
             }
         },
         methods: {
             async fetchLocation(city?: string, state?: string, country?: string) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
-                const location = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + state +'&Country=' + country)
-                this.lat = location.data[0].lat.toString()
-                this.lon = location.data[0].lon.toString()
+                const locationResponse = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + state +'&Country=' + country)
+                this.location = locationResponse.data[0]
             },
-            getLocation() {
-                console.log("getLocation!")
+            async getLocation() {
+                await this.fetchLocation('piedmont', 'ca', 'us')
+
+                if (this.location.lat && this.location.lon) {
+                    console.info("Location.onLocationChanged: " + this.location.lat.toString() + ' ' + this.location.lon.toString())
+                    this.$emit("onLocationChanged", this.location.lat, this.location.lon)
+                }
+
             }
         },
         async mounted() {
-            await this.fetchLocation('piedmont', 'ca', 'us')
+            
         }
     })
 </script>
@@ -35,7 +39,7 @@ export default defineComponent({
         <label for="locationTxt">City, State: </label>
         <input type="text" id="locationTxt">
         <button @click="getLocation()">Lookup</button>
-        <div>Lat: {{lat}} Lon: {{lon}}</div>
+        <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
     </div>
 
 </template>

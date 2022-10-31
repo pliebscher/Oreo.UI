@@ -3,14 +3,42 @@ import Location from './components/Location.vue'
 import Weather from './components/Weather.vue'
 </script>
 
+<script lang="ts">
+ 
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+        name: 'LocatipnApp',
+        data() {
+            return {
+              lat: 0,
+              lon: 0
+            }
+        },
+        methods: {
+            async locationChanged(lat?: number, lon?: number) {
+              console.info('App.locationChanged: ' + lat?.toString() + ' ' + lon?.toString())
+              if (lat && lon) {
+                this.lat = lat
+                this.lon = lon
+              }
+ 
+            }
+        },
+        async mounted() {
+            
+        }
+    })
+</script>
+
 <template>
   <header>
     <div class="wrapper">
-      <Location />
+      <Location @onLocationChanged="locationChanged" />
     </div>
   </header>
   <main>
-    <Weather lat="37.82" lon="-122.23" />
+    <Weather :lat="lat?.toString()" :lon="lon?.toString()" />
   </main>
 </template>
 
