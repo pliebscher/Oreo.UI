@@ -43,7 +43,7 @@ export default defineComponent({
             await this.fetchWeather(this.lat, this.lon)
         },
         async updated() {
-            if (this.lat != this.currentLat) {
+            if (this.lat != this.currentLat || this.lon != this.currentLon) {
                 console.info('Weather.updated()')
                 await this.fetchWeather(this.lat, this.lon)
             }
