@@ -58,7 +58,7 @@ export default defineComponent({
         <label for="locationTxt">City, State: </label>
         <input type="text" v-model="locationStr" placeholder="City, [State, Country]">
         <button @click="getLocation()">Lookup</button>
-        <div>Lat: {{location?.lat}} Lon: {{location?.lon}} Num: {{resultCount}}</div>
+        <div v-if="locationVis">Lat: {{location?.lat}} Lon: {{location?.lon}} Num: {{resultCount}}</div>
         <div v-if="errorVis" style="color:greenyellow">Location Not Found 😢</div>
     </div>
 
