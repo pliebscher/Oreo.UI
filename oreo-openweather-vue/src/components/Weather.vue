@@ -36,6 +36,12 @@ export default defineComponent({
             },
             getWeatherIconUrl() {
                 return 'http://openweathermap.org/img/wn/' + this.weatherIconUrl + '@2x.png';
+            },
+            toCamelSentence(str: string) {
+                // TODO: Fix RegEx to upp case all words without removing spaces
+                return  (" " + str).toLowerCase().replace(/[^a-zA-Z0-9]+(.)/, function(match, chr) {
+                    return chr.toUpperCase();
+                });
             }
         },
         async mounted() {
@@ -57,7 +63,7 @@ export default defineComponent({
         <h2>{{city?.name}}</h2>
         <img v-bind:src='getWeatherIconUrl()' />
         <h2>{{metrics?.temp}}&deg;</h2>
-        <div>{{weather?.description}}</div>
+        <div>{{toCamelSentence(weather?.description)}}</div>
         <div>Lat: {{lat}} Lon: {{lon}}</div>
     </div>
 </template>

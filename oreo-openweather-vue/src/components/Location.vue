@@ -56,7 +56,7 @@ export default defineComponent({
         <input type="text" v-model="locationStr" placeholder="City, [State, Country]">
         <button @click="getLocation()">Lookup</button>
         <div :style="{visibility: locationVis ? 'visible' : 'hidden'}">Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
-        <div :style="{ color: 'red', visibility: errorVis ? 'visible' : 'hidden' }">Location Not Found</div>
+        <div :style="{ color: 'crimson', visibility: errorVis ? 'visible' : 'hidden' }">Location Not Found</div>
     </div>
 
 </template>
