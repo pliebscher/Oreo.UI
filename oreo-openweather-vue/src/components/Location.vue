@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import { defineComponent } from 'vue'
+import { defineComponent, type StyleValue} from 'vue'
 import axios from 'axios'
 
 export default defineComponent({
@@ -8,7 +8,10 @@ export default defineComponent({
         data() {
             return {
                 location: {} as Location,
-                loccationStr: 'Piedmont, CA'
+                locationStr: 'Piedmont, CA',
+                locationVis: false,
+                errorVis: false,
+                activeColor: 'red',
             }
         },
         methods: {
@@ -20,9 +23,9 @@ export default defineComponent({
             },
             async getLocation() {
 
-                if (this.loccationStr.length > 0) {
+                if (this.locationStr.length > 0) {
 
-                    var locArr = this.loccationStr.split(/[\s,]+/);
+                    var locArr = this.locationStr.split(/[\s,]+/);
 
                     if (locArr.length > 0)
                         await this.fetchLocation(locArr[0], locArr[1], 'us')
@@ -30,7 +33,12 @@ export default defineComponent({
 
                 if (this.location?.lat && this.location?.lon) {
                     console.info("Location.onLocationChanged: " + this.location.lat.toString() + ', ' + this.location.lon.toString())
+                    this.locationVis = true
+                    this.errorVis = false
                     this.$emit("onLocationChanged", this.location.lat, this.location.lon)
+                } else {
+                    this.locationVis = false
+                    this.errorVis = true
                 }
 
             }
@@ -45,9 +53,10 @@ export default defineComponent({
 
     <div class="location">
         <label for="locationTxt">City, State: </label>
-        <input type="text" v-model="loccationStr" placeholder="City, [State, Country]">
+        <input type="text" v-model="locationStr" placeholder="City, [State, Country]">
         <button @click="getLocation()">Lookup</button>
-        <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
+        <div :style="{visibility: locationVis ? 'visible' : 'hidden'}">Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
+        <div :style="{ color: 'red', visibility: errorVis ? 'visible' : 'hidden' }">Location Not Found</div>
     </div>
 
 </template>
