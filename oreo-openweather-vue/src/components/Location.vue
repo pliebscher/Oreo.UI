@@ -11,15 +11,16 @@ export default defineComponent({
                 locationStr: 'Piedmont, CA',
                 locationVis: false,
                 errorVis: false,
-                activeColor: 'red',
+                resultCount: 1,
             }
         },
         methods: {
             async fetchLocation(city?: string, state?: string, country?: string) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
-                const locationResponse = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + state +'&Country=' + country)
+                const locationResponse = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + (state ? state : '') +'&Country=' + (country ? country : 'US'))
                 this.location = locationResponse.data[0]
+                this.resultCount = locationResponse.data.length
             },
             async getLocation() {
 
@@ -35,10 +36,12 @@ export default defineComponent({
                     console.info("Location.onLocationChanged: " + this.location.lat.toString() + ', ' + this.location.lon.toString())
                     this.locationVis = true
                     this.errorVis = false
+                    // TODO: Pass full Location object...
                     this.$emit("onLocationChanged", this.location.lat, this.location.lon)
                 } else {
                     this.locationVis = false
                     this.errorVis = true
+                    this.$emit("onLocationChanged", 0, 0)
                 }
 
             }
@@ -55,8 +58,8 @@ export default defineComponent({
         <label for="locationTxt">City, State: </label>
         <input type="text" v-model="locationStr" placeholder="City, [State, Country]">
         <button @click="getLocation()">Lookup</button>
-        <div :style="{visibility: locationVis ? 'visible' : 'hidden'}">Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
-        <div :style="{ color: 'crimson', visibility: errorVis ? 'visible' : 'hidden' }">Location Not Found</div>
+        <div>Lat: {{location?.lat}} Lon: {{location?.lon}} Num: {{resultCount}}</div>
+        <div v-if="errorVis" style="color:greenyellow">Location Not Found 😢</div>
     </div>
 
 </template>
