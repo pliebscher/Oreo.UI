@@ -7,67 +7,86 @@ export default defineComponent({
         name: 'Location',
         data() {
             return {
-                location: {} as Location,
-                locationStr: 'Piedmont, CA',
-                locationVis: false,
+                locations: {} as Location[],
+                searchStr: 'Piedmont ',
+                locationsVis: false,
                 errorVis: false,
-                resultCount: 1,
             }
         },
         methods: {
-            async fetchLocation(city?: string, state?: string, country?: string) {
+            async fetchLocations(city?: string, state?: string, country?: string) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
                 const locationResponse = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + (state ? state : '') +'&Country=' + (country ? country : 'US'))
-                this.location = locationResponse.data[0]
-                this.resultCount = locationResponse.data.length
-            },
-            async getLocation() {
+                this.locations = locationResponse.data
+             },
+             async getLocations() {
 
-                if (this.locationStr.length > 0) {
+                // Parse location search string...
+                if (this.searchStr.length > 0) {
 
-                    var locArr = this.locationStr.split(/[\s,]+/);
+                    var locArr = this.searchStr.split(/[\s,]+/);
 
                     if (locArr.length > 0)
-                        await this.fetchLocation(locArr[0], locArr[1], 'us')
+                        await this.fetchLocations(locArr[0], locArr[1], 'us')
                 }
 
-                if (this.location?.lat && this.location?.lon) {
-                    console.info("Location.onLocationChanged: " + this.location.lat.toString() + ', ' + this.location.lon.toString())
-                    this.locationVis = true
+                if (this.locations.length > 0) {
+                    if (this.locations.length == 1) {
+                        this.selectLocation(this.locations[0])
+                        this.locationsVis = false
+                    } else {
+                        this.locationsVis = true
+                    }
                     this.errorVis = false
-                    // TODO: Pass full Location object...
-                    this.$emit("onLocationChanged", this.location.lat, this.location.lon)
                 } else {
-                    this.locationVis = false
+                    this.locationsVis = false
                     this.errorVis = true
                     this.$emit("onLocationChanged", 0, 0)
                 }
 
+             },
+            async selectLocation(location: Location) {
+
+                    console.info("Location.onLocationChanged: " + location.lat.toString() + ', ' + location.lon.toString())
+                    // TODO: Pass full Location object...
+                    this.$emit("onLocationChanged", location.lat, location.lon)
+
             }
         },
         async mounted() {
-            this.getLocation()
+            //this.getLocation()
         }
     })
 </script>
 
 <template>
 
-    <div class="location">
+    <div class="locationSearch">
         <label for="locationTxt">City, State: </label>
-        <input type="text" v-model="locationStr" placeholder="City, [State, Country]">
-        <button @click="getLocation()">Lookup</button>
-        <div v-if="locationVis">Lat: {{location?.lat}} Lon: {{location?.lon}} Num: {{resultCount}}</div>
-        <div v-if="errorVis" style="color:greenyellow">Location Not Found 😢</div>
+        <input type="text" v-model="searchStr" placeholder="City, [State]">
+        <button @click="getLocations()">Lookup</button>
+        <div v-if="locations?.length == 0" style="color:greenyellow">Location Not Found 😢</div>
+        <div v-if="locations?.length > 1">
+            <h3>Found {{locations?.length}} Locations</h3>
+            <hr />
+            <div v-for="loc in locations">
+            <a @click="selectLocation(loc)" href="#">{{loc.name}}</a>, {{loc.state}}
+        </div>
+        </div>
+
     </div>
 
 </template>
 
 <style scoped>
-.location {
+.locationSearch {
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px;
+}
+
+h3 {
+    color: #73AD21;
 }
 </style>

@@ -45,7 +45,11 @@ export default defineComponent({
 <style scoped>
 header {
   line-height: 1.5;
-  --background-color: dimgray;
+  vertical-align: top;
+}
+.wrapper {
+    --background-color: dimgray;
+    vertical-align: top;
 }
 
 @media (min-width: 1024px) {
@@ -53,6 +57,7 @@ header {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
+    vertical-align: top;
   }
 
   header .wrapper {
@@ -60,5 +65,6 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+
 }
 </style>
