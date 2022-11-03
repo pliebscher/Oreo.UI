@@ -11,16 +11,14 @@ export default defineComponent({
         name: 'LocatipnApp',
         data() {
             return {
-              lat: 0,
-              lon: 0
+              location: {} as Location
             }
         },
         methods: {
-            async locationChanged(lat?: number, lon?: number) {
-              console.info('App.locationChanged: ' + lat?.toString() + ', ' + lon?.toString())
-              if (lat && lon) {
-                this.lat = lat
-                this.lon = lon
+            async locationChanged(location: Location) {
+              console.info('App.locationChanged: ' + location?.lat.toString() + ', ' + location?.lon.toString())
+              if (location) {
+                this.location = location
               }
  
             }
@@ -38,7 +36,7 @@ export default defineComponent({
     </div>
   </header>
   <main>
-    <Weather :lat="lat?.toString()" :lon="lon?.toString()" />
+    <Weather :location=location />
   </main>
 </template>
 
