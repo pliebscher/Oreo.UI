@@ -6,8 +6,7 @@ import axios from 'axios'
 export default defineComponent({
         name: 'Weather',
         props:{
-            lat: String,
-            lon: String
+            location: Location
         },
         data() {
             return {
@@ -15,23 +14,21 @@ export default defineComponent({
                 metrics: {} as Metrics,
                 weather: {} as Weather,
                 weatherIconUrl: "01n", // https://openweathermap.org/weather-conditions#Icon-list
-                currentLat: "",
-                currentLon: ""
+                curLat: 0
             }
         },
         methods: {
-            async fetchWeather(lat?: string, lon?: string) {
+            async fetchWeather(loc?: Location) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
-                if (lat && lon) {
-                    console.info('fetching weather: ' + lat + ', ' + lon)
-                    const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + lat + '&Lon=' + lon)
+                if (loc) {
+                    console.info('fetchWeather: ' + loc.lat + ', ' + loc.lon)
+                    const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
                     this.city = weatherResponse.data.city
                     this.metrics = weatherResponse.data.forecast[0].metrics
                     this.weather = weatherResponse.data.forecast[0].weather[0]
                     this.weatherIconUrl = weatherResponse.data.forecast[0].weather[0].icon
-                    this.currentLat = lat
-                    this.currentLon = lon
+                    this.curLat = loc.lat
                 }
             },
             getWeatherIconUrl() {
@@ -44,13 +41,13 @@ export default defineComponent({
             }
         },
         async mounted() {
-            console.info('Weather.mounted(): ' + this.lat + ', ' + this.lon)
-            await this.fetchWeather(this.lat, this.lon)
+            console.info('Weather.mounted(): ' + this.location?.lat + ', ' + this.location?.lon)
+            await this.fetchWeather(this.location)
         },
         async updated() {
-            if (this.lat != this.currentLat || this.lon != this.currentLon) {
+            if (this.curLat !== this.location?.lat) {
                 console.info('Weather.updated()')
-                await this.fetchWeather(this.lat, this.lon)
+                await this.fetchWeather(this.location)
             }
             
         }
@@ -59,11 +56,11 @@ export default defineComponent({
 
 <template>
     <div class="weather">
-        <h2>{{city?.name}}</h2>
+        <h2>{{city?.name}}, {{location?.state}}</h2>
         <img v-bind:src='getWeatherIconUrl()' />
         <h2>{{metrics?.temp}}&deg;</h2>
         <div>{{toCapWords(weather?.description)}}</div>
-        <div>Lat: {{lat}} Lon: {{lon}}</div>
+        <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
     </div>
 </template>
 

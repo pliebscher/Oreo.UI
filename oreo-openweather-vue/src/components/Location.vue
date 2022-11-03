@@ -14,9 +14,11 @@ export default defineComponent({
             }
         },
         methods: {
+            // TODO: Move to Axios module and;
+            // TODO: Axios error handling
+            // TODO: Remove hard-coded API hostname:port
             async fetchLocations(city?: string, state?: string, country?: string) {
-                // TODO: Axios error handling
-                // TODO: Remove hard-coded API hostname:port
+
                 const locationResponse = await axios.get<Location[]>('http://localhost:36416/api/GeoLocation?City=' + city +'&State=' + (state ? state : '') +'&Country=' + (country ? country : 'US'))
                 this.locations = locationResponse.data
              },
@@ -42,20 +44,17 @@ export default defineComponent({
                 } else {
                     this.locationsVis = false
                     this.errorVis = true
-                    this.$emit("onLocationChanged", 0, 0)
+                    //this.$emit("onLocationChanged", 0, 0)
                 }
-
              },
             async selectLocation(location: Location) {
-
                     console.info("Location.onLocationChanged: " + location.lat.toString() + ', ' + location.lon.toString())
                     // TODO: Pass full Location object...
-                    this.$emit("onLocationChanged", location.lat, location.lon)
-
+                    this.$emit("onLocationChanged", location)
             }
         },
         async mounted() {
-            //this.getLocation()
+
         }
     })
 </script>
