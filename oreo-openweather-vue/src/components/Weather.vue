@@ -6,7 +6,10 @@ import axios from 'axios'
 export default defineComponent({
         name: 'Weather',
         props:{
-            location: Location
+            location: {
+                type: [Location],
+                require: true
+            }
         },
         data() {
             return {
@@ -21,14 +24,15 @@ export default defineComponent({
             async fetchWeather(loc?: Location) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
-                if (loc) {
+                if (loc?.lat && loc.lon) {
                     console.info('fetchWeather: ' + loc.lat + ', ' + loc.lon)
-                    const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
+                    const weatherResponse = await axios.get('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
                     this.city = weatherResponse.data.city
                     this.metrics = weatherResponse.data.forecast[0].metrics
                     this.weather = weatherResponse.data.forecast[0].weather[0]
                     this.weatherIconUrl = weatherResponse.data.forecast[0].weather[0].icon
                     this.curLat = loc.lat
+                    console.info('this.weather: ', weatherResponse.data.forecast[0].weather[0])
                 }
             },
             getWeatherIconUrl() {
@@ -46,7 +50,7 @@ export default defineComponent({
         },
         async updated() {
             if (this.curLat !== this.location?.lat) {
-                console.info('Weather.updated()')
+                console.info('Weather.updated: ' + this.location)
                 await this.fetchWeather(this.location)
             }
             

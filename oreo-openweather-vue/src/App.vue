@@ -8,7 +8,7 @@ import Weather from './components/Weather.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-        name: 'LocatipnApp',
+        name: 'LocationApp',
         data() {
             return {
               location: {} as Location
@@ -16,7 +16,7 @@ export default defineComponent({
         },
         methods: {
             async locationChanged(location: Location) {
-              console.info('App.locationChanged: ' + location?.lat.toString() + ', ' + location?.lon.toString())
+              console.info('App.locationChanged: ' + location)
               if (location) {
                 this.location = location
               }
@@ -36,7 +36,7 @@ export default defineComponent({
     </div>
   </header>
   <main>
-    <Weather :location=location />
+    <Weather v-bind:location="location" />
   </main>
 </template>
 
