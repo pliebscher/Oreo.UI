@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import Location from './components/Location.vue'
 import Weather from './components/Weather.vue'
+import Error from './components/Error.vue'
 </script>
 
 <script lang="ts">
  
-import { defineComponent } from 'vue'
+import { createApp, defineComponent, handleError } from 'vue'
 
 export default defineComponent({
         name: 'LocationApp',
@@ -20,7 +21,6 @@ export default defineComponent({
               if (location) {
                 this.location = location
               }
- 
             }
         },
         async mounted() {
@@ -38,6 +38,7 @@ export default defineComponent({
   <main>
     <Weather v-bind:location="location" />
   </main>
+  <Error/>
 </template>
 
 <style scoped>

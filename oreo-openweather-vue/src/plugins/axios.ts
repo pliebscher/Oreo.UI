@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { Axios, AxiosError } from 'axios'
 import type {App} from 'vue'
 
 interface AxiosOptions 
@@ -19,5 +19,9 @@ export default
                 Authorization: options.token ? `Bearer ${options.token}` : '',
             }
         })
+    },
+    options: (error: AxiosError) => 
+    {
+        console.error('AxiosError: ' + error.message)
     }
 }
