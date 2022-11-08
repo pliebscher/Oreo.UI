@@ -7,17 +7,19 @@ import Error from './components/Error.vue'
 <script lang="ts">
  
 import { createApp, defineComponent, handleError } from 'vue'
+import type { GeoLocation } from './models/GeoLocation';
 
 export default defineComponent({
         name: 'LocationApp',
         data() {
             return {
-              location: {} as Location
+              location: {} as GeoLocation
             }
         },
         methods: {
-            async locationChanged(location: Location) {
-              console.info('App.locationChanged: ' + location)
+            async locationChanged(location: GeoLocation) {
+              console.info('App.locationChanged: ')
+              console.info(location)
               if (location) {
                 this.location = location
               }
@@ -32,11 +34,11 @@ export default defineComponent({
 <template>
   <header>
     <div class="wrapper">
-      <Location @onLocationChanged="locationChanged" />
+      <Location @onLocationChanged='locationChanged' />
     </div>
   </header>
   <main>
-    <Weather v-bind:location="location" />
+    <Weather v-bind:location="$data.location as GeoLocation" />
   </main>
   <Error/>
 </template>

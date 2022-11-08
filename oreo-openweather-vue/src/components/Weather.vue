@@ -1,14 +1,31 @@
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, type PropType } from 'vue'
 import axios from 'axios'
+import weather from '@/services/weather'
+import { GeoLocation } from '@/models/GeoLocation'
 
 export default defineComponent({
         name: 'Weather',
         props:{
             location: {
-                type: [Location],
-                require: true
+                type: GeoLocation,
+                required: true,
+                default: {
+                    name: "Test",
+                    lat: 0,
+                    lon: 0
+                },
+                validator: (location: GeoLocation) => true
+            }
+        },
+        watch: {
+            location: {
+                handler (val, oldVal) {
+                    console.warn(val)
+                    console.info('Weather.updated: ' + this.location)
+                    this.fetchWeather(this.location)
+                }
             }
         },
         data() {
@@ -16,27 +33,26 @@ export default defineComponent({
                 city: {} as City,
                 metrics: {} as Metrics,
                 weather: {} as Weather,
-                weatherIconUrl: "01n", // https://openweathermap.org/weather-conditions#Icon-list
-                curLat: 0
+                weatherIcon: "01n", // https://openweathermap.org/weather-conditions#Icon-list
             }
         },
         methods: {
-            async fetchWeather(loc?: Location) {
+            async fetchWeather(loc?: GeoLocation) {
                 // TODO: Axios error handling
                 // TODO: Remove hard-coded API hostname:port
                 if (loc?.lat && loc.lon) {
                     console.info('fetchWeather: ' + loc.lat + ', ' + loc.lon)
-                    const weatherResponse = await axios.get('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
+                    const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
                     this.city = weatherResponse.data.city
                     this.metrics = weatherResponse.data.forecast[0].metrics
                     this.weather = weatherResponse.data.forecast[0].weather[0]
-                    this.weatherIconUrl = weatherResponse.data.forecast[0].weather[0].icon
-                    this.curLat = loc.lat
+                    this.weatherIcon = weatherResponse.data.forecast[0].weather[0].icon
+
                     console.info('this.weather: ', weatherResponse.data.forecast[0].weather[0])
                 }
             },
             getWeatherIconUrl() {
-                return 'http://openweathermap.org/img/wn/' + this.weatherIconUrl + '@2x.png';
+                return 'http://openweathermap.org/img/wn/' + this.weatherIcon + '@2x.png';
             },
             toCapWords(str: string) {
                 return  (" " + str).toLowerCase().replace(/(\b[a-z](?!\s))/g, function(chr) {
@@ -48,13 +64,6 @@ export default defineComponent({
             console.info('Weather.mounted(): ' + this.location?.lat + ', ' + this.location?.lon)
             await this.fetchWeather(this.location)
         },
-        async updated() {
-            if (this.curLat !== this.location?.lat) {
-                console.info('Weather.updated: ' + this.location)
-                await this.fetchWeather(this.location)
-            }
-            
-        }
     })
 </script>
 
