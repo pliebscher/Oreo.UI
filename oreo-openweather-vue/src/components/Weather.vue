@@ -44,7 +44,7 @@ export default defineComponent({
                     console.info('fetchWeather: ' + loc.lat + ', ' + loc.lon)
                     const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
                     this.city = weatherResponse.data.city
-                    this.metrics = weatherResponse.data.forecast[0].metrics
+                    this.metrics = weatherResponse.data.forecast[0].metrics as Metrics
                     this.weather = weatherResponse.data.forecast[0].weather[0]
                     this.weatherIcon = weatherResponse.data.forecast[0].weather[0].icon
 
