@@ -2,7 +2,7 @@
 
 import { defineComponent, ref, type PropType } from 'vue'
 import axios from 'axios'
-import weather from '@/services/weather'
+import { getWeather } from '@/services/weather'
 import { GeoLocation } from '@/models/GeoLocation'
 
 export default defineComponent({
@@ -38,17 +38,12 @@ export default defineComponent({
         },
         methods: {
             async fetchWeather(loc?: GeoLocation) {
-                // TODO: Axios error handling
-                // TODO: Remove hard-coded API hostname:port
                 if (loc?.lat && loc.lon) {
-                    console.info('fetchWeather: ' + loc.lat + ', ' + loc.lon)
-                    const weatherResponse = await axios.get<WeatherResponse>('http://localhost:36416/api/Weather?Lat=' + loc.lat + '&Lon=' + loc.lon)
-                    this.city = weatherResponse.data.city
-                    this.metrics = weatherResponse.data.forecast[0].metrics as Metrics
-                    this.weather = weatherResponse.data.forecast[0].weather[0]
-                    this.weatherIcon = weatherResponse.data.forecast[0].weather[0].icon
-
-                    console.info('this.weather: ', weatherResponse.data.forecast[0].weather[0])
+                    const weatherResponse = await getWeather(loc)
+                    this.city = weatherResponse?.city as City
+                    this.metrics = weatherResponse?.forecast[0].metrics as Metrics
+                    this.weather = weatherResponse?.forecast[0].weather[0] as Weather
+                    this.weatherIcon = weatherResponse?.forecast[0].weather[0].icon as string
                 }
             },
             getWeatherIconUrl() {

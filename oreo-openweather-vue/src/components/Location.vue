@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import getLocations from '@/services/weather'
+import { getLocations } from '@/services/weather'
 import type { GeoLocation } from '@/models/GeoLocation'
 
 export default defineComponent({
