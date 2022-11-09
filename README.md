@@ -1,3 +1,3 @@
 # Oreo.UI
 
-Frontend for various API's
+Frontends for various API's

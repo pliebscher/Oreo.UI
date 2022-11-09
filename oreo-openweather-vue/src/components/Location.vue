@@ -20,13 +20,14 @@ export default defineComponent({
         }
     },
     methods: {
-        async updateLocations() {
+        async getLocations() {
             // Parse location search string... TODO: Do this better!
             if (this.searchStr.length > 0) {
                 var locArr = this.searchStr.split(/[\s,]+/);
                 if (locArr.length > 0)
-                    this.locations = await getLocations(locArr[0], locArr[1], "us")                    
+                this.locations = await getLocations(locArr[0], locArr[1], "us")
             }
+
             if (this.locations.length > 0) {
                 if (this.locations.length == 1) {
                     this.selectLocation(this.locations[0]);
@@ -58,7 +59,7 @@ export default defineComponent({
     <div class="locationSearch">
         <label for="locationTxt">City, State: &nbsp;</label>
         <input type="text" v-model="searchStr" placeholder="City, [State]">
-        <button @click="updateLocations()">Lookup</button>
+        <button @click="getLocations()">Lookup</button>
         <div>&nbsp;</div>
         <div v-if="errorVis" style="color:greenyellow">Location Not Found 😢</div>
         <div v-if="locations?.length > 1">

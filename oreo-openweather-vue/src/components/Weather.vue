@@ -68,7 +68,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="weather">
+    <div class="weather" v-if="location?.lat !== undefined">
         <h2>{{city?.name}}, {{location?.state}}</h2>
         <img v-bind:src='getWeatherIconUrl()' />
         <h2>{{metrics?.temp}}&deg;</h2>
