@@ -63,7 +63,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div v-if="location?.lat !== undefined" class="weather">
+    <div v-if="location?.lat !== undefined" class="box-rnd-green">
         <div>
             <h2>{{city?.name}}, {{location?.state}}</h2>
             <img v-bind:src='getWeatherIconUrl()' />
@@ -75,9 +75,5 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.weather {
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  padding: 20px;
-}
+
 </style>

@@ -55,15 +55,13 @@ export default defineComponent({
 </script>
 
 <template>
-        <div class="location">
+        <div class="box-rnd-green">
             <div class="row row-no-gutters">
                 <div class="col-sm-4">
-                    <label for="locationTxt">City [,State]:</label>
-                                    
+                    <label for="locationTxt">City [,State]:</label>                                    
                 </div>
                 <div class="col-sm-5">                    
                     <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
-                
                 </div>
                 <div class="col-sm-3">
                     <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
@@ -75,8 +73,8 @@ export default defineComponent({
         <div>&nbsp;</div>
 
         <div>
-            <div v-if="errorVis" class="location green">Location Not Found 😢</div>
-            <div v-if="locations?.length > 1" class="location">
+            <div v-if="errorVis" class="box-rnd-green green">Location Not Found 😢</div>
+            <div v-if="locations?.length > 1" class="box-rnd-green">
                 <b>Found {{locations?.length}} Locations</b>
                 <hr />
                 <div v-for="location in locations">
@@ -90,11 +88,5 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.location {
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  padding: 20px;
-  /* width: 300px; */
-}
 
 </style>
