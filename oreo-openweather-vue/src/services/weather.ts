@@ -6,20 +6,35 @@ const axiosClient = axios.create({
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
 });
 
-// TODO: Handle Axios errors...
+// Error hanldling...
+axiosClient.interceptors.response.use(
+  response => response,
+  handleError
+);
 
+function handleError(error: any) {
+  // check for errorHandle config
+  if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
+    return Promise.reject(error);
+  }
+  // if has response show the error
+  if (error.response) {
+    //toast.error(error.response.data.message);
+    console.error(error.response.status + ' - ' + error.response.statusText + ': ' + error.response.data.title)
+  }
+}
+
+// API calls...
 export async function getLocations(city?: string, state?: string, country?: string) {
     const query = "GeoLocation?City=" + city + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
-    const locationResponse = await axiosClient.get<GeoLocation[]>(query)
-    return locationResponse.data
+    return await (await axiosClient.get<GeoLocation[]>(query)).data
 }
 
 export async function getWeather(location?: GeoLocation) {
   if (location?.lat && location?.lon) {
-      const weatherResponse = await axiosClient.get<WeatherResponse>('Weather?Lat=' + location.lat + '&Lon=' + location.lon)
-      return weatherResponse.data
+      return await (await axiosClient.get<WeatherResponse>('Weather?Lat=' + location.lat + '&Lon=' + location.lon)).data
   }
 }
