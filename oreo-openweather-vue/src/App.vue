@@ -6,7 +6,7 @@ import Error from './components/Error.vue'
 
 <script lang="ts">
  
-import { createApp, defineComponent, handleError } from 'vue'
+import { defineComponent } from 'vue'
 import type { GeoLocation } from './models/GeoLocation';
 
 export default defineComponent({
@@ -26,21 +26,23 @@ export default defineComponent({
             }
         },
         async mounted() {
-            
+
         }
     })
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <Location @onLocationChanged='locationChanged' />
+  <div class=".container-fluid">
+    <div class="row">
+      <div class="col">
+        <Location @onLocationChanged='locationChanged' />
+      </div>
+      <div class="col-md-7">
+        <Weather v-bind:location='$data.location as GeoLocation' />
+      </div>
     </div>
-  </header>
-  <main>
-    <Weather v-bind:location="$data.location as GeoLocation" />
-  </main>
-  <Error/>
+
+  </div>
 </template>
 
 <style scoped>
@@ -49,8 +51,8 @@ header {
   vertical-align: top;
 }
 .wrapper {
-    --background-color: dimgray;
-    vertical-align: top;
+    --background-color: rgb(146, 145, 145);
+    --vertical-align: top;
 }
 
 @media (min-width: 1024px) {

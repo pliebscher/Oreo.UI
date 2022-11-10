@@ -50,26 +50,29 @@ export default defineComponent({
     },
     async mounted() {
 
-    },
-    components: { Error }
+    }
 })
 </script>
 
 <template>
     <div class="locationSearch">
-        <label for="locationTxt">City, State: &nbsp;</label>
-        <input type="text" v-model="searchStr" placeholder="City, [State]">
-        <button @click="getLocations()">Lookup</button>
+        <div class="form-group">
+            <label class="sr-only" for="locationTxt">City, State: &nbsp;</label>
+            <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
+        </div>
+        
+        <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
+
         <div>&nbsp;</div>
-        <div v-if="errorVis" style="color:greenyellow">Location Not Found 😢</div>
+        <div v-if="errorVis" class="green">Location Not Found 😢</div>
         <div v-if="locations?.length > 1">
             <b>Found {{locations?.length}} Locations</b>
             <hr />
             <div v-for="location in locations">
-            <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+            </div>
         </div>
-        </div>
-    </div>    
+    </div>
 </template>
 
 <style scoped>
@@ -77,9 +80,7 @@ export default defineComponent({
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px;
+  --width: 300px;
 }
 
-h3 {
-    color: #73AD21;
-}
 </style>
