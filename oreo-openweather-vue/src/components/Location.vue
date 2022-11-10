@@ -55,32 +55,46 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="locationSearch">
-        <div class="form-group">
-            <label class="sr-only" for="locationTxt">City, State: &nbsp;</label>
-            <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
+        <div class="location">
+            <div class="row row-no-gutters">
+                <div class="col-sm-4">
+                    <label for="locationTxt">City [,State]:</label>
+                                    
+                </div>
+                <div class="col-sm-5">                    
+                    <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
+                
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
+                </div>
+            </div>
+            
         </div>
-        
-        <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
 
         <div>&nbsp;</div>
-        <div v-if="errorVis" class="green">Location Not Found 😢</div>
-        <div v-if="locations?.length > 1">
-            <b>Found {{locations?.length}} Locations</b>
-            <hr />
-            <div v-for="location in locations">
-                <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+
+        <div>
+            <div v-if="errorVis" class="location green">Location Not Found 😢</div>
+            <div v-if="locations?.length > 1" class="location">
+                <b>Found {{locations?.length}} Locations</b>
+                <hr />
+                <div v-for="location in locations">
+                    <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                </div>
             </div>
         </div>
-    </div>
+
+        <div>&nbsp;</div>
+
 </template>
 
 <style scoped>
-.locationSearch {
+.location {
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px;
-  --width: 300px;
+  /* width: 300px; */
 }
 
 </style>

@@ -63,12 +63,14 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="weather" v-if="location?.lat !== undefined">
-        <h2>{{city?.name}}, {{location?.state}}</h2>
-        <img v-bind:src='getWeatherIconUrl()' />
-        <h2>{{metrics?.temp}}&deg;</h2>
-        <div>{{toCapWords(weather?.description)}}</div>
-        <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
+    <div v-if="location?.lat !== undefined" class="weather">
+        <div>
+            <h2>{{city?.name}}, {{location?.state}}</h2>
+            <img v-bind:src='getWeatherIconUrl()' />
+            <h2>{{metrics?.temp}}&deg;</h2>
+            <div>{{toCapWords(weather?.description)}}</div>
+            <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
+        </div>
     </div>
 </template>
 
@@ -77,7 +79,5 @@ export default defineComponent({
   border-radius: 25px;
   border: 2px solid #73AD21;
   padding: 20px;
-  --width: 200px;
-  --height: 150px;
 }
 </style>

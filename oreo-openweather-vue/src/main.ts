@@ -6,8 +6,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
-//import axios from './plugins/axios'
-
 import './assets/main.css'
 
 const app = createApp(App)
