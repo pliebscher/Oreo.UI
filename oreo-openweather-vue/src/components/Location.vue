@@ -22,6 +22,7 @@ export default defineComponent({
     methods: {
         async getLocations() {
             // Parse location search string... TODO: Do this better!
+            // https://stackoverflow.com/questions/35784962/regex-for-capturing-city-state-zip-from-an-address-string
             if (this.searchStr.length > 0) {
                 var locArr = this.searchStr.split(/[\s,]+/);
                 if (locArr.length > 0)
