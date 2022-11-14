@@ -11,7 +11,6 @@ export default defineComponent({
         return {
             locations: [] as GeoLocation[],
             searchStr: "Piedmont ",
-            //locationsVis: false,
             errorVis: false,
             favLocations: JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]') as GeoLocation[]
         };
@@ -47,7 +46,8 @@ export default defineComponent({
             localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
         },
         delFavorite(location: GeoLocation) {
-
+           this.favLocations.splice(this.favLocations.indexOf(location), 1)
+           localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
         }
     },
     async mounted() {
@@ -76,7 +76,7 @@ export default defineComponent({
                 <table class="table table-striped table-hover">
                     <tr v-for="location in favLocations" class="">
                         <td class="loc">
-                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>
                         <td class="fav">
                             <a @click="delFavorite(location)" href="#" alt="Nuke Favorite">💀</a>
@@ -93,13 +93,13 @@ export default defineComponent({
             <div v-if="locations?.length > 0" class="box-rnd-green">
                 <b>Found {{locations?.length}} Locations</b>
                 <hr />
-                <table class="table table-striped table-hover">
+                <table class="table">
                     <tr v-for="location in locations" class="">
                         <td class="loc">
-                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>
                         <td class="fav">
-                            <a @click="addFavorite(location)" href="#" alt="Add Favorite">⭐</a>
+                            <a v-if="!favLocations.includes(location)" @click="addFavorite(location)" href="#" alt="Add Favorite">⭐</a>
                         </td>
                     </tr>
                 </table>
