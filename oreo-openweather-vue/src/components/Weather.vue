@@ -24,8 +24,6 @@ export default defineComponent({
         watch: {
             location: {
                 handler (val, oldVal) {
-                    console.warn(val)
-                    console.info('Weather.updated: ' + this.location)
                     this.fetchWeather(this.location)
                 }
             }

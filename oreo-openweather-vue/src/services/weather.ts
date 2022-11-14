@@ -1,9 +1,10 @@
 import axios from 'axios'
+//import process from 'process' // BROKEN, see main.ts
 import type { GeoLocation } from '@/models/GeoLocation'
-import type { WeatherResponse } from '@/models/WeatherResponse';
+import type { WeatherResponse } from '@/models/WeatherResponse'
 
 const axiosClient = axios.create({
-    baseURL: `http://20.120.148.155/api/`,
+    baseURL: `http://20.120.148.155/api/`, // process.env.WEATHER_API_URL,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -25,6 +26,7 @@ function handleError(error: any) {
   if (error.response) {
     //toast.error(error.response.data.message);
     console.error(error.response.status + ' - ' + error.response.statusText + ': ' + error.response.data.title)
+    // TODO: Send error to an error service API...
   }
 }
 

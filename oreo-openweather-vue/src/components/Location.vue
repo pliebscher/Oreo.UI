@@ -3,21 +3,21 @@ import { defineComponent } from 'vue'
 import { getLocations } from '@/services/weather'
 import type { GeoLocation } from '@/models/GeoLocation'
 
+const FAV_LOCATIONS_KEY = "favLocations"
+
 export default defineComponent({
     name: "Location",
     data() {
         return {
             locations: [] as GeoLocation[],
             searchStr: "Piedmont ",
-            locationsVis: false,
+            //locationsVis: false,
             errorVis: false,
+            favLocations: JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]') as GeoLocation[]
         };
     },
     emits: {
-        onLocationChanged(location: GeoLocation) {
-            console.info('onLocationChanged.Validate: ' + location)
-            return location !== undefined
-        }
+        onLocationChanged(location: GeoLocation) { return location }
     },
     methods: {
         async getLocations() {
@@ -26,27 +26,28 @@ export default defineComponent({
             if (this.searchStr.length > 0) {
                 var locArr = this.searchStr.split(/[\s,]+/);
                 if (locArr.length > 0)
-                this.locations = await getLocations(locArr[0], locArr[1], "us")
+                    this.locations = await getLocations(locArr[0], locArr[1], "us")
             }
 
             if (this.locations.length > 0) {
-                if (this.locations.length == 1) {
-                    this.selectLocation(this.locations[0]);
-                    this.locationsVis = false;
-                }
-                else {
-                    this.locationsVis = true;
-                }
-                this.errorVis = false;
+                this.selectLocation(this.locations[0])
+                //this.locationsVis = true               
             }
             else { // Location(s) Not Found...
-                this.locationsVis = false;
-                this.errorVis = true;
+                //this.locationsVis = false
+                this.errorVis = true
             }
         },
         async selectLocation(location: GeoLocation) {
-            console.info("Location.selectLocation: " + location.toString());
             this.$emit("onLocationChanged", location);
+        },
+        addFavorite(location: GeoLocation) {
+            this.selectLocation(location)
+            this.favLocations.push(location)
+            localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
+        },
+        delFavorite(location: GeoLocation) {
+
         }
     },
     async mounted() {
@@ -68,19 +69,40 @@ export default defineComponent({
                     <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
                 </div>
             </div>
-            
+            <div v-if="favLocations?.length > 0">
+                <div>&nbsp;</div>
+                <b>Favorite Locations</b>
+                <hr />
+                <table class="table table-striped table-hover">
+                    <tr v-for="location in favLocations" class="">
+                        <td class="loc">
+                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                        </td>
+                        <td class="fav">
+                            <a @click="delFavorite(location)" href="#" alt="Nuke Favorite">💀</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div>&nbsp;</div>
 
         <div>
-            <div v-if="errorVis" class="box-rnd-green green">Location Not Found 😢</div>
-            <div v-if="locations?.length > 1" class="box-rnd-green">
+            <div v-if="errorVis" class="box-rnd-green green">Location Not Found 😢</div>            
+            <div v-if="locations?.length > 0" class="box-rnd-green">
                 <b>Found {{locations?.length}} Locations</b>
                 <hr />
-                <div v-for="location in locations">
-                    <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
-                </div>
+                <table class="table table-striped table-hover">
+                    <tr v-for="location in locations" class="">
+                        <td class="loc">
+                            <a @click="selectLocation(location)" href="#">{{location.name}}</a>, {{location.state}}, {{location.country}}
+                        </td>
+                        <td class="fav">
+                            <a @click="addFavorite(location)" href="#" alt="Add Favorite">⭐</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -89,5 +111,10 @@ export default defineComponent({
 </template>
 
 <style scoped>
-
+.loc {
+    color: rgba(235, 235, 235, 0.64);
+}
+.fav {
+    text-align: right;
+}
 </style>
