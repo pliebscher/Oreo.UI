@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------------------
+# PREREQ: npm install @popperjs/core --save (Required for Bootstrap)
 # BUILD	: docker build --force-rm -t {namespace/image name} .
 # RUN	: docker run -p 80:80 {namespace/image name}
 # -----------------------------------------------------------------------------------------
@@ -12,4 +13,4 @@ RUN npm run build
 FROM nginx as production-stage
 RUN mkdir /app
 COPY --from=build-stage /app/dist /app
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf

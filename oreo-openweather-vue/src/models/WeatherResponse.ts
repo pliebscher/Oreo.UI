@@ -1,6 +1,9 @@
-interface WeatherResponse {
-    city: City
-    forecast: Forecast[]
+import { City } from "./City"
+import type { Forecast } from "./Forecast"
+
+export class WeatherResponse {
+    city: City = new City
+    forecast: Forecast[] = []
 }
 
 // "weatherResponse": {

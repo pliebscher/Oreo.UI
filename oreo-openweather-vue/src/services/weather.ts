@@ -1,8 +1,9 @@
 import axios from 'axios'
 import type { GeoLocation } from '@/models/GeoLocation'
+import type { WeatherResponse } from '@/models/WeatherResponse';
 
 const axiosClient = axios.create({
-    baseURL: `http://localhost:36416/api/`,
+    baseURL: `http://20.120.148.155/api/`,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -29,12 +30,12 @@ function handleError(error: any) {
 
 // API calls...
 export async function getLocations(city?: string, state?: string, country?: string) {
-    const query = "GeoLocation?City=" + city + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
-    return await (await axiosClient.get<GeoLocation[]>(query)).data
+  const query = "GeoLocation?City=" + city + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
+  return await (await axiosClient.get<GeoLocation[]>(query)).data
 }
 
 export async function getWeather(location?: GeoLocation) {
   if (location?.lat && location?.lon) {
-      return await (await axiosClient.get<WeatherResponse>('Weather?Lat=' + location.lat + '&Lon=' + location.lon)).data
+    return await (await axiosClient.get<WeatherResponse>('Weather?Lat=' + location.lat + '&Lon=' + location.lon)).data
   }
 }

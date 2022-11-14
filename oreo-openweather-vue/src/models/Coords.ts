@@ -1,4 +1,4 @@
-interface Coords {
-    lat: Number
-    lon: Number
+export class Coords {
+    lat: Number = 0
+    lon: Number = 0
 }

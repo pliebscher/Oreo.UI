@@ -1,6 +1,6 @@
-interface Weather {
-    code: number
-    summary: string
-    description: string
-    icon: string
+export class Weather {
+    code: number = 0
+    summary: string = ''
+    description: string = ''
+    icon: string = ''
 }

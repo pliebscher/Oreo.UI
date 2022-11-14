@@ -1,9 +1,11 @@
 <script lang="ts">
 
 import { defineComponent, ref, type PropType } from 'vue'
-import axios from 'axios'
 import { getWeather } from '@/services/weather'
 import { GeoLocation } from '@/models/GeoLocation'
+import type { City } from '@/models/City'
+import type { Metrics } from '@/models/Metrics'
+import type { Weather } from '@/models/Weather'
 
 export default defineComponent({
         name: 'Weather',
