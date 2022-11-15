@@ -12,7 +12,7 @@ export default defineComponent({
             locations: [] as GeoLocation[],
             searchStr: "Piedmont ",
             errorVis: false,
-            favLocations: JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]') as GeoLocation[]
+            favLocations: [] as GeoLocation[]
         };
     },
     emits: {
@@ -29,11 +29,9 @@ export default defineComponent({
             }
 
             if (this.locations.length > 0) {
-                this.selectLocation(this.locations[0])
-                //this.locationsVis = true               
+                this.errorVis = false      
             }
             else { // Location(s) Not Found...
-                //this.locationsVis = false
                 this.errorVis = true
             }
         },
@@ -51,27 +49,15 @@ export default defineComponent({
         }
     },
     async mounted() {
-
+        this.favLocations = JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]')
     }
 })
 </script>
 
 <template>
-        <div class="box-rnd-green">
-            <div class="row row-no-gutters">
-                <div class="col-sm-4">
-                    <label for="locationTxt">City [,State]:</label>                                    
-                </div>
-                <div class="col-sm-5">                    
-                    <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
-                </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
-                </div>
-            </div>
-            <div v-if="favLocations?.length > 0">
-                <div>&nbsp;</div>
-                <b>Favorite Locations</b>
+        <div v-if="favLocations?.length > 0" class="box-rnd-green">
+             <div>
+                <h3>Favorite Locations</h3>
                 <hr />
                 <table class="table table-striped table-hover">
                     <tr v-for="location in favLocations" class="">
@@ -85,13 +71,23 @@ export default defineComponent({
                 </table>
             </div>
         </div>
-
-        <div>&nbsp;</div>
-
-        <div>
-            <div v-if="errorVis" class="box-rnd-green green">Location Not Found 😢</div>            
-            <div v-if="locations?.length > 0" class="box-rnd-green">
-                <b>Found {{locations?.length}} Locations</b>
+        <div v-if="favLocations?.length > 0">&nbsp;</div>
+        <div class="box-rnd-green green">
+            <div class="row row-no-gutters">
+                <div class="col-sm-4">
+                    <label for="locationTxt">City [,State]:</label>                                    
+                </div>
+                <div class="col-sm-5">                    
+                    <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div v-if="errorVis">Location Not Found 😢</div>            
+            <div v-if="locations.length > 0">
+                <b>Found {{locations.length}} Locations</b>
                 <hr />
                 <table class="table">
                     <tr v-for="location in locations" class="">
