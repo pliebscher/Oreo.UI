@@ -9,10 +9,10 @@ export default defineComponent({
     name: "Location",
     data() {
         return {
-            locations: [] as GeoLocation[],
+            locations: {} as GeoLocation[],
             searchStr: "Piedmont ",
             errorVis: false,
-            favLocations: [] as GeoLocation[]
+            favLocations: {} as GeoLocation[]
         };
     },
     emits: {
@@ -23,7 +23,7 @@ export default defineComponent({
             // Parse location search string... TODO: Do this better!
             // https://stackoverflow.com/questions/35784962/regex-for-capturing-city-state-zip-from-an-address-string
             if (this.searchStr.length > 0) {
-                var locArr = this.searchStr.split(/[\s,]+/);
+                var locArr = this.searchStr.split(/[,]+/);
                 if (locArr.length > 0)
                     this.locations = await getLocations(locArr[0], locArr[1], "us")
             }
@@ -46,6 +46,10 @@ export default defineComponent({
         delFavorite(location: GeoLocation) {
            this.favLocations.splice(this.favLocations.indexOf(location), 1)
            localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
+        },
+        favExists(location: Location) : boolean {
+
+            return true //!this.favLocations.includes(location)
         }
     },
     async mounted() {
@@ -65,7 +69,7 @@ export default defineComponent({
                             <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>
                         <td class="fav">
-                            <a @click="delFavorite(location)" href="#" alt="Nuke Favorite">💀</a>
+                            <a @click="delFavorite(location)" href="#" alt="Nuke Favorite">🗑️</a>
                         </td>
                     </tr>
                 </table>
@@ -90,7 +94,7 @@ export default defineComponent({
                 <b>Found {{locations.length}} Locations</b>
                 <hr />
                 <table class="table">
-                    <tr v-for="location in locations" class="">
+                    <tr v-for='location in locations.values()' class="">
                         <td class="loc">
                             <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>

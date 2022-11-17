@@ -56,8 +56,8 @@ export default defineComponent({
             }
         },
         async mounted() {
-            console.info('Weather.mounted(): ' + this.location?.lat + ', ' + this.location?.lon)
-            await this.fetchWeather(this.location)
+            //console.info('Weather.mounted(): ' + this.location?.lat + ', ' + this.location?.lon)
+            //await this.fetchWeather(this.location)
         },
     })
 </script>
@@ -69,7 +69,7 @@ export default defineComponent({
             <img v-bind:src='getWeatherIconUrl()' />
             <h2>{{metrics?.temp}}&deg;</h2>
             <div>{{toCapWords(weather?.description)}}</div>
-            <div>Lat: {{location?.lat}} Lon: {{location?.lon}}</div>
+            <div>Lat: {{parseFloat(location?.lat.toString()).toFixed(2)}} Lon: {{parseFloat(location?.lon.toString()).toFixed(2)}}</div>
         </div>
     </div>
 </template>
