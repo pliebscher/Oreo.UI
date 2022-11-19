@@ -13,7 +13,8 @@ import './assets/main.css'
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(createPinia()) 
+
 app.mount('#app')
 
 // TODO:Add global error handling...

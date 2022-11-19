@@ -2,17 +2,19 @@
 import { defineComponent } from 'vue'
 import { getLocations } from '@/services/weather'
 import type { GeoLocation } from '@/models/GeoLocation'
-
-const FAV_LOCATIONS_KEY = "favLocations"
+import { useFavoritesStore } from '@/stores/favorites'
 
 export default defineComponent({
     name: "Location",
+    setup() {
+        const favoriteStore = useFavoritesStore()
+        return { favoriteStore }
+    },
     data() {
         return {
-            locations: {} as GeoLocation[],
+            locations: [] as GeoLocation[],
             searchStr: "Piedmont ",
             errorVis: false,
-            favLocations: {} as GeoLocation[]
         };
     },
     emits: {
@@ -38,47 +40,34 @@ export default defineComponent({
         async selectLocation(location: GeoLocation) {
             this.$emit("onLocationChanged", location);
         },
-        addFavorite(location: GeoLocation) {
-            this.selectLocation(location)
-            this.favLocations.push(location)
-            localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
-        },
-        delFavorite(location: GeoLocation) {
-           this.favLocations.splice(this.favLocations.indexOf(location), 1)
-           localStorage.setItem(FAV_LOCATIONS_KEY, JSON.stringify(this.favLocations))
-        },
-        favExists(location: Location) : boolean {
-
-            return true //!this.favLocations.includes(location)
-        }
     },
     async mounted() {
-        this.favLocations = JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]')
+        //  JSON.parse(localStorage.getItem(FAV_LOCATIONS_KEY) || '[]')
     }
 })
 </script>
 
 <template>
     <!-- TODO: Move Favorites to SFC -->
-    <div v-if="favLocations?.length > 0" class="box-rnd-green">
+    <div v-if="favoriteStore.favorites?.length > 0" class="box-rnd-green">
         <div>
             <h3>Favorite Locations</h3>
             <hr />
             <table class="table table-striped table-hover">    
                 <TransitionGroup name="favs">            
-                    <tr v-for="location in favLocations" :key="location.lat + location.lon">                       
+                    <tr v-for="location in favoriteStore.favorites" :key="location.lat + location.lon">                       
                         <td class="loc">
                             <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>
                         <td class="fav">
-                            <a @click="delFavorite(location)" href="#" alt="Nuke Favorite">🗑️</a>
+                            <a @click="favoriteStore.delFovorite(location)" href="#" alt="Nuke Favorite">🗑️</a>
                         </td>                        
                     </tr>             
                 </TransitionGroup>   
             </table>
         </div>
     </div>
-    <div v-if="favLocations?.length > 0">&nbsp;</div>
+    <div v-if="favoriteStore.favorites?.length > 0">&nbsp;</div>
     <div class="box-rnd-green green">
         <div class="row row-no-gutters">
             <div class="col-sm-4">
@@ -102,7 +91,7 @@ export default defineComponent({
                         <a @click="selectLocation(location)" href="#">{{location.name}}</a>{{location.state}}, {{location.country}}
                     </td>
                     <td class="fav">
-                        <a v-if="!favLocations.includes(location)" @click="addFavorite(location)" href="#" alt="Add Favorite">⭐</a>
+                        <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#" alt="Add Favorite">⭐</a>
                     </td>
                 </tr>
             </table>
