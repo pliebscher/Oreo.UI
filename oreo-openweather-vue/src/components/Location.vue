@@ -45,25 +45,6 @@ export default defineComponent({
 </script>
 
 <template>
-    <!-- TODO: Move Favorites to SFC -->
-    <div id="favorites" v-if="favoriteStore.favorites?.length > 0" class="box-rnd-green">
-        <div>
-            <h3>Favorite Locations</h3>
-            <hr />
-            <table class="table table-striped table-hover">    
-                <TransitionGroup name="favs">            
-                    <tr v-for="location in favoriteStore.favorites" :key="location.lat + location.lon">                       
-                        <td class="loc">
-                            <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>{{location.state}}, {{location.country}}
-                        </td>
-                        <td class="fav">
-                            <a @click="favoriteStore.delFovorite(location)" href="#search" alt="Nuke Favorite">🗑️</a>
-                        </td>                        
-                    </tr>             
-                </TransitionGroup>   
-            </table>
-        </div>
-    </div>
 
     <div v-if="favoriteStore.favorites?.length > 0">&nbsp;</div>
 
@@ -107,18 +88,4 @@ export default defineComponent({
 .loc {
     color: rgba(235, 235, 235, 0.64);
 }
-
-.fav {
-    text-align: right;
-}
-
-.favs-enter-active, .favs-leave-active {
-  transition: all 1s ease;
-}
-
-.favs-enter-from, .favs-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
 </style>
