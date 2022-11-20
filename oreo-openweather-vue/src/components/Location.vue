@@ -49,22 +49,19 @@ export default defineComponent({
     <div v-if="favoriteStore.favorites?.length > 0">&nbsp;</div>
 
     <div id="search" class="box-rnd-green green">
-        <div class="row row-no-gutters">
-            <div class="col-sm-4">
-                <label for="locationTxt">City [,State]:</label>                                    
-            </div>
-            <div class="col-sm-5">                    
-                <input type="text" class="form-control form-control-sm" v-model="searchStr" placeholder="City, [State]">
-            </div>
-            <div class="col-sm-3">
-                <button class="btn btn-success btn-sm" @click="getLocations()">Lookup</button>
-            </div>
+
+        <div class="input-group">
+            <input type="search" class="form-control form-control-sm rounded" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
+            <button type="button" class="btn btn-success btn-sm" @click="getLocations()">Find</button>
         </div>
 
-        <div>&nbsp;</div>
+        <div v-if="errorVis">
+            <div>&nbsp;</div>
+            Location Not Found 😢
+        </div>
 
-        <div v-if="errorVis">Location Not Found 😢</div>            
         <div v-if="locations.length > 0">
+            <div>&nbsp;</div>
             <b>Found {{locations.length}} Locations</b>
             <hr />
             <table class="table">
