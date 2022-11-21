@@ -49,13 +49,14 @@ export default defineComponent({
     <div v-if="favoriteStore.favorites?.length > 0">&nbsp;</div>
 
     <div id="search" class="box-rnd-green green">
-
-        <div class="input-group">
-            <input type="search" class="form-control form-control-sm rounded" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
-            <button type="button" class="btn btn-success btn-sm" @click="getLocations()">
-                <img class="svgsearch" src="public/search.svg" />
-            </button>            
-        </div>
+        <form >
+            <div class="input-group">
+                <input type="search" autofocus class="form-control form-control-sm rounded" @keydown.enter="getLocations()" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
+                <button type="button" class="btn btn-success btn-sm" @click="getLocations()">
+                    <img class="svgsearch" src="/public/search.svg" />
+                </button>            
+            </div>
+        </form>
 
         <div v-if="errorVis">
             <div>&nbsp;</div>
@@ -64,8 +65,6 @@ export default defineComponent({
 
         <div v-if="locations.length > 0">
             <div>&nbsp;</div>
-            <b>Found {{locations.length}} Locations</b>
-            <hr />
             <table class="table">
                 <tr v-for='location in locations.values()' class="">
                     <td class="loc">
