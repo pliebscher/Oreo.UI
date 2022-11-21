@@ -1,9 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { GeoLocation } from './models/GeoLocation';
-import Favorites from './components/Favorites.vue';
-import Location from './components/Location.vue'
-import Weather from './components/Weather.vue'
+import type { GeoLocation } from '@/models/GeoLocation'
+
+import TopNav from './components/TopNav.vue'
+import Favorites from '@/components/Favorites.vue'
+import Location from '@/components/Location.vue'
+import Weather from '@/components/Weather.vue'
 
 export default defineComponent({
     name: "LocationApp",
@@ -21,7 +23,7 @@ export default defineComponent({
     },
     async mounted() {
     },
-    components: { Location, Favorites, Weather }
+    components: { Location, Favorites, Weather, TopNav }
 })
 </script>
 
@@ -29,6 +31,7 @@ export default defineComponent({
   <div class="container">
     <div class="row row-no-gutters">
       <div class="col-md-4">
+        <!-- TopNav / -->
         <Favorites @onLocationChanged='locationChanged' />
         <Location @onLocationChanged='locationChanged' />
       </div>

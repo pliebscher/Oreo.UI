@@ -37,7 +37,7 @@ export default defineComponent({
                             <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>{{location.state}}, {{location.country}}
                         </td>
                         <td class="fav">
-                            <a @click="favoriteStore.delFovorite(location)" href="#search" alt="Nuke Favorite">🗑️</a>
+                            <a @click="favoriteStore.delFovorite(location)" href="#favorites" alt="Nuke Favorite">🗑️</a>
                         </td>                        
                     </tr>             
                 </TransitionGroup>   
