@@ -52,7 +52,9 @@ export default defineComponent({
 
         <div class="input-group">
             <input type="search" class="form-control form-control-sm rounded" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
-            <button type="button" class="btn btn-success btn-sm" @click="getLocations()">Find</button>
+            <button type="button" class="btn btn-success btn-sm" @click="getLocations()">
+                <img class="svgsearch" src="public/search.svg" />
+            </button>            
         </div>
 
         <div v-if="errorVis">
@@ -85,4 +87,17 @@ export default defineComponent({
 .loc {
     color: rgba(235, 235, 235, 0.64);
 }
+
+.svgsearch {
+    display: inline-flex;
+    align-self: center;
+    position: center;
+    height: 1.5em;
+    width: 1.5em;
+}
+.svgsearch img {
+    height: 1.25em;
+    width: 1.25em;
+}
+
 </style>
