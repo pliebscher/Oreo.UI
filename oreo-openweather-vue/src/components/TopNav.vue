@@ -19,6 +19,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent ({
 
+    // https://getbootstrap.com/docs/5.0/components/navbar/#placement ^^^
 
 })
 </script>
