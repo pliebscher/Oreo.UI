@@ -53,7 +53,7 @@ export default defineComponent({
             <div class="input-group">
                 <input type="search" autofocus class="form-control form-control-sm rounded" @keydown.enter="getLocations()" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
                 <button type="button" class="btn btn-success btn-sm" @click="getLocations()">
-                    <img class="svgsearch" src="/public/search.svg" />
+                    <img class="svgsearch" src="/search.svg" />
                 </button>            
             </div>
         </form>
