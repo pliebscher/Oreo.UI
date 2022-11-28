@@ -1,12 +1,12 @@
 
 <template>
 
-    <nav class="navbar navbar-expand-sm box-rnd-green green">
-        <div class="container-fluid" >
+    <nav class="green">
+        <div class="" >
             <div class="input-group">
-                <input type="search" autofocus class="form-control form-control-sm rounded" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
-                <button type="button" class="btn btn-success btn-sm">
-                    <img class="svgsearch" src="/public/search.svg" />
+                <input type="search" autofocus class="rounded" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
+                <button type="button" class="">
+                    <img class="svgsearch" src="/search.svg" />
                 </button>            
             </div>
         </div>

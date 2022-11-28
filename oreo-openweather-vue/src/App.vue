@@ -28,18 +28,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container">
-    <div class="row row-no-gutters">
-      <div class="col-md-4">
-        <!-- TopNav / -->
-        <Favorites @onLocationChanged='locationChanged' />
-        <Location @onLocationChanged='locationChanged' />
-      </div>
-      <div class="col-md-4">
-        <Weather v-bind:location='$data.location as GeoLocation' />
-      </div>
-    </div>
+  <div class="">
+    <!-- TopNav / -->
+    <Favorites @onLocationChanged='locationChanged' />
+    <Location @onLocationChanged='locationChanged' />
+  </div>
+  <div class="">
+    <Weather v-bind:location='$data.location as GeoLocation' />
   </div>
 </template>
-
-
