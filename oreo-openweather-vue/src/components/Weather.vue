@@ -25,7 +25,8 @@ export default defineComponent({
     watch: {
         location: {
             handler(val, oldVal) {
-                this.fetchWeather(this.location);
+                if (val)
+                    this.fetchWeather(val);
             }
         }
     },
@@ -63,13 +64,13 @@ export default defineComponent({
 <template>    
     <div id="weather" v-if="location?.lat !== undefined">
         <ContentBox>
-            <div>
-                <h2>{{city?.name}}, {{location?.state}}</h2>
+
+                <h3>{{city?.name}}, {{location?.state}}</h3>
                 <img v-bind:src='getWeatherIconUrl()' />
                 <h2>{{metrics?.temp}}&deg;</h2>
-                <div class="loc">{{toCapWords(weather?.description)}}</div>
+                <div>{{toCapWords(weather?.description)}}</div>
                 <div>Lat: {{parseFloat(location?.lat.toString()).toFixed(2)}} Lon: {{parseFloat(location?.lon.toString()).toFixed(2)}}</div>
-            </div>
+
         </ContentBox>
     </div>    
 </template>

@@ -33,7 +33,7 @@ export default defineComponent({
             <table>    
                 <TransitionGroup name="favs">            
                     <tr v-for="location in favoriteStore.favorites" :key="location.lat + location.lon">                       
-                        <td class="loc">
+                        <td class="">
                             <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
                         </td>
                         <td class="">

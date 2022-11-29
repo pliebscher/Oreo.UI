@@ -11,13 +11,13 @@ export default defineComponent ({
 
 <template>
     <div class=" p-3">
-        <div class=" box rounded-xl shadow-ms flex  md:w-auto ">
+        <div class=" box rounded-xl  ">
             <div>
                 <div v-if='title' class="text-xl font-medium text-slate">
                     {{title}}
                 </div>
                 <hr v-if='title' />            
-                <p class="text-slate-500">
+                <p class="">
                     <slot />
                 </p>
             </div>            

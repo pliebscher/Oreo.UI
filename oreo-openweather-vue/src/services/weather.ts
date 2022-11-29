@@ -31,8 +31,8 @@ function handleError(error: any) {
 }
 
 // API calls...
-export async function getLocations(city: string, state?: string, country?: string) {
-  const query = "GeoLocation?City=" + city + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
+export async function getLocations(city?: string, state?: string, country?: string) {
+  const query = "GeoLocation?City=" + (city ? city : "") + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
   return await (await axiosClient.get<GeoLocation[]>(query)).data
 }
 

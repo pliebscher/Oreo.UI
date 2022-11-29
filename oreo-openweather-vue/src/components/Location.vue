@@ -46,39 +46,52 @@ export default defineComponent({
 </script>
 
 <template>
-
     <ContentBox>
-        <div id="search">
-            <form >
-                <div>
-                    <input type="search" autofocus @keydown.enter="getLocations()" v-model="searchStr" placeholder="City [,State]" aria-label="City [,State]" aria-describedby="search-addon" />
-                    <button type="button" class="" @click="getLocations()">
-                        <img class="svgsearch" src="/search.svg" />
-                    </button>            
-                </div>
-            </form>
-
-            <div v-if="errorVis">
-                <div>&nbsp;</div>
-                Location Not Found 😢
+        <form class="w-full max-w-sm">
+            <div id="search" class="flex items-center border-b py-2">
+                <input  type="search"
+                        class=" shadow 
+                                appearance-none 
+                                border rounded 
+                                w-full
+                                py-1 px-2 
+                                text-gray-700 
+                                leading-tight 
+                                focus:outline-none 
+                                focus:shadow-outline" 
+                        autofocus 
+                        @keydown.enter="getLocations()" 
+                        v-model="searchStr" 
+                        placeholder="City [,State]" 
+                        aria-label="City [,State]" 
+                        aria-describedby="search-addon" />
+                <button
+                        type="button" 
+                        class="shadow appearance-none border rounded text-gray-700 leading-tight" @click="getLocations()">
+                    <img class="svgsearch" src="/search.svg" />
+                </button>            
             </div>
+        </form>
 
-            <div v-if="locations.length > 0">
-                <div>&nbsp;</div>
-                <table class="table">
-                    <tr v-for='location in locations.values()'>
-                        <td class="loc">
-                            <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
-                        </td>
-                        <td class="">
-                            <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div v-if="errorVis">
+            <div>&nbsp;</div>
+            Location Not Found 😢
+        </div>
+
+        <div v-if="locations.length > 0">
+
+            <table class="table">
+                <tr v-for='location in locations.values()'>
+                    <td class="">
+                        <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
+                    </td>
+                    <td class="">
+                        <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </ContentBox>
-
 </template>
 
 <style scoped>
