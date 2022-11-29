@@ -10,16 +10,16 @@ export default defineComponent ({
 </script>
 
 <template>
-    <div class=" p-3">
-        <div class=" box rounded-xl  ">
+    <div class="p-1">
+        <div class="box rounded-xl">
             <div>
                 <div v-if='title' class="text-xl font-medium text-slate">
                     {{title}}
                 </div>
                 <hr v-if='title' />            
-                <p class="">
+                <div class="">
                     <slot />
-                </p>
+                </div>
             </div>            
         </div>
     </div>

@@ -40,7 +40,7 @@ export default defineComponent({
     },
     methods: {
         async fetchWeather(loc?: GeoLocation) {
-            if (loc?.lat && loc.lon) {
+            if (loc) {
                 const weatherResponse = await getWeather(loc);
                 this.city = weatherResponse?.city as City;
                 this.metrics = weatherResponse?.forecast[0].metrics as Metrics;
@@ -62,15 +62,23 @@ export default defineComponent({
 </script>
 
 <template>    
-    <div id="weather" v-if="location?.lat !== undefined">
-        <ContentBox>
-
-                <h3>{{city?.name}}, {{location?.state}}</h3>
+    <ContentBox id="weather" v-if="location?.lat !== undefined">
+        <div class="text-xl font-medium text-slate">
+            {{city?.name}}, {{location?.state}}
+        </div>
+        <hr />
+        <div class="grid grid-cols-2 gap-4 w-full">
+            <div>
                 <img v-bind:src='getWeatherIconUrl()' />
-                <h2>{{metrics?.temp}}&deg;</h2>
-                <div>{{toCapWords(weather?.description)}}</div>
-                <div>Lat: {{parseFloat(location?.lat.toString()).toFixed(2)}} Lon: {{parseFloat(location?.lon.toString()).toFixed(2)}}</div>
-
-        </ContentBox>
-    </div>    
+            </div>
+            <div class="py-5">    
+                <div class="text-2xl justify-center content-center">
+                    {{metrics?.temp}}&deg;
+                </div>
+                <div>
+                    {{toCapWords(weather?.description)}}
+                </div>
+            </div>
+        </div>
+    </ContentBox>
 </template>

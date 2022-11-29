@@ -79,13 +79,12 @@ export default defineComponent({
         </div>
 
         <div v-if="locations.length > 0">
-
-            <table class="table">
+            <table class="table w-full">
                 <tr v-for='location in locations.values()'>
                     <td class="">
                         <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
                     </td>
-                    <td class="">
+                    <td class="content-end">
                         <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a>
                     </td>
                 </tr>

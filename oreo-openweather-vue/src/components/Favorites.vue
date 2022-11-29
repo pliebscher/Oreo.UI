@@ -30,13 +30,13 @@ export default defineComponent({
 <template>
     <ContentBox id="favorites" v-if="favoriteStore.favorites?.length > 0" title="Favorite Locations">
         <div>
-            <table>    
+            <table class="w-full">    
                 <TransitionGroup name="favs">            
                     <tr v-for="location in favoriteStore.favorites" :key="location.lat + location.lon">                       
                         <td class="">
                             <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
                         </td>
-                        <td class="">
+                        <td class="content-end">
                             <a @click="favoriteStore.delFovorite(location)" href="#favorites" alt="Nuke Favorite">🗑️</a>
                         </td>                        
                     </tr>             
