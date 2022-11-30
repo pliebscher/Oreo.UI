@@ -14,7 +14,7 @@ export default defineComponent({
     data() {
         return {
             locations: [] as GeoLocation[],
-            searchStr: "Piedmont ",
+            searchStr: "",
             errorVis: false,
         };
     },
@@ -40,6 +40,11 @@ export default defineComponent({
         async selectLocation(location: GeoLocation) {
             this.$emit("onLocationChanged", location);
         },
+    },
+    mounted() {
+        if (import.meta.env.DEV) {
+            this.searchStr = "Piedmont"
+        }
     },
     components: { ContentBox }
 })
