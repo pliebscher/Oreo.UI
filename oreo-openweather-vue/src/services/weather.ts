@@ -4,7 +4,8 @@ import type { GeoLocation } from '@/models/GeoLocation'
 import type { WeatherResponse } from '@/models/WeatherResponse'
 
 const axiosClient = axios.create({
-    baseURL: `http://20.120.148.155/api/`, // process.env.WEATHER_API_URL,
+    // TODO: Add to dev/prod env/config
+    baseURL: `http://20.120.148.155/api/`, // `http://localhost:36416/api/`,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
