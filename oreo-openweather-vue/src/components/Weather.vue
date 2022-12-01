@@ -5,6 +5,7 @@ import { getWeather } from '@/services/weather'
 import { GeoLocation } from '@/models/GeoLocation'
 import type { City } from '@/models/City'
 import type { Metrics } from '@/models/Metrics'
+import type { Forecast } from '@/models/Forecast'
 import type { Weather } from '@/models/Weather'
 import ContentBox from './ContentBox.vue'
 
@@ -15,7 +16,7 @@ export default defineComponent({
             type: GeoLocation,
             required: true,
             default: {
-                name: "Test",
+                name: "LatLon",
                 lat: 0,
                 lon: 0
             },
@@ -24,7 +25,7 @@ export default defineComponent({
     },
     watch: {
         location: {
-            handler(val, oldVal) {
+            handler(val: GeoLocation, oldVal: GeoLocation) {
                 if (val)
                     this.fetchWeather(val);
             }
@@ -34,28 +35,36 @@ export default defineComponent({
         return {
             city: {} as City,
             metrics: {} as Metrics,
-            weather: {} as Weather,
+            currentWeather: {} as Weather,
+            forecast: [] as Forecast[],
             weatherIcon: "01n", // https://openweathermap.org/weather-conditions#Icon-list
         };
     },
     methods: {
         async fetchWeather(loc?: GeoLocation) {
             if (loc) {
-                const weatherResponse = await getWeather(loc);
-                this.city = weatherResponse?.city as City;
-                this.metrics = weatherResponse?.forecast[0].metrics as Metrics;
-                this.weather = weatherResponse?.forecast[0].weather[0] as Weather;
-                this.weatherIcon = weatherResponse?.forecast[0].weather[0].icon as string;
+                const weatherResponse = await getWeather(loc)
+                this.city = weatherResponse?.city as City
+                this.metrics = weatherResponse?.forecast[0].metrics as Metrics
+                this.currentWeather = weatherResponse?.forecast[0].weather[0] as Weather
+                this.weatherIcon = weatherResponse?.forecast[0].weather[0].icon as string
+                this.forecast = weatherResponse?.forecast as Forecast[]
             }
         },
         getWeatherIconUrl() {
-            return "http://openweathermap.org/img/wn/" + this.weatherIcon + "@2x.png";
+            return "http://openweathermap.org/img/wn/" + this.weatherIcon + "@2x.png"
         },
         toCapWords(str: string) {
             return (" " + str).toLowerCase().replace(/(\b[a-z](?!\s))/g, function (chr) {
                 return chr.toUpperCase();
             });
-        }
+        },
+    },
+    mounted() {
+        // setTimeout(() => { 
+        //    this.fetchWeather(this.location)
+        //    console.log(new Date().toLocaleTimeString()
+        // }, 1000)
     },
     components: { ContentBox }
 })
@@ -76,9 +85,15 @@ export default defineComponent({
                     {{metrics?.temp}}&deg;
                 </div>
                 <div>
-                    {{toCapWords(weather?.description)}}
+                    {{toCapWords(currentWeather?.description)}}
                 </div>
             </div>
+        </div>
+        <div>
+            {{new Date().toDateString()}} &nbsp;
+            {{new Date().toLocaleTimeString()}} <br />
+            <!-- {{new Date(forecast[0]?.localDateTime).toDateString()}} &nbsp;
+            {{new Date(forecast[0]?.localDateTime).toLocaleTimeString()}} -->
         </div>
     </ContentBox>
 </template>

@@ -29,11 +29,10 @@ export default defineComponent({
 
 <template>
   <div class="">
-    <!-- TopNav / -->
-    <Favorites @onLocationChanged='locationChanged' />
     <Location @onLocationChanged='locationChanged' />
+    <Favorites @onLocationChanged='locationChanged' />
   </div>
   <div class="">
-    <Weather v-bind:location='$data.location as GeoLocation' />
+    <Weather v-if="location" v-bind:location='location as GeoLocation' />
   </div>
 </template>

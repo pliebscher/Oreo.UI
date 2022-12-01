@@ -17,13 +17,16 @@ export class WeatherResponse {
 //           "tempMax": 64.69,
 //           "pressure": 1023,
 //           "humidity": 76
-//         },
+//       },
 //         "weather": [
 //           {
 //             "code": 500,
 //             "summary": "Rain",
 //             "description": "light rain",
 //             "icon": "10n"
+//           },
+//           { 
+//              ... 
 //           }
 //         ],
 //         "wind": {
