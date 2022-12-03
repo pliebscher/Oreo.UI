@@ -36,64 +36,120 @@ export default defineComponent({
             city: {} as City,
             metrics: {} as Metrics,
             currentWeather: {} as Weather,
-            forecast: [] as Forecast[],
-            weatherIcon: "01n", // https://openweathermap.org/weather-conditions#Icon-list
+            forecast: [] as Forecast[],            
         };
     },
     methods: {
+        // TODO: Add new fetchWeather and weather service method to correct OW API 
+        // ----
+        // TODO: Change this to fetchForecast..
         async fetchWeather(loc?: GeoLocation) {
             if (loc) {
                 const weatherResponse = await getWeather(loc)
                 this.city = weatherResponse?.city as City
                 this.metrics = weatherResponse?.forecast[0].metrics as Metrics
                 this.currentWeather = weatherResponse?.forecast[0].weather[0] as Weather
-                this.weatherIcon = weatherResponse?.forecast[0].weather[0].icon as string
                 this.forecast = weatherResponse?.forecast as Forecast[]
             }
         },
-        getWeatherIconUrl() {
-            return "http://openweathermap.org/img/wn/" + this.weatherIcon + "@2x.png"
+        getWeatherIconUrl(icon?: string, large?: boolean) {
+            if (icon)
+                return "http://openweathermap.org/img/wn/" + icon + (large ? "@2x" : "") + ".png"
         },
-        toCapWords(str: string) {
-            return (" " + str).toLowerCase().replace(/(\b[a-z](?!\s))/g, function (chr) {
+        toCapDescription(forecast: Forecast) {
+            return (" " + forecast?.weather[0]?.description).toLowerCase().replace(/(\b[a-z](?!\s))/g, (chr) => {
                 return chr.toUpperCase();
             });
         },
+        toWeatherDescription(weather: Weather) {
+            return (" " + weather.description).toLowerCase().replace(/(\b[a-z](?!\s))/g, (chr) => {
+                return chr.toUpperCase();
+            });
+        },
+        getTomorrowHeading() {
+            return "Tomorrow - " + new Date(this.forecast[1]?.localDateTime).toLocaleDateString()
+        },
+        getTimeString(forecast: Forecast) {
+            if (forecast)
+                return new Date(forecast.localDateTime).toLocaleTimeString().replace(":00", "")
+          },
     },
     mounted() {
-        // setTimeout(() => { 
-        //    this.fetchWeather(this.location)
-        //    console.log(new Date().toLocaleTimeString()
-        // }, 1000)
+
     },
     components: { ContentBox }
 })
 </script>
 
 <template>    
-    <ContentBox id="weather" v-if="location?.lat !== undefined">
+    <ContentBox id="weather" v-if="location?.lat">
         <div class="text-xl font-medium text-slate">
             {{city?.name}}, {{location?.state}}
         </div>
         <hr />
         <div class="grid grid-cols-2 gap-4 w-full">
             <div>
-                <img v-bind:src='getWeatherIconUrl()' />
+                <img v-bind:src='getWeatherIconUrl(currentWeather?.icon, true)' />
             </div>
             <div class="py-5">    
                 <div class="text-2xl justify-center content-center">
                     {{metrics?.temp}}&deg;
                 </div>
                 <div>
-                    {{toCapWords(currentWeather?.description)}}
+                    {{toWeatherDescription(currentWeather)}}
                 </div>
             </div>
         </div>
-        <div>
-            {{new Date().toDateString()}} &nbsp;
+        {{new Date().toDateString()}} &nbsp;
             {{new Date().toLocaleTimeString()}} <br />
-            <!-- {{new Date(forecast[0]?.localDateTime).toDateString()}} &nbsp;
-            {{new Date(forecast[0]?.localDateTime).toLocaleTimeString()}} -->
-        </div>
     </ContentBox>
+    <ContentBox id="weather" v-if="location?.lat" :title="getTomorrowHeading()" >
+        <div class="grid grid-cols-3 gap-1 rounded-lg bg-sky-700">
+            <!-- 1 TODO: Do this with a loop! -->
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                <img class="" v-bind:src='getWeatherIconUrl(forecast[1]?.weather[0].icon, false)' /> 
+                {{forecast[1]?.metrics.temp}}&deg;
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{getTimeString(forecast[1])}}
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{toCapDescription(forecast[1])}}
+            </div>
+            <!-- 2  -->
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                <img class="" v-bind:src='getWeatherIconUrl(forecast[2]?.weather[0].icon, false)' /> 
+                {{forecast[2]?.metrics.temp}}&deg;
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{new Date(forecast[2]?.localDateTime).toLocaleTimeString()}}
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{toCapDescription(forecast[2])}}
+            </div>
+            <!-- 3  -->
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                <img class="" v-bind:src='getWeatherIconUrl(forecast[3]?.weather[0].icon, false)' /> 
+                {{forecast[3]?.metrics.temp}}&deg;
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{new Date(forecast[3]?.localDateTime).toLocaleTimeString()}}
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{toCapDescription(forecast[3])}}
+            </div>
+            <!-- 4  -->
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                <img class="" v-bind:src='getWeatherIconUrl(forecast[4]?.weather[0].icon, false)' /> 
+                {{forecast[4]?.metrics.temp}}&deg;
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{new Date(forecast[4]?.localDateTime).toLocaleTimeString()}}
+            </div>
+            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
+                {{toCapDescription(forecast[4])}}
+            </div>
+        </div>
+
+    </ContentBox>   
 </template>

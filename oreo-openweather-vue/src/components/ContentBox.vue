@@ -10,8 +10,8 @@ export default defineComponent ({
 </script>
 
 <template>
-    <div class="p-1">
-        <div class="box rounded-xl">
+    <div class="p-1 ">
+        <div class="box rounded-xl bg-stripes-purple">
             <div>
                 <div v-if='title' class="text-xl font-medium text-slate">
                     {{title}}
