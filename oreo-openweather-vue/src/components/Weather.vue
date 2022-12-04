@@ -66,16 +66,17 @@ export default defineComponent({
                 return chr.toUpperCase();
             });
         },
-        getTomorrowHeading() {
+        getTitle() {
             return "Tomorrow - " + new Date(this.forecast[1]?.localDateTime).toLocaleDateString()
         },
         getTimeString(forecast: Forecast) {
             if (forecast)
                 return new Date(forecast.localDateTime).toLocaleTimeString().replace(":00", "")
-          },
-    },
-    mounted() {
-
+        },
+        getTemp(forecast: Forecast) {
+            if (forecast)
+                return forecast.metrics.temp.toString().split(".")[0]
+        },
     },
     components: { ContentBox }
 })
@@ -87,7 +88,7 @@ export default defineComponent({
             {{city?.name}}, {{location?.state}}
         </div>
         <hr />
-        <div class="grid grid-cols-2 gap-4 w-full">
+        <div class="grid grid-cols-2 gap-4 w-full shadow-lg rounded-lg bg-sky-700">
             <div>
                 <img v-bind:src='getWeatherIconUrl(currentWeather?.icon, true)' />
             </div>
@@ -101,55 +102,6 @@ export default defineComponent({
             </div>
         </div>
         {{new Date().toDateString()}} &nbsp;
-            {{new Date().toLocaleTimeString()}} <br />
+        {{new Date().toLocaleTimeString()}}
     </ContentBox>
-    <ContentBox id="weather" v-if="location?.lat" :title="getTomorrowHeading()" >
-        <div class="grid grid-cols-3 gap-1 rounded-lg bg-sky-700">
-            <!-- 1 TODO: Do this with a loop! -->
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                <img class="" v-bind:src='getWeatherIconUrl(forecast[1]?.weather[0].icon, false)' /> 
-                {{forecast[1]?.metrics.temp}}&deg;
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{getTimeString(forecast[1])}}
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{toCapDescription(forecast[1])}}
-            </div>
-            <!-- 2  -->
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                <img class="" v-bind:src='getWeatherIconUrl(forecast[2]?.weather[0].icon, false)' /> 
-                {{forecast[2]?.metrics.temp}}&deg;
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{new Date(forecast[2]?.localDateTime).toLocaleTimeString()}}
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{toCapDescription(forecast[2])}}
-            </div>
-            <!-- 3  -->
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                <img class="" v-bind:src='getWeatherIconUrl(forecast[3]?.weather[0].icon, false)' /> 
-                {{forecast[3]?.metrics.temp}}&deg;
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{new Date(forecast[3]?.localDateTime).toLocaleTimeString()}}
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{toCapDescription(forecast[3])}}
-            </div>
-            <!-- 4  -->
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                <img class="" v-bind:src='getWeatherIconUrl(forecast[4]?.weather[0].icon, false)' /> 
-                {{forecast[4]?.metrics.temp}}&deg;
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{new Date(forecast[4]?.localDateTime).toLocaleTimeString()}}
-            </div>
-            <div class="p-1 flex items-center justify-center shadow-lg rounded-lg bg-sky-700">
-                {{toCapDescription(forecast[4])}}
-            </div>
-        </div>
-
-    </ContentBox>   
 </template>

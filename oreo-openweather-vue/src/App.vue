@@ -6,6 +6,7 @@ import TopNav from './components/TopNav.vue'
 import Favorites from '@/components/Favorites.vue'
 import Location from '@/components/Location.vue'
 import Weather from '@/components/Weather.vue'
+import Forecast from '@/components/Forecast.vue'
 
 export default defineComponent({
     name: "LocationApp",
@@ -23,7 +24,7 @@ export default defineComponent({
     },
     async mounted() {
     },
-    components: { Location, Favorites, Weather, TopNav }
+    components: { Location, Favorites, Weather, TopNav, Forecast }
 })
 </script>
 
@@ -33,6 +34,7 @@ export default defineComponent({
     <Favorites @onLocationChanged='locationChanged' />
   </div>
   <div class="">
-    <Weather v-if="location" v-bind:location='location as GeoLocation' />
+    <Weather v-if="location" v-bind:location='location' />
+    <Forecast v-if="location" v-bind:location='location' />
   </div>
 </template>
