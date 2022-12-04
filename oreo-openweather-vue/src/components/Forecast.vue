@@ -69,7 +69,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <ContentBox id="weather" :title="getTitle()">
+    <ContentBox id="weather" v-if="forecast?.length > 0" :title="getTitle()">
         <div class="w-full shadow-lg rounded-lg bg-sky-700">
             <div v-for="fcast in forecast" class="grid grid-cols-3 auto-cols-min gap-1 py-0.5 shadow-lg rounded-lg">
                 <div class="px-0 flex items-center justify-center">
