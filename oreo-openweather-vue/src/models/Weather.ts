@@ -3,4 +3,5 @@ export class Weather {
     summary: string = ''
     description: string = ''
     icon: string = ''
+    city: String = ''
 }

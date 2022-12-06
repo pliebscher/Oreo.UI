@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 import type { Forecast } from '@/models/Forecast'
 import { GeoLocation } from '@/models/GeoLocation'
-import { getWeather } from '@/services/weather'
+import { getForecast } from '@/services/weather'
 
 import ContentBox from './ContentBox.vue'
 
@@ -24,7 +24,7 @@ export default defineComponent({
         location: {
             handler(val: GeoLocation, oldVal: GeoLocation) {
                 if (val)
-                    this.fetchWeather(val);
+                    this.fetchForecast(val);
             }
         }
     },
@@ -34,13 +34,13 @@ export default defineComponent({
         }
     },
     methods: {
-        async fetchWeather(loc?: GeoLocation) {
+        async fetchForecast(loc?: GeoLocation) {
             if (loc) {
-                const weatherResponse = await getWeather(loc)
+                const weatherResponse = await getForecast(loc)
                 this.forecast = weatherResponse?.forecast as Forecast[]
             }
         },
-        getWeatherIconUrl(icon?: string, large?: boolean) {
+        getWeatherIconUrl(icon?: String, large?: boolean) {
             if (icon)
                 return "http://openweathermap.org/img/wn/" + icon + (large ? "@2x" : "") + ".png"
         },
@@ -73,7 +73,7 @@ export default defineComponent({
         <div class="w-full shadow-lg rounded-lg bg-sky-700">
             <div v-for="fcast in forecast" class="grid grid-cols-3 auto-cols-min gap-1 py-0.5 shadow-lg rounded-lg">
                 <div class="px-0 flex items-center justify-center">
-                    <img class="" v-bind:src='getWeatherIconUrl(fcast.weather[0].icon, false)' /> 
+                    <img class="" v-bind:src="getWeatherIconUrl(fcast.weather[0].icon, false)" /> 
                     {{getTemp(fcast)}}&deg;
                 </div>
                 <div class="p-0 flex items-center justify-center">
