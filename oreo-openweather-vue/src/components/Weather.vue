@@ -3,24 +3,17 @@
 import { defineComponent, ref, type PropType } from 'vue'
 import { getWeather } from '@/services/weather'
 import { GeoLocation } from '@/models/GeoLocation'
-import type { City } from '@/models/City'
 import type { Metrics } from '@/models/Metrics'
-
 import type { Weather } from '@/models/Weather'
+
 import ContentBox from './ContentBox.vue'
 
 export default defineComponent({
     name: "weatherSFC",
     props: {
         location: {
-            type: GeoLocation,
-            required: true,
-            default: {
-                name: "LatLon",
-                lat: 0,
-                lon: 0
-            },
-            validator: (location: GeoLocation) => true
+            type: GeoLocation, Object,
+            default: new GeoLocation
         }
     },
     watch: {
