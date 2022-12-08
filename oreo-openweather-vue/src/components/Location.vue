@@ -110,20 +110,3 @@ export default defineComponent({
         </div>
     </ContentBox>
 </template>
-
-<style scoped>
-
-.svgsearch {
-    display: inline-flex;
-    align-self: center;
-    position: center;
-    height: 1.5em;
-    width: 1.5em;
-    padding-left: 5px;
-}
-.svgsearch img {
-    height: 1.25em;
-    width: 1.25em;
-}
-
-</style>
