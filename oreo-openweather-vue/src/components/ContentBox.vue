@@ -10,25 +10,13 @@ export default defineComponent ({
 </script>
 
 <template>
-    <div class="p-1 ">
-        <div class="box rounded-xl bg-stripes-purple">
-            <div>
-                <div v-if='title' class="text-xl font-medium text-slate">
-                    {{title}}
-                </div>
-                <hr v-if='title' />            
-                <div class="">
-                    <slot />
-                </div>
-            </div>            
+    <div class="rounded-xl border-green-400 border-2 p-3 m-1 bg-gradient-to-r from-gray-900 to-blue-700">
+        <div v-if='title' class="text-xl font-medium">
+            {{title}}
+            <hr />
+        </div>                        
+        <div class="">
+            <slot />
         </div>
     </div>
 </template>
-
-<style scoped>
-.box { /* TODO: Replace with Tailwind classes */
-  border: 2px solid #73AD21; 
-  padding: 20px;
-  background: rgb(62, 60, 60);
-}
-</style>

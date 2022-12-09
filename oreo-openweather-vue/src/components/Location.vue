@@ -118,17 +118,15 @@ export default defineComponent({
             Location Not Found 😢
         </div>
 
-        <div v-if="locations.length > 0">
-            <table class="w-full pt-2">
-                <tr v-for='location in locations.values()'>
-                    <td class="">
-                        <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
-                    </td>
-                    <td class="content-end text-right">
-                        <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <table class="w-full pt-2" v-if="locations.length > 0">
+            <tr v-for='location in locations.values()'>
+                <td class="">
+                    <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}
+                </td>
+                <td class="content-end text-right">
+                    <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a>
+                </td>
+            </tr>
+        </table>
     </ContentBox>
 </template>
