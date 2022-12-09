@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getLocations } from '@/services/weather'
-import type { GeoLocation } from '@/models/GeoLocation'
 import { useFavoritesStore } from '@/stores/favorites'
+
+import type { GeoLocation } from '@/models/GeoLocation'
+ 
 import ContentBox from './ContentBox.vue'
 
 export default defineComponent({
@@ -117,7 +119,7 @@ export default defineComponent({
         </div>
 
         <div v-if="locations.length > 0">
-            <table class="w-full">
+            <table class="w-full pt-2">
                 <tr v-for='location in locations.values()'>
                     <td class="">
                         <a @click="selectLocation(location)" href="#weather">{{location.name}}</a>&nbsp;{{location.state}}, {{location.country}}

@@ -1,13 +1,16 @@
 import axios from 'axios'
-//import process from 'process' // BROKEN, see main.ts
+
 import type { GeoLocation } from '@/models/GeoLocation'
 import type { ForecastResponse } from '@/models/ForecastResponse'
 import type { WeatherResponse } from '@/models/WeatherResponse';
 
+let apiBaseURL: string = import.meta.env['VITE_DEV_WEATHER_API_URL']
+
+if(import.meta.env.PROD)
+  apiBaseURL = import.meta.env['VITE_PRD_WEATHER_API_URL']
+
 const axiosClient = axios.create({
-    // TODO: Add to dev/prod env/config
-    //baseURL: `http://localhost:36416/api/`, // Dev
-    baseURL: `http://20.120.148.155/api/`, // Prod
+    baseURL: apiBaseURL,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
