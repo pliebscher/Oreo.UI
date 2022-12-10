@@ -60,7 +60,8 @@ export default defineComponent({
             {{city}}, {{location?.state}}
         </div>
         <hr />
-        <div class="grid grid-cols-2 gap-4 w-full shadow-lg rounded-lg bg-sky-700">
+        <div class="w-full shadow-lg rounded-lg bg-sky-700">
+        <div class="grid grid-cols-2 gap-1 w-full ">
             <div>
                 <img v-bind:src='getWeatherIconUrl(currentWeather?.icon, true)' />
             </div>
@@ -73,7 +74,11 @@ export default defineComponent({
                 </div>
             </div>
         </div>
-        {{new Date().toDateString()}} &nbsp;
-        {{new Date().toLocaleTimeString()}}
+        <div class="pl-4">
+            {{new Date().toDateString()}} &nbsp;
+            {{new Date().toLocaleTimeString()}}
+        </div>
+        </div>
+
     </ContentBox>
 </template>
