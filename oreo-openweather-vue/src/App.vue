@@ -2,7 +2,6 @@
 import { defineComponent } from 'vue'
 import type { GeoLocation } from '@/models/GeoLocation'
 
-import TopNav from './components/TopNav.vue'
 import Favorites from '@/components/Favorites.vue'
 import Location from '@/components/Location.vue'
 import Weather from '@/components/Weather.vue'
@@ -22,9 +21,10 @@ export default defineComponent({
             }
         }
     },
-    async mounted() {
+    mounted() {
+
     },
-    components: { Location, Favorites, Weather, TopNav, Forecast }
+    components: { Location, Favorites, Weather, Forecast }
 })
 </script>
 
