@@ -30,9 +30,10 @@ function handleError(error: any) {
   }
   // if has response show the error
   if (error.response) {
-    //toast.error(error.response.data.message);
-    console.error(error.response.status + ' - ' + error.response.statusText + ': ' + error.response.data.title)
+    const msg = error.response.status + ' - ' + error.response.statusText + ': ' + error.response.data.title
+    console.error(msg)
     // TODO: Send error to an error service API...
+    throw msg
   }
 }
 

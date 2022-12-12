@@ -19,13 +19,23 @@ export default defineComponent({
             if (location) {
                 this.location = location;
             }
-        }
+        },
+        showToast(msg: any) {
+          const x: HTMLElement | null = document.getElementById("toaster")
+          if (x) {
+            x.innerText = msg
+            x.className = "show"
+            setTimeout(() => { 
+              x.className = x.className.replace("show", "")
+            }, 3000)
+          }      
+        },
     },
     mounted() {
 
     },
     errorCaptured(err) {
-      console.error('Error: ' + err)
+      this.showToast(err)
     },
     components: { Location, Favorites, Weather, Forecast }
 })
@@ -35,9 +45,10 @@ export default defineComponent({
   <div class="">
     <Location @onLocationChanged='locationChanged' />
     <Favorites @onLocationChanged='locationChanged' />
+    <div id="toaster" class="border rounded bg-red-900"></div>
   </div>
   <div class="">
     <Weather v-if="location" v-bind:location='location' />
-    <Forecast v-if="location" v-bind:location='location' />
+    <Forecast v-if="location" v-bind:location='location' />    
   </div>
 </template>
