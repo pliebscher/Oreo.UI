@@ -24,6 +24,9 @@ export default defineComponent({
     mounted() {
 
     },
+    errorCaptured(err) {
+      console.error('Error: ' + err)
+    },
     components: { Location, Favorites, Weather, Forecast }
 })
 </script>
