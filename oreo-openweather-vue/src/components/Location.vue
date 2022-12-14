@@ -57,7 +57,7 @@ export default defineComponent({
 
 <template>
     <ContentBox>
-        <form class="w-full max-w-sm">
+        <form class="">
             <div id="search" class="flex rounded bg-white p-.5 border-slate-50">
                 <button type="button" 
                         id="searchBtn"

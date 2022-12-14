@@ -55,7 +55,7 @@ export default defineComponent({
 </script>
 
 <template>    
-    <ContentBox id="weather" v-if="location?.lat">
+    <ContentBox id="weather" v-if="city">
         <div class="text-xl font-medium text-slate">
             {{city}}, {{location?.state}}
         </div>
