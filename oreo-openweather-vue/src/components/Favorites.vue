@@ -30,7 +30,7 @@ export default defineComponent({
 <template>
     <ContentBox id="favorites" v-if="favoriteStore.favorites?.length > 0" title="Favorite Locations">
         <div>
-            <table class="">    
+            <table class="w-full">    
                 <TransitionGroup name="favs">            
                     <tr v-for="location in favoriteStore.favorites" :key="location.lat + location.lon">                       
                         <td class="">
