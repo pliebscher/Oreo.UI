@@ -1,9 +1,13 @@
 <script lang="ts">
+    import type { GeoLocation } from "src/models/GeoLocation";
+    import Container from "./container.svelte";
 
-import Container from "./container.svelte";
+    let location: GeoLocation
 
 </script>
 
+{#if location}
 <Container title="Forecast">
     ...
 </Container>
+{/if}
