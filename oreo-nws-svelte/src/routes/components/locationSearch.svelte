@@ -1,10 +1,16 @@
 <script lang="ts">
-	import type { GeoLocation } from "../../models/GeoLocation";
     import { onMount } from "svelte";
+    import { createEventDispatcher } from 'svelte';
+
+    import type { GeoLocation } from "../../models/GeoLocation";
     import { getLocations } from "../../services/locationService";
+
     import Container from "./container.svelte";
 
-    let searchStr: string = ''
+
+	const dispatch = createEventDispatcher();
+
+    let searchStr: string = ""
     let notFound: boolean = false
     let locations: GeoLocation[] = []
 
@@ -21,13 +27,19 @@
     }
 
     function onLocationClick(location: GeoLocation) {
-        console.info(location)
+        dispatch('locationSelected', {
+			location: location
+		});
     }
 
     function onSearchClearClick() {
         notFound = false
         searchStr = ''
         locations = []
+
+        dispatch('locationSelected', {
+			location: undefined
+		});
     }
 
     onMount(() => {

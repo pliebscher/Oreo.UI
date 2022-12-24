@@ -3,6 +3,15 @@
 	import Favorites from "./components/favorites.svelte";
 	import Weather from "./components/weather.svelte";
 	import Forecast from "./components/forecast.svelte";
+
+	import type { GeoLocation } from "src/models/GeoLocation";
+
+	let selectedLocation: GeoLocation
+
+	function onLocationSelected(event: CustomEvent<GeoLocation>) {
+		selectedLocation = event.detail
+	}
+
 </script>
 
   <!-- NavBar -->            
@@ -10,11 +19,11 @@
     🐕 Weather Dog
   </div>
   <!-- Content -->
-  <div class="w-auto mt-10" >
+  <div class="w-auto mt-10">
     <div class="w-full">
-		<LocationSearch />
+		<LocationSearch on:locationSelected = {onLocationSelected} />
 		<Favorites />
-		<Weather />
+		<Weather location = {selectedLocation} />
 		<Forecast />
     </div>
     <div id="toaster" class="border rounded bg-red-900"></div> 
