@@ -6,8 +6,8 @@
 
 </script>
 
-{#if location}
+{#if location?.lat}
 <Container title="Weather">
-    {location}
+    {location?.lat}, {location?.lon}
 </Container>
 {/if}

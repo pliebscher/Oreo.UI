@@ -22,14 +22,11 @@
                     locations = await getLocations(locArr[0], locArr[1], "us");
             }
 
-        if (locations.length == 0)
-		    notFound = true
+        notFound = (locations.length == 0)
     }
 
     function onLocationClick(location: GeoLocation) {
-        dispatch('locationSelected', {
-			location: location
-		});
+        dispatch('locationSelected', location);
     }
 
     function onSearchClearClick() {
