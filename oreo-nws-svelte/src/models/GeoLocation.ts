@@ -1,9 +1,5 @@
 export class GeoLocation {
 
-    GeoLocation() {
-
-    }
-
     name: string = ''
     state: string = ''
     country: string = ''
