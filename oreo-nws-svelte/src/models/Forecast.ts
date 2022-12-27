@@ -12,7 +12,6 @@ export class Forecast {
     credit: string = ''
     moreInformation: string = ''
     location: Location = new Location
-    time: string = ''
     data: Data = new Data
     currentobservation: Currentobservation = new Currentobservation
 
