@@ -1,0 +1,23 @@
+export class Currentobservation
+{
+    id: string = '' 
+    name: string = ''
+    elev: string = ''
+    latitude: string = ''
+    longitude: string = ''
+    Date: string = ''
+    Temp: string = ''
+    Dewp: string = ''
+    Relh: string = ''
+    Winds: string = ''
+    Windd: string = ''
+    Gust: string = ''
+    Weather: string = ''
+    Weatherimage: string = ''
+    Visibility: string = ''
+    Altimeter: string = ''
+    SLP: string = ''
+    timezone: string = ''
+    state: string = ''
+    WindChill: string = ''
+}
