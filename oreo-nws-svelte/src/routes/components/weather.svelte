@@ -3,14 +3,12 @@
     import type { Forecast } from "../../models/Forecast";
     import { getForecast } from "../../services/forecastService";
     import Container from "./container.svelte";
-	import { afterUpdate, onMount } from "svelte";
 
     // Props...
     export let location: GeoLocation
 
     $: {
         fetchForecast(location)
-        console.log(location);
     }
 
     // Locals...
@@ -25,7 +23,24 @@
 </script>
 
 {#if location?.lat}
-<Container title="Weather">
-    {location?.lat}, {location?.lon}: {forecast?.creationDateLocal}
+<Container title="{location?.name}, {location?.state}">
+    <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
+        <div class="grid grid-cols-2 gap-1 w-full ">
+            <div>
+                <img class="mt-4 ml-4" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
+            </div>
+            <div class="py-5">    
+                <div class="text-2xl justify-center content-center">
+                    {forecast?.currentobservation.Temp}&deg;
+                </div>
+                <div class="pr-3">
+                    {forecast?.data.weather[0]}
+                </div>
+            </div>
+        </div>
+        <div class="pl-4">
+            {forecast?.creationDateLocal}
+        </div>
+    </div>
 </Container>
 {/if}

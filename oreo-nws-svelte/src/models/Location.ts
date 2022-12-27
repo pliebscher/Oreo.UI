@@ -1,5 +1,5 @@
-export class Location
-{
+export class Location {
+
     region: string = ''
     latitude: string = ''
     longitude: string = ''
@@ -12,4 +12,5 @@ export class Location
     county: string = ''
     firezone: string = ''
     metar: string = ''
+    
 }

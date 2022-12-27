@@ -61,24 +61,23 @@ export default defineComponent({
         </div>
         <hr />
         <div class="w-full shadow-lg rounded-lg bg-sky-700">
-        <div class="grid grid-cols-2 gap-1 w-full ">
-            <div>
-                <img v-bind:src='getWeatherIconUrl(currentWeather?.icon, true)' />
-            </div>
-            <div class="py-5">    
-                <div class="text-2xl justify-center content-center">
-                    {{metrics?.temp}}&deg;
-                </div>
+            <div class="grid grid-cols-2 gap-1 w-full ">
                 <div>
-                    {{toWeatherDescription(currentWeather)}}
+                    <img v-bind:src='getWeatherIconUrl(currentWeather?.icon, true)' />
+                </div>
+                <div class="py-5">    
+                    <div class="text-2xl justify-center content-center">
+                        {{metrics?.temp}}&deg;
+                    </div>
+                    <div>
+                        {{toWeatherDescription(currentWeather)}}
+                    </div>
                 </div>
             </div>
+            <div class="pl-4">
+                {{new Date().toDateString()}} &nbsp;
+                {{new Date().toLocaleTimeString()}}
+            </div>
         </div>
-        <div class="pl-4">
-            {{new Date().toDateString()}} &nbsp;
-            {{new Date().toLocaleTimeString()}}
-        </div>
-        </div>
-
     </ContentBox>
 </template>

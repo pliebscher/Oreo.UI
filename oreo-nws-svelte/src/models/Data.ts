@@ -1,5 +1,5 @@
-export class Data
-{
+export class Data {
+
     temperature: string[] = []
     pop: string[] = []
     weather: string[] = []
@@ -7,4 +7,5 @@ export class Data
     //public object[] hazard { get; set; }
     //public object[] hazardUrl { get; set; }
     text: string[] = []
+    
 }
