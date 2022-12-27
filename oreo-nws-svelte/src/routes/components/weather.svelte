@@ -25,9 +25,9 @@
 {#if location?.lat}
 <Container title="{location?.name}, {location?.state}">
     <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
-        <div class="grid grid-cols-2 gap-1 w-full ">
+        <div class="grid grid-cols-2 gap-0 w-full ">
             <div>
-                <img class="mt-4 ml-4" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
+                <img class="mt-4 ml-4 rounded-md" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
             </div>
             <div class="py-5">    
                 <div class="text-2xl justify-center content-center">
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="pl-4">
+        <div class="pl-4 pb-2 text-sm">
             {forecast?.creationDateLocal}
         </div>
     </div>

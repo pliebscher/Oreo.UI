@@ -47,9 +47,8 @@
 </script>
 
 <Container >
-
     <form on:submit|preventDefault={onSearchClick}>
-        <div id="search" class="flex rounded bg-white p-.5 border-slate-50">
+        <div id="search" class="bg-white flex rounded p-.5 border-slate-50">
             <button type="button" 
                     id="searchBtn"
                     class="border-0
@@ -120,12 +119,10 @@
                 <a on:click={() => onLocationClick(location)} href="#weather">{location.name}</a>&nbsp;{location.state}, {location.country}
             </td>
             <td class="content-end text-right">                
-                <!-- <a v-if="!favoriteStore.favorites.includes(location)" @click="favoriteStore.addFovorite(location)" href="#favorites" alt="Add Favorite">⭐</a> -->
-                ⭐
+                <a on:click={() => onLocationClick(location)} href="#weather">⭐</a>
             </td>
         </tr>
         {/each}
     </table>
     {/if}
-
 </Container>
