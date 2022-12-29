@@ -4,21 +4,23 @@
 
     import type { GeoLocation } from "../../models/GeoLocation";
     import { getLocations } from "../../services/locationService";
+    import { getFavorites, addFavorite } from "../../stores/favoriteStore";
 
     import Container from "./container.svelte";
-
 
 	const dispatch = createEventDispatcher();
 
     let searchStr: string = ""
     let notFound: boolean = false
     let locations: GeoLocation[] = []
+    let favorites: GeoLocation[] = []
 
 	async function onSearchClick() {
 
         if (searchStr.length > 0) {
                 var locArr = searchStr.split(/[,]+/);
                 if (locArr.length > 0)
+                    favorites = getFavorites()
                     locations = await getLocations(locArr[0], locArr[1], "us");
             }
 
@@ -33,10 +35,13 @@
         notFound = false
         searchStr = ''
         locations = []
-
         dispatch('locationSelected', {
-			location: undefined
+			location: {}
 		});
+    }
+
+    function onAddFavoriteClick(location: GeoLocation) {
+        addFavorite(location)
     }
 
     onMount(() => {
@@ -118,8 +123,10 @@
             <td class="">
                 <a on:click={() => onLocationClick(location)} href="#weather">{location.name}</a>&nbsp;{location.state}, {location.country}
             </td>
-            <td class="content-end text-right">                
-                <a on:click={() => onLocationClick(location)} href="#weather">⭐</a>
+            <td class="content-end text-right">
+                {#if !favorites.includes(location)}
+                <a on:click={() => onAddFavoriteClick(location)} href="#favorites">⭐</a>                    
+                {/if}         
             </td>
         </tr>
         {/each}

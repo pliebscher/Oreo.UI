@@ -6,22 +6,22 @@
 
     // Props...
     export let location: GeoLocation
+    
+    // Locals...
+    let forecast: Forecast
 
     $: {
         fetchForecast(location)
     }
 
-    // Locals...
-    let forecast: Forecast
-
     async function fetchForecast(loc: GeoLocation) {
         if (loc?.lat)
             forecast =  await getForecast(loc.lat.toString(), loc.lon.toString())
-            console.info(forecast)
+            //console.info(forecast)
     }
 
 </script>
-
+   
 {#if location?.lat}
 <Container title="{location?.name}, {location?.state}">
     <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
