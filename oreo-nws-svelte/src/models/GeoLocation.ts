@@ -5,6 +5,7 @@ export class GeoLocation {
     country: string = ''
     lat: number = 0
     lon: number = 0
-    key: string = ''
+    // TODO: Init this only once...
+    key: string = this.lat.toString() + '_' + this.lon.toString()
     
 }

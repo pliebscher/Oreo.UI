@@ -19,7 +19,6 @@
         if (searchStr.length > 0) {
                 var locArr = searchStr.split(/[,]+/);
                 if (locArr.length > 0)
-
                     locations = await getLocations(locArr[0], locArr[1], "us");
             }
 

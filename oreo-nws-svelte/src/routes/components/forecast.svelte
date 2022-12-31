@@ -1,13 +1,13 @@
 <script lang="ts">
-    import type { GeoLocation } from "src/models/GeoLocation";
+    import type { Forecast } from "src/models/Forecast";
     import Container from "./container.svelte";
 
-    let location: GeoLocation
+    export let forecast: Forecast
 
 </script>
 
-{#if location}
+{#if forecast?.creationDate}
 <Container title="Forecast">
-    ...
+    {forecast?.creationDate}
 </Container>
 {/if}
