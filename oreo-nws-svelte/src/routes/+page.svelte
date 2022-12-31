@@ -22,7 +22,7 @@
   <div class="w-auto mt-10">
     <div class="w-full">
 		<LocationSearch on:locationSelected = {onLocationSelected} />
-		<Favorites />
+		<Favorites on:locationSelected = {onLocationSelected} />
 		<Weather location = {selectedLocation} />
 		<Forecast />
     </div>

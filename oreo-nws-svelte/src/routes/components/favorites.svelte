@@ -1,16 +1,36 @@
-<script lang="ts">
+<script lang="ts">    
+    import { createEventDispatcher } from 'svelte'
 	import type { GeoLocation } from "src/models/GeoLocation";
     import Container from "./container.svelte";
-    import { getFavorites, delFavorite } from "../../stores/favoriteStore";
+    import { favorites, delFavorite } from "../../stores/favoriteStore";
 
-    let favorites: GeoLocation[] = []
+    const dispatch = createEventDispatcher();
 
-    // TODO...
+     function onLocationClick(location: GeoLocation) {
+        dispatch('locationSelected', location)
+    }
+
+    function onLocationDelClick(location: GeoLocation) {
+        delFavorite(location)        
+    }
 
 </script>
 
-{#if favorites.length = 0}
-<Container title="Favorites">
-    ...
+{#if $favorites?.length > 0}
+<Container title="Favorites">    
+    <div id="favorites">
+        <table class="w-full">    
+            {#each $favorites as favorite }
+                <tr >                       
+                    <td class="">
+                        <a on:click={() => onLocationClick(favorite)} href="#weather">{favorite.name}</a>&nbsp;{favorite.state}, {favorite.country}
+                    </td>
+                    <td class="content-end text-right">
+                        <a on:click={() => onLocationDelClick(favorite)} href="#favorites">🗑️</a>
+                    </td>                        
+                </tr>             
+            {/each}
+        </table>
+    </div>
 </Container>
 {/if}
