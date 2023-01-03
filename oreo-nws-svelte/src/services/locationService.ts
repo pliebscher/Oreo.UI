@@ -13,6 +13,7 @@ let apiBaseURL: string = import.meta.env['VITE_DEV_WEATHER_API_URL']
 if(import.meta.env.PROD)
   apiBaseURL = import.meta.env['VITE_PRD_WEATHER_API_URL']
 
+// TODO: move to axiosClient.ts
 const axiosClient = axios.create({
     baseURL: apiBaseURL,
     headers: {

@@ -5,7 +5,7 @@ export class Currentobservation {
     elev: string = ''
     latitude: string = ''
     longitude: string = ''
-    date: string = ''
+    Date: string = ''
     Temp: string = ''
     Dewp: string = '' // Dew Point
     Relh: string = '' // Rel. Humidity

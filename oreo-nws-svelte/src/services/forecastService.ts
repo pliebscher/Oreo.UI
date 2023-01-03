@@ -3,6 +3,7 @@ import type { Forecast } from 'src/models/Forecast';
 
 let apiBaseURL: string = 'https://forecast.weather.gov/'
 
+// TODO: move to axiosClient.ts
 const axiosClient = axios.create({
     baseURL: apiBaseURL,
     headers: {
