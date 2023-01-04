@@ -7,22 +7,44 @@
 </script>
 
 {#if forecast?.creationDate}
-<Container title="Forecast">
-    <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
-        {#each forecast?.data.iconLink as icon, i }
-        <div class="grid grid-cols-3 auto-cols-min gap-1 py-0.5 shadow-lg rounded-lg">
-            <div class="flex">
+<Container title="7 Day Forecast">
+    <table class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
+        {#each forecast?.data.iconLink as icon, i}
+        <tr class="shadow-lg rounded-lg">
+            <td class="">
                 <img class="m-2 rounded-md" width="30px" height="30px" src="{icon}" alt="" />
-                <div class="p-2">{forecast.data.temperature[i]}&deg;</div>
+            </td>
+            <td class="p-3">
+                {forecast.data.temperature[i]}&deg;
+            </td>
+            <td class="p-3 ">
+                {forecast?.time.startPeriodName[i]}
+            </td>
+            <td class="p-3 "> 
+                {forecast?.data.weather[i].split(' ')[0]}
+            </td>
+        </tr>
+        {/each}
+    </table>
+
+
+    <!-- <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
+        {#each forecast?.data.iconLink as icon, i}
+        <div class="grid grid-cols-4 grid-flow-col auto-cols-max py-0.5 shadow-lg rounded-lg w-fit">
+            <div class="border">
+                <img class="m-2 rounded-md" width="30px" height="30px" src="{icon}" alt="" />
             </div>
-            <div class="pt-3 ">
+            <div class="p-3">
+                {forecast.data.temperature[i]}&deg;
+            </div>
+            <div class="p-3 border">
                 {forecast?.time.startPeriodName[i]}
             </div>
-            <div class="p-2 flex items-center justify-center"> 
+            <div class="p-3 border"> 
                 {forecast?.data.weather[i].split(' ')[0]}
             </div>
         </div>
         {/each}
-    </div>
+    </div> -->
 </Container>
 {/if}
