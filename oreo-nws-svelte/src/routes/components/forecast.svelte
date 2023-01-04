@@ -21,7 +21,7 @@
                 {forecast?.time.startPeriodName[i]}
             </td>
             <td class="p-3 "> 
-                {forecast?.data.weather[i].split(' ')[0]}
+                {forecast?.data.weather[i].split(' then')[0].replace('Slight', '')}
             </td>
         </tr>
         {/each}
