@@ -9,7 +9,7 @@
 
 </script>
    
-{#if location?.lat}
+{#if forecast?.currentobservation}
 <Container title="{location?.name}, {location?.state}">
     <div id="weather" class="w-full shadow-lg rounded-lg bg-sky-700 mt-2 mb-0">
         <div class="grid grid-flow-col auto-cols-max">
