@@ -18,7 +18,7 @@
 
 {#if $favorites?.length > 0}
 <div id="favorites" />
-<Container title="Favorites">    
+<Container title="">    
     <table class="w-full">    
         {#each $favorites as favorite }
             <tr >                       
@@ -26,7 +26,8 @@
                     <a on:click={() => onLocationClick(favorite)} href="#weather">{favorite.name}</a>&nbsp;{favorite.state}, {favorite.country}
                 </td>
                 <td class="content-end text-right">
-                    <a on:click={() => onLocationDelClick(favorite)} href="#favorites">🗑️</a>
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a on:click={() => onLocationDelClick(favorite)} href="#">🗑️</a>
                 </td>                        
             </tr>             
         {/each}

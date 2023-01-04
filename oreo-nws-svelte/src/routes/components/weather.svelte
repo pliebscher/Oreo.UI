@@ -12,16 +12,16 @@
 {#if location?.lat}
 <Container title="{location?.name}, {location?.state}">
     <div id="weather" class="w-full shadow-lg rounded-lg bg-sky-700 mt-2 mb-0">
-        <div class="grid grid-cols-3 gap-0 w-full  ">
-            <div class="">
-                <img class="mt-4 ml-4 mb-3 rounded-md" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
+        <div class="grid grid-flow-col auto-cols-max  ">
+            <div class="p-4">
+                <img class=" rounded-md" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
             </div>
 
-            <div class="py-5 ">    
-                <div class="text-2xl justify-center content-center">
+            <div class="py-4  ">    
+                <div class="pl-3 text-2xl ">
                     {forecast?.currentobservation.Temp}&deg;
                 </div>                
-                <div class="pr-3">
+                <div class="pl-3">
                     {forecast?.data.weather[0]}
                 </div>
             </div>
