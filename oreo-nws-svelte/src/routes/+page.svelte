@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount} from "svelte";
 
 	import LocationSearch from "./components/locationSearch.svelte";
 	import Favorites from "./components/favorites.svelte";
@@ -22,7 +22,7 @@
               x.className = x.className.replace("show", "")
             }, 3000)
           }      
-        }
+    }
 
 	onMount( () => {
 		window.onunhandledrejection = (e) => {
