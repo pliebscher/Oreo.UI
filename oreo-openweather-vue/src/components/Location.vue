@@ -61,6 +61,7 @@ export default defineComponent({
             <div id="search" class="flex rounded bg-white p-.5 border-slate-50">
                 <button type="button" 
                         id="searchBtn"
+                        aria-label="Search"
                         class="border-0
                                pl-2 pt-1 pr-2
                                rounded 
@@ -94,6 +95,7 @@ export default defineComponent({
                         aria-describedby="search-addon" />
                 <button type="button" 
                         id="clearBtn"
+                        aria-label="Clear Search"
                         class=" border-0
                                 pt-1
                               bg-white
