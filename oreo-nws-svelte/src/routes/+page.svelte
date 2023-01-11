@@ -46,7 +46,7 @@
 	</table>
 </div>
 
-<div class="w-auto mt-8">
+<div class="w-full mt-8">
 	<div class="w-full">
 		<LocationSearch on:locationSelected = {onLocationSelected} />
 		<Favorites on:locationSelected = {onLocationSelected} />

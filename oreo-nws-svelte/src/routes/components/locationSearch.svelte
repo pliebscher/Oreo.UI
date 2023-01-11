@@ -62,7 +62,7 @@
                            leading-tight
                            cursor-pointer" 
                            on:click={onSearchClick}> 
-                <svg xmlns="http://www.w3.org/2000/svg"
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="Search"
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                         xml:space="preserve"
                         class="h-5 w-4" 
@@ -81,7 +81,7 @@
                             text-gray-500                                 
                             focus:outline-none " 
                     placeholder="City [,State]" 
-                    aria-label="City [,State]" 
+                    aria-label="Search Text" 
                     aria-describedby="search-addon" 
                     bind:value={searchStr}/>
             <button type="button" 
@@ -101,7 +101,7 @@
                         stroke-width="2" 
                         stroke-linecap="round" 
                         stroke-linejoin="round" 
-                        class="">
+                        aria-label="Clear Search">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
