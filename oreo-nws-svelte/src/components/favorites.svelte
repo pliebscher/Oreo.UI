@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
 	import type { GeoLocation } from "src/models/GeoLocation";
     import Container from "./container.svelte";
-    import { favorites, delFavorite } from "../../stores/favoriteStore";
+    import { favorites, delFavorite } from "../stores/favoriteStore";
 
     const dispatch = createEventDispatcher();
 

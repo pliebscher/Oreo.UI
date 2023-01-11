@@ -2,9 +2,9 @@
     import { onMount } from "svelte";
     import { createEventDispatcher } from 'svelte';
 
-    import type { GeoLocation } from "../../models/GeoLocation";
-    import { getLocations } from "../../services/locationService";
-    import { favorites, addFavorite } from "../../stores/favoriteStore";
+    import type { GeoLocation } from "../models/GeoLocation";
+    import { getLocations } from "../services/locationService";
+    import { favorites, addFavorite } from "../stores/favoriteStore";
 
     import Container from "./container.svelte";
 

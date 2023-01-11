@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { GeoLocation } from "../../models/GeoLocation";
-    import type { Forecast } from "../../models/Forecast";
+	import type { GeoLocation } from "../models/GeoLocation";
+    import type { Forecast } from "../models/Forecast";
     import Container from "./container.svelte";
 
     // Props...

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { GeoLocation } from "../../models/GeoLocation";
-    import type { Forecast } from "../../models/Forecast";
-    import { getForecast } from "../../services/forecastService";
+	import type { GeoLocation } from "../models/GeoLocation";
+    import type { Forecast } from "../models/Forecast";
+    import { getForecast } from "../services/forecastService";
 
 	import WeatherComp from "./weather.svelte";
     import ForecastComp from "./forecast.svelte";

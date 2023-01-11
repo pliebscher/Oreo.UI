@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount} from "svelte";
 
-	import LocationSearch from "./components/locationSearch.svelte";
-	import Favorites from "./components/favorites.svelte";
-	import Weatherforecast from "./components/weatherForecast.svelte";
+	import LocationSearch from "../components/locationSearch.svelte";
+	import Favorites from "../components/favorites.svelte";
+	import Weatherforecast from "../components/weatherForecast.svelte";
 
 	import type { GeoLocation } from "src/models/GeoLocation";
 
@@ -33,7 +33,7 @@
 
 </script>
           
-<div class="fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full pl-2 py-0 text-lg">
+<div class=" -mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full pl-2 py-0 text-lg">
 	<table class="w-full">
 		<tr>
 			<td class="">🐕 Weather Dog</td>
