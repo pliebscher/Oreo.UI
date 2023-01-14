@@ -1,11 +1,26 @@
 <script lang="ts">
-	import type { GeoLocation } from "../models/GeoLocation";
+	import { onMount } from "svelte";
+    
+    import type { GeoLocation } from "../models/GeoLocation";
     import type { Forecast } from "../models/Forecast";
+    
     import Container from "./container.svelte";
 
     // Props...
     export let location: GeoLocation
     export let forecast: Forecast | undefined
+
+    $: {
+        if (forecast)
+            lastUpdate = new Date()
+    }
+    
+    // Locals...
+    let lastUpdate: Date = new Date()
+   
+    onMount( () => {		
+        console.info('weather Mounted...')
+	});
 
 </script>
    
@@ -26,7 +41,7 @@
             </div>
         </div>
         <div class="border-0 ml-4 mr-3 pb-2 text-sm">
-            {forecast?.currentobservation.Date}
+            {forecast?.currentobservation.Date} / {lastUpdate.toLocaleTimeString()}
         </div>
     </div>
 </Container>

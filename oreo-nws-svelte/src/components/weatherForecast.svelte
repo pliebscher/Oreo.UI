@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
 	import type { GeoLocation } from "../models/GeoLocation";
     import type { Forecast } from "../models/Forecast";
     import { getForecast } from "../services/forecastService";
@@ -19,12 +21,26 @@
 
     // Methods...
     async function fetchForecast(loc: GeoLocation) {
-        if (loc?.lat)
+        
+        if (loc?.lat) {
+            console.info('fetchForecast...')
             forecast =  await getForecast(loc.lat.toString(), loc.lon.toString())
+        }            
         
         if (!loc?.lat)
-        forecast = undefined
+            forecast = undefined
     }
+
+    onMount( () => {
+		
+        console.info('weatherForecast Mounted...')
+
+        setInterval(() => {
+            if (forecast) 
+                fetchForecast(location)            
+        }, 600000) // 10 min.
+
+	});
 
 </script>
 
