@@ -42,7 +42,7 @@
         </div>
         <div class="border-0 ml-4 mr-3 pb-2 text-sm">
             <section class="flex w-full">
-                <div class="w-1/2 bg-gradient-to-r from-blue-900 to-blue-600 rounded-md p-1">
+                <div class="w-1/2">
                     {forecast?.currentobservation.Date}
                 </div>
                 <div class="w-1/2 text-right">
