@@ -19,7 +19,6 @@ favorites.subscribe((value) => {
 })
 
 currentFav.subscribe((value) => {
-    console.info('setCurrentFav.update')
     localStorage.setItem(CUR_KEY, JSON.stringify(value))
 })
 
@@ -41,14 +40,21 @@ export function delFavorite(location: GeoLocation) {
 
 // Set the currenty selected location...
 export function setCurrentFav(location: GeoLocation) {
-    console.info('setCurrentFav')
-    currentFav.update((cur) => {
-        cur = location
-        return cur
+    currentFav.update((newFav) => {
+        newFav = location
+        return newFav
     })
 }
 
-// // Set the currenty selected location...
-// export function getCurrentFav() {
-//     return _curr
-// }
+// Clear favorites & current/selected favorite...
+export function clearFavorites() {
+    favorites.update((favs) => {
+        favs = []       
+        return favs
+    })
+
+    currentFav.update((curFav) => {
+        curFav = {} as GeoLocation
+        return curFav
+    })
+}
