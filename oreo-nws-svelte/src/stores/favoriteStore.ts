@@ -8,7 +8,7 @@ const FAV_KEY: string = 'FAVORITES'
 const CUR_KEY: string = 'SELECTED_FAVORITE'
 
 let _favs: GeoLocation[] = JSON.parse(localStorage.getItem(FAV_KEY) || "[]")
-let _curr: GeoLocation = JSON.parse(localStorage.getItem(CUR_KEY) || '')
+let _curr: GeoLocation = JSON.parse(localStorage.getItem(CUR_KEY) || '{}')
 
 export const favorites: Writable<GeoLocation[]> = writable(_favs)
 export const currentFav: Writable<GeoLocation> = writable(_curr)
