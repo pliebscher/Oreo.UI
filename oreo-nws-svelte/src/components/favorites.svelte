@@ -2,11 +2,16 @@
     import { createEventDispatcher } from 'svelte'
 	import type { GeoLocation } from "src/models/GeoLocation";
     import Container from "./container.svelte";
-    import { favorites, delFavorite } from "../stores/favoriteStore";
+    import { favorites, delFavorite, setCurrentFav } from "../stores/favoriteStore";
 
     const dispatch = createEventDispatcher();
 
      function onLocationClick(location: GeoLocation) {
+
+        // Save the currently selected favorite...
+        setCurrentFav(location)
+
+        // Raise the location selected event...
         dispatch('locationSelected', location)
     }
 

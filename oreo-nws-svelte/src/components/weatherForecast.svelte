@@ -5,6 +5,8 @@
     import type { Forecast } from "../models/Forecast";
     import { getForecast } from "../services/forecastService";
 
+    import { currentFav } from "../stores/favoriteStore";
+
 	import WeatherComp from "./weather.svelte";
     import ForecastComp from "./forecast.svelte";
   
@@ -34,6 +36,9 @@
     onMount( () => {
 		
         console.info('weatherForecast Mounted...')
+
+        if ($currentFav?.lat)
+            location = $currentFav
 
         setInterval(() => {
             if (forecast) 
