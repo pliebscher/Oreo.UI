@@ -49,7 +49,6 @@
                     Updated {lastUpdate.toLocaleTimeString()}
                 </div>
             </section>
-
         </div>
     </div>
 </Container>
