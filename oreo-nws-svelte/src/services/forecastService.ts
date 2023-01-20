@@ -19,11 +19,12 @@ axiosClient.interceptors.response.use(
 );
 
 function handleError(error: any) {
+  console.error('Axios Error: ' + error.message)
   // check for errorHandle config
   if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
     return Promise.reject(error);
   }
-  // if has response show the error
+  // if has response show the error. TODO: this is not being caught!!!
   if (error.response) {
     const msg = error.response.status + ' - ' + error.response.statusText + ': ' + error.response.data.title
     console.error(msg)

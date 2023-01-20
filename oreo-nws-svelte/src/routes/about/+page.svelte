@@ -1,6 +1,15 @@
 <script lang="ts">
 	import Header from "../../components/header.svelte";
     import { clearFavorites } from "../../stores/favoriteStore"
+    import { onMount } from "svelte";
+
+    // Play Canvas...
+    let canvas: HTMLCanvasElement
+
+    onMount(() => {
+        const ctx = canvas.getContext('2d')
+        
+    })
 
 </script>
 
@@ -72,4 +81,7 @@
             </td>
         </tr>
       </table>
+      <canvas bind:this={canvas} class="w-full">
+
+      </canvas>
 </div>

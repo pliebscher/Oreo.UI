@@ -14,13 +14,9 @@ export const favorites: Writable<GeoLocation[]> = writable(_favs)
 export const currentFav: Writable<GeoLocation> = writable(_curr)
 
 // Wire up subscriptions...
-favorites.subscribe((value) => {
-    localStorage.setItem(FAV_KEY, JSON.stringify(_favs))
-})
+favorites.subscribe( value => localStorage.setItem(FAV_KEY, JSON.stringify(value)) )
 
-currentFav.subscribe((value) => {
-    localStorage.setItem(CUR_KEY, JSON.stringify(value))
-})
+currentFav.subscribe( value => localStorage.setItem(CUR_KEY, JSON.stringify(value)) )
 
 // Add a favorite...
 export function addFavorite(location: GeoLocation) {
@@ -52,7 +48,6 @@ export function clearFavorites() {
         favs = []       
         return favs
     })
-
     currentFav.update((curFav) => {
         curFav = {} as GeoLocation
         return curFav
