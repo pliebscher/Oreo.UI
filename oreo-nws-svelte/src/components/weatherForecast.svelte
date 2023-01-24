@@ -25,7 +25,7 @@
     async function fetchForecast(loc: GeoLocation) {
         
         if (loc?.lat) {
-            console.info('fetchForecast...')
+            console.info(`fetchForecast: ${loc.name}, ${loc.state}`)
             forecast =  await getForecast(loc.lat.toString(), loc.lon.toString())
         }            
         
