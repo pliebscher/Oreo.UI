@@ -3,7 +3,7 @@
 
 	import type { GeoLocation } from "../models/GeoLocation";
     import type { Forecast } from "../models/Forecast";
-    import { getForecast } from "../services/forecastService";
+    import { getForecast } from "../services/nwsForecastService";
 
     import { currentFav } from "../stores/favoriteStore";
 

@@ -2,9 +2,13 @@
     import { onMount } from "svelte";
     import { createEventDispatcher } from 'svelte';
 
+    import { favorites, addFavorite } from "../stores/favoriteStore";
+
     import type { GeoLocation } from "../models/GeoLocation";
     import { getLocations } from "../services/locationService";
-    import { favorites, addFavorite } from "../stores/favoriteStore";
+
+    import { getSuggestions } from "../services/arcGISService";
+    import type { arcGISSearchResult } from "../models/arcGISSearchResults";
 
     import Container from "./container.svelte";
 
@@ -14,13 +18,19 @@
     let notFound: boolean = false
     let locations: GeoLocation[] = []
 
+    let suggestions: arcGISSearchResult
+
 	async function onSearchClick() {
 
         if (searchStr.length > 0) {
                 var locArr = searchStr.split(/[,]+/);
                 if (locArr.length > 0)
                     locations = await getLocations(locArr[0], locArr[1], "us");
-            }
+
+                    //suggestions = await getSuggestions(searchStr)
+                    //console.info(suggestions)
+
+        }
 
         notFound = (locations.length == 0)
     }

@@ -1,18 +1,13 @@
-// TODO: Switch to ArcGIS...
-// 1. Locations search results..
-//  https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?f=json&countryCode=USA,PRI,VIR,GUM,ASM&category=Postal,Populated%20Place&maxSuggestions=5&text=pied
-// 2. Retreive Lat/Long location data
-//  https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?magicKey=dHA9MCNsb2M9MzYyMzYyNiNsbmc9NTQjcGw9NTc3NDg3I2xicz0xNDo0MTQzMzE3&f=json
-
+// TODO: Replace w. arcGISService!
 import axios from 'axios'
 import type { GeoLocation } from "../models/GeoLocation";
+
 
 let apiBaseURL: string = import.meta.env['VITE_DEV_WEATHER_API_URL']
 
 if(import.meta.env.PROD)
   apiBaseURL = import.meta.env['VITE_PRD_WEATHER_API_URL']
 
-// TODO: move to axiosClient.ts
 const axiosClient = axios.create({
     baseURL: apiBaseURL,
     headers: {
@@ -45,3 +40,5 @@ export async function getLocations(city?: string, state?: string, country?: stri
     const query = "GeoLocation?City=" + (city ? city : "") + "&State=" + (state ? state : "") + "&Country=" + (country ? country : "US")
     return (await axiosClient.get<GeoLocation[]>(query)).data
 }
+
+
