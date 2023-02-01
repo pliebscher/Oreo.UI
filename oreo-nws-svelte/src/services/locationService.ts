@@ -1,9 +1,8 @@
 // TODO: Switch to ArcGIS...
-// https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?
-// callback=jQuery11020631306415855886_1672093525924&f=json 
-// &countryCode=USA,PRI,VIR,GUM,ASM
-// &category=Land Features,Bay,Channel,Cove,Dam,Delta,Gulf,Lagoon,Lake,Ocean,Reef,Reservoir,Sea,Sound,Strait,Waterfall,Wharf,Amusement Park,Historical Monument,Landmark,Tourist Attraction,Zoo,College,Beach,Campground,Golf Course,Harbor,Nature Reserve,Other Parks and Outdoors,Park,Racetrack,Scenic Overlook,Ski Resort,Sports Center,Sports Field,Wildlife Reserve,Airport,Ferry,Marina,Pier,Port,Resort,Postal,Populated Place
-// &maxSuggestions=5&text=piedmont, ca
+// 1. Locations search results..
+//  https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?f=json&countryCode=USA,PRI,VIR,GUM,ASM&category=Postal,Populated%20Place&maxSuggestions=5&text=pied
+// 2. Retreive Lat/Long location data
+//  https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?magicKey=dHA9MCNsb2M9MzYyMzYyNiNsbmc9NTQjcGw9NTc3NDg3I2xicz0xNDo0MTQzMzE3&f=json
 
 import axios from 'axios'
 import type { GeoLocation } from "../models/GeoLocation";

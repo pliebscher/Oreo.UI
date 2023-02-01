@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Header from "../../components/header.svelte";
     import { clearFavorites } from "../../stores/favoriteStore"
+    import { version } from '$app/environment'
     import { onMount } from "svelte";
 
     // Play Canvas...
     let canvas: HTMLCanvasElement
 
     onMount(() => {
-        const ctx = canvas.getContext('2d')
-        
+        //const ctx = canvas.getContext('2d')        
     })
 
 </script>

@@ -1,22 +1,27 @@
-//
-// This (localStorage) does not work when SSR is enabled...
-//
+// TODO: Not working with ssr!
+import { browser } from '$app/environment'
 import { writable, type Writable } from 'svelte/store'
 import type { GeoLocation } from "src/models/GeoLocation";
 
 const FAV_KEY: string = 'FAVORITES'
 const CUR_KEY: string = 'SELECTED_FAVORITE'
 
-let _favs: GeoLocation[] = JSON.parse(localStorage.getItem(FAV_KEY) || "[]")
-let _curr: GeoLocation = JSON.parse(localStorage.getItem(CUR_KEY) || '{}')
+let _favs: GeoLocation[] = browser? JSON.parse(localStorage.getItem(FAV_KEY) || "[]") : []
+let _curr: GeoLocation = browser? JSON.parse(localStorage.getItem(CUR_KEY) || '{}') : {}
 
 export const favorites: Writable<GeoLocation[]> = writable(_favs)
 export const currentFav: Writable<GeoLocation> = writable(_curr)
 
 // Wire up subscriptions...
-favorites.subscribe( value => localStorage.setItem(FAV_KEY, JSON.stringify(value)) )
+favorites.subscribe( (value) => {
+    if (browser)
+        localStorage.setItem(FAV_KEY, JSON.stringify(value))
+} )
 
-currentFav.subscribe( value => localStorage.setItem(CUR_KEY, JSON.stringify(value)) )
+currentFav.subscribe( (value) => {
+    if (browser)
+        localStorage.setItem(CUR_KEY, JSON.stringify(value))
+} )
 
 // Add a favorite...
 export function addFavorite(location: GeoLocation) {
