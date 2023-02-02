@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { Forecast } from "src/models/Forecast";
+    import type { nwsForecast } from "src/models/nwsForecast";
 	import { onMount } from "svelte";
     import Container from "./container.svelte";
 
-    export let forecast: Forecast | undefined
+    export let forecast: nwsForecast | undefined
 
     onMount( () => {		
         console.info('weather Mounted...')

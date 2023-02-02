@@ -1,16 +1,16 @@
 // TODO: Not working with ssr!
 import { browser } from '$app/environment'
 import { writable, type Writable } from 'svelte/store'
-import type { GeoLocation } from "src/models/GeoLocation";
+import type { arcGISSearchSuggestion } from 'src/models/arcGISSearchSuggestion';
 
 const FAV_KEY: string = 'FAVORITES'
 const CUR_KEY: string = 'SELECTED_FAVORITE'
 
-let _favs: GeoLocation[] = browser? JSON.parse(localStorage.getItem(FAV_KEY) || "[]") : []
-let _curr: GeoLocation = browser? JSON.parse(localStorage.getItem(CUR_KEY) || '{}') : {}
+let _favs: arcGISSearchSuggestion[] = browser? JSON.parse(localStorage.getItem(FAV_KEY) || "[]") : []
+let _curr: arcGISSearchSuggestion = browser? JSON.parse(localStorage.getItem(CUR_KEY) || '{}') : {}
 
-export const favorites: Writable<GeoLocation[]> = writable(_favs)
-export const currentFav: Writable<GeoLocation> = writable(_curr)
+export const favorites: Writable<arcGISSearchSuggestion[]> = writable(_favs)
+export const currentFav: Writable<arcGISSearchSuggestion> = writable(_curr)
 
 // Wire up subscriptions...
 favorites.subscribe( (value) => {
@@ -24,7 +24,7 @@ currentFav.subscribe( (value) => {
 } )
 
 // Add a favorite...
-export function addFavorite(location: GeoLocation) {
+export function addFavorite(location: arcGISSearchSuggestion) {
     favorites.update((favs) => {
         favs.push(location)
         return favs
@@ -32,7 +32,7 @@ export function addFavorite(location: GeoLocation) {
 }
 
 // Remove a favorite...
-export function delFavorite(location: GeoLocation) {
+export function delFavorite(location: arcGISSearchSuggestion) {
     favorites.update((favs) => {
         favs.splice(favs.indexOf(location), 1)        
         return favs
@@ -40,7 +40,7 @@ export function delFavorite(location: GeoLocation) {
 }
 
 // Set the currenty selected location...
-export function setCurrentFav(location: GeoLocation) {
+export function setCurrentFav(location: arcGISSearchSuggestion) {
     currentFav.update((newFav) => {
         newFav = location
         return newFav
@@ -54,7 +54,7 @@ export function clearFavorites() {
         return favs
     })
     currentFav.update((curFav) => {
-        curFav = {} as GeoLocation
+        curFav = {} as arcGISSearchSuggestion
         return curFav
     })
 }

@@ -53,6 +53,20 @@
                 </a>
             </td>
         </tr>
+
+        <tr>
+            <td class="p-1">
+                <a href="https://www.arcgis.com" aria-label="ArcGIS Online">
+                    <img src="arcgis-online-icon.png" alt="ArcGIS Online" aria-label="ArcGIS Online" class="mr-1" width="23px" height="23px" />
+                </a>
+            </td>
+            <td>
+                <a href="https://www.arcgis.com">
+                    ArcGIS Online
+                </a>
+            </td>
+        </tr>
+
         <tr>
             <td class="p-1">
                 <a href="https://github.com/pliebscher/Oreo.UI/tree/master/oreo-nws-svelte" aria-label="GitHub">

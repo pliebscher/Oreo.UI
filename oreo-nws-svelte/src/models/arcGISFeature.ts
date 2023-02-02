@@ -1,5 +1,5 @@
-import type { arcGISGeometry } from "./arcGISGeometry";
+import { arcGISGeometry } from "./arcGISGeometry";
 
-export interface arcGISFeature {
-    geomerty: arcGISGeometry
+export class arcGISFeature {
+    geometry: arcGISGeometry = new arcGISGeometry()
 }

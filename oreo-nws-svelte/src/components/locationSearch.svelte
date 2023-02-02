@@ -3,50 +3,40 @@
     import { createEventDispatcher } from 'svelte';
 
     import { favorites, addFavorite } from "../stores/favoriteStore";
+    import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
+    import { getLocation, getSuggestions } from "../services/arcGISService";
 
-    import type { GeoLocation } from "../models/GeoLocation";
-    import { getLocations } from "../services/locationService";
-
-    import { getSuggestions } from "../services/arcGISService";
-    import type { arcGISSearchResult } from "../models/arcGISSearchResults";
-
-    import Container from "./container.svelte";
+    import Container from "./container.svelte";	
 
 	const dispatch = createEventDispatcher();
 
     let searchStr: string = ""
     let notFound: boolean = false
-    let locations: GeoLocation[] = []
 
-    let suggestions: arcGISSearchResult
+    let suggestions: arcGISSearchSuggestion[] = []
 
 	async function onSearchClick() {
 
-        if (searchStr.length > 0) {
-                var locArr = searchStr.split(/[,]+/);
-                if (locArr.length > 0)
-                    locations = await getLocations(locArr[0], locArr[1], "us");
+        if (searchStr.length > 0)
+            suggestions = await getSuggestions(searchStr)
 
-                    //suggestions = await getSuggestions(searchStr)
-                    //console.info(suggestions)
-
-        }
-
-        notFound = (locations.length == 0)
+        notFound = (suggestions.length == 0)
     }
 
-    function onLocationClick(location: GeoLocation) {
+    async function onLocationClick(suggestion: arcGISSearchSuggestion) {
+        // Get the location containing the lat/lon needed for the weather and forecast components...
+        const location = await getLocation(suggestion.magicKey)
         dispatch('locationSelected', location);
     }
 
     function onSearchClearClick() {
         notFound = false
         searchStr = ''
-        locations = []
+        suggestions = []
     }
 
-    function onAddFavoriteClick(location: GeoLocation) {
-        addFavorite(location)
+    function onAddFavoriteClick(suggestion: arcGISSearchSuggestion) {
+        addFavorite(suggestion)
     }
 
     onMount(() => {
@@ -123,18 +113,18 @@
     </div>
     {/if}
 
-    {#if locations.length > 0}
+    {#if suggestions.length > 0}
     <table class="w-full pt-2 mt-3">
-        {#each locations as location }
+        {#each suggestions as suggestion }
         <tr >
             <td class="">
                 <!-- svelte-ignore a11y-invalid-attribute -->
-                <a on:click={() => onLocationClick(location)} href="#favorites">{location.name}</a>&nbsp;{location.state}, {location.country}
+                <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text}</a>
             </td>
             <td class="content-end text-right">
-                {#if !$favorites?.includes(location)}
+                {#if !$favorites?.includes(suggestion)}
                 <!-- svelte-ignore a11y-invalid-attribute -->
-                <a on:click={() => onAddFavoriteClick(location)} href="#">⭐</a>                    
+                <a on:click={() => onAddFavoriteClick(suggestion)} href="#">⭐</a>                    
                 {/if}         
             </td>
         </tr>

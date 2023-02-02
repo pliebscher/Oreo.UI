@@ -1,8 +1,8 @@
-import type { arcGISExtent } from "./arcGISExtent"
-import type { arcGISFeature } from "./arcGISFeature"
+import { arcGISExtent } from "./arcGISExtent"
+import { arcGISFeature } from "./arcGISFeature"
 
-export interface arcGISLocation {
-    name: string
-    extent: arcGISExtent
-    feature: arcGISFeature
+export class arcGISLocation {
+    name: string = ''
+    extent: arcGISExtent = new arcGISExtent()
+    feature: arcGISFeature = new arcGISFeature()
 }

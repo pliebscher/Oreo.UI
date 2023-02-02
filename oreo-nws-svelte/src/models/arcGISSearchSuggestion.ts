@@ -1,4 +1,4 @@
-export interface arcGISSearchSuggestion {
-    text: string
-    magicKey: string    
+export class arcGISSearchSuggestion {
+    text: string = ''
+    magicKey: string = '' 
 }

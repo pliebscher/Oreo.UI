@@ -1,4 +1,4 @@
-export class Currentobservation {
+export class nwsObservation {
 
     id: string = '' 
     name: string = ''

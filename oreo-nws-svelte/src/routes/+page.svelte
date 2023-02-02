@@ -5,12 +5,12 @@
 	import LocationSearch from "../components/locationSearch.svelte";
 	import Favorites from "../components/favorites.svelte";
 	import Weatherforecast from "../components/weatherForecast.svelte";
+	
+	import type { arcGISLocation } from "src/models/arcGISLocation";
 
-	import type { GeoLocation } from "src/models/GeoLocation";
+	let selectedLocation: arcGISLocation
 
-	let selectedLocation: GeoLocation
-
-	function onLocationSelected(event: CustomEvent<GeoLocation>) {
+	function onLocationSelected(event: CustomEvent<arcGISLocation>) {
 		selectedLocation = event.detail
 	}
 

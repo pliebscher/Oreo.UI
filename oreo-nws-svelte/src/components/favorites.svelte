@@ -1,22 +1,25 @@
 <script lang="ts">    
     import { createEventDispatcher } from 'svelte'
-	import type { GeoLocation } from "src/models/GeoLocation";
-    import Container from "./container.svelte";
+
     import { favorites, delFavorite, setCurrentFav } from "../stores/favoriteStore";
+	import type { arcGISSearchSuggestion } from '../models/arcGISSearchSuggestion';
+	import { getLocation } from '../services/arcGISService';
+
+    import Container from "./container.svelte";
 
     const dispatch = createEventDispatcher();
 
-     function onLocationClick(location: GeoLocation) {
-
+     async function onLocationClick(suggestion: arcGISSearchSuggestion) {
+        // Get the location containing the lat/lon needed for the weather and forecast components...
+        const location = await getLocation(suggestion.magicKey)
         // Save the currently selected favorite...
-        setCurrentFav(location)
-
+        setCurrentFav(suggestion)
         // Raise the location selected/changed event...
         dispatch('locationSelected', location)
     }
 
-    function onLocationDelClick(location: GeoLocation) {
-        delFavorite(location)        
+    function onLocationDelClick(suggestion: arcGISSearchSuggestion) {
+        delFavorite(suggestion)        
     }
 
 </script>
@@ -28,7 +31,7 @@
             <tr >                       
                 <td class="">
                     <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.name}</a>&nbsp;{favorite.state}, {favorite.country}
+                    <a on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.text}</a>
                 </td>
                 <td class="content-end text-right">
                     <!-- svelte-ignore a11y-invalid-attribute -->

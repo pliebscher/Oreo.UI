@@ -1,4 +1,4 @@
-export class Location {
+export class nwsLocation {
 
     region: string = ''
     latitude: string = ''

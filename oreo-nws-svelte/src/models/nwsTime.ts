@@ -1,4 +1,4 @@
-export class Time {
+export class nwsTime {
 
     startPeriodName: string[] = []
     startValidTime: string[] = []

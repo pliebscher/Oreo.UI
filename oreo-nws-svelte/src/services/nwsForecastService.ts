@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { Forecast } from 'src/models/Forecast';
+import type { nwsForecast } from 'src/models/nwsForecast';
 
 let apiBaseURL: string = 'https://forecast.weather.gov/'
 
@@ -35,6 +35,8 @@ function handleError(error: any) {
 
 // https://forecast.weather.gov/MapClick.php?=&lat=37.82&lon=-122.23&FcstType=json
 export async function getForecast(lat: string, lon: string) {
+
+  console.info(lat + ', ' + lon)
     const query = `MapClick.php?=&lat=${lat}&lon=${lon}&FcstType=json`
-    return (await axiosClient.get<Forecast>(query)).data
+    return (await axiosClient.get<nwsForecast>(query)).data
 }

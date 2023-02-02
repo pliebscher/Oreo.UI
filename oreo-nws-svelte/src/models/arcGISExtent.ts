@@ -1,6 +1,6 @@
-export interface arcGISExtent {
-    xmin: string
-    ymin: string
-    xmax: string
-    ymax: string
+export class arcGISExtent {
+    xmin: string = ''
+    ymin: string = ''
+    xmax: string = ''
+    ymax: string = ''
 }

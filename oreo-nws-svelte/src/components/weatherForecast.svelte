@@ -1,20 +1,21 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-	import type { GeoLocation } from "../models/GeoLocation";
-    import type { Forecast } from "../models/Forecast";
+      import type { nwsForecast } from "../models/nwsForecast";
     import { getForecast } from "../services/nwsForecastService";
 
     import { currentFav } from "../stores/favoriteStore";
 
 	import WeatherComp from "./weather.svelte";
     import ForecastComp from "./forecast.svelte";
-  
+	import type { arcGISLocation } from "../models/arcGISLocation";
+	import { getLocation } from "../services/arcGISService";
+	  
     // Props...
-    export let location: GeoLocation
+    export let location: arcGISLocation
     
     // Locals...
-    let forecast: Forecast | undefined
+    let forecast: nwsForecast | undefined
 
     // Watchers...
     $: {
@@ -22,23 +23,26 @@
     }
 
     // Methods...
-    async function fetchForecast(loc: GeoLocation) {
+    async function fetchForecast(location: arcGISLocation) {
         
-        if (loc?.lat) {
-            console.info(`fetchForecast: ${loc.name}, ${loc.state}`)
-            forecast =  await getForecast(loc.lat.toString(), loc.lon.toString())
+        if (location?.name) {            
+            forecast =  await getForecast(location.feature.geometry.y, location.feature.geometry.x)
         }            
         
-        if (!loc?.lat)
+        if (!location?.name)
             forecast = undefined
+    }
+
+    async function showFavorite() {
+        if ($currentFav?.text) {
+            location = await getLocation($currentFav.magicKey)
+        }
     }
 
     onMount( () => {
 		
         console.info('weatherForecast Mounted...')
-
-        if ($currentFav?.lat)
-            location = $currentFav
+        showFavorite()
 
         setInterval(() => {
             if (forecast) 

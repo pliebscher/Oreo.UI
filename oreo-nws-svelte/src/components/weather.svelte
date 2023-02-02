@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { arcGISLocation } from "../models/arcGISLocation";
 	import { onMount } from "svelte";
     
-    import type { GeoLocation } from "../models/GeoLocation";
-    import type { Forecast } from "../models/Forecast";
+    import type { nwsForecast } from "../models/nwsForecast";
     
     import Container from "./container.svelte";
 
     // Props...
-    export let location: GeoLocation
-    export let forecast: Forecast | undefined
+    export let location: arcGISLocation
+    export let forecast: nwsForecast | undefined
 
     $: {
         if (forecast)
@@ -25,7 +25,7 @@
 </script>
    
 {#if forecast?.currentobservation}
-<Container title="{location?.name}, {location?.state}" id="weather">
+<Container title="{location?.name}" id="weather">
     <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2 mb-0">
         <div class="grid grid-flow-col auto-cols-max z-50">
             <div class="pt-4 pr-4 pl-4">
