@@ -9,7 +9,7 @@
 
     const dispatch = createEventDispatcher();
 
-     async function onLocationClick(suggestion: arcGISSearchSuggestion) {
+    async function onLocationClick(suggestion: arcGISSearchSuggestion) {
         // Get the location containing the lat/lon needed for the weather and forecast components...
         const location = await getLocation(suggestion.magicKey)
         // Save the currently selected favorite...

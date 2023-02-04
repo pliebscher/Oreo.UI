@@ -35,8 +35,6 @@ function handleError(error: any) {
 
 // https://forecast.weather.gov/MapClick.php?=&lat=37.82&lon=-122.23&FcstType=json
 export async function getForecast(lat: string, lon: string) {
-
-  console.info(lat + ', ' + lon)
     const query = `MapClick.php?=&lat=${lat}&lon=${lon}&FcstType=json`
     return (await axiosClient.get<nwsForecast>(query)).data
 }

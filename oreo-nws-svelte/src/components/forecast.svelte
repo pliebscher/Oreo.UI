@@ -6,7 +6,7 @@
     export let forecast: nwsForecast | undefined
 
     onMount( () => {		
-        console.info('weather Mounted...')
+        console.info('forecast Mounted...')
 	});
 
 </script>
