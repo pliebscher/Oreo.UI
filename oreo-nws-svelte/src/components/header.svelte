@@ -14,7 +14,7 @@
             </td>
 			<td class="justify-items-end" align="right">
 				<a href="/about">
-                    <img src="about.png" alt="About" aria-label="About" class="mr-1" width="23px" height="23px" />
+                    <img src="about.png" alt="About" aria-label="About" class="pr-2" width="23px" height="23px" />
 				</a>
 			</td>
 		</tr>
