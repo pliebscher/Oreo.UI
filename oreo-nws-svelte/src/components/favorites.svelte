@@ -28,7 +28,7 @@
 <Container id="favorites">    
     <table class="w-full">    
         {#each $favorites as favorite }
-            <tr >                       
+            <tr>                       
                 <td class="">
                     <!-- svelte-ignore a11y-invalid-attribute -->
                     <a on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>

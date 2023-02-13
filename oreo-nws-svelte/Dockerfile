@@ -1,6 +1,6 @@
 # In svelte.config.js, update "adapter-auto" to "adapter-node"
 # See: https://github.com/sveltejs/kit/tree/master/packages/adapter-node
-FROM node:18.10 AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
