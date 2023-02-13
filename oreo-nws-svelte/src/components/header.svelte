@@ -3,7 +3,7 @@
 
 </script>
 
-<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full pl-2 py-0 text-lg">
+<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 pr-1 w-full text-lg">
 	<table class="w-full">
 		<tr>
 			<td>
@@ -14,7 +14,7 @@
             </td>
 			<td class="justify-items-end" align="right">
 				<a href="/about">
-                    <img src="about.png" alt="About" aria-label="About" class="pr-2" width="23px" height="23px" />
+                    <img src="about.png" alt="About" aria-label="About" class="" width="20px" height="20px" />
 				</a>
 			</td>
 		</tr>

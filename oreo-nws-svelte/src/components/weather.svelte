@@ -36,7 +36,7 @@
                     {forecast?.currentobservation.Temp}&deg;
                 </div>                
                 <div class="px-3">
-                    {forecast?.data.weather[0]}
+                    {forecast?.data.weather[0].split(' then')[0].replace('Slight', '')}
                 </div>
             </div>
         </div>
