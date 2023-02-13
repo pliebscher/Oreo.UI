@@ -119,7 +119,7 @@
         <tr >
             <td class="">
                 <!-- svelte-ignore a11y-invalid-attribute -->
-                <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text}</a>
+                <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text.replace(', USA', '')}</a>
             </td>
             <td class="content-end text-right">
                 {#if !$favorites?.includes(suggestion)}
