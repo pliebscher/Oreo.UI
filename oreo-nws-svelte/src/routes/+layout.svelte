@@ -28,7 +28,7 @@
   
 <Header />
 
-<div class="w-full mt-7">
+<div class="w-full mt-6">
     <slot />
     <div id="toaster" class=""></div> 
 </div>
