@@ -18,8 +18,13 @@
     // Locals...
     let lastUpdate: Date = new Date()
    
+    // Methods...
+    function getRadarUrl() {
+        return `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
+    }
+
     onMount( () => {		
-        console.info('weather Mounted...')
+        
 	});
 
 </script>
@@ -50,6 +55,7 @@
                 </div>
             </section>
         </div>
-    </div>
+        <img src={ getRadarUrl() } alt="Radar Map" class="w-full rounded" />
+    </div>    
 </Container>
 {/if}

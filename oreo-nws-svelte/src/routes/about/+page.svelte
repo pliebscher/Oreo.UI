@@ -1,7 +1,7 @@
 <script lang="ts">
     import Container from "../../components/container.svelte";
 
-    import { clearFavorites } from "../../stores/favoriteStore"
+
     import { version } from '$app/environment'
     import { onMount } from "svelte";
 
@@ -14,7 +14,7 @@
 
 </script>
 
-<Container>
+<Container title="About" id="about">
         <table class="w-full">
           <tr>
               <td class="p-1">
@@ -77,23 +77,8 @@
                   </a>
               </td>
           </tr>
-          <tr> 
-              <td colspan="2"><hr /></td>
-          </tr>
-          <tr>
-              <td class="p-1">
-                  <!-- svelte-ignore a11y-invalid-attribute -->
-                  <a href="#" on:click={ () => { clearFavorites(); alert('Favorites cleared!') } }>🗑️</a>
-              </td>
-              <td>
-                  <!-- svelte-ignore a11y-invalid-attribute -->
-                  <a href="#" on:click={ () => { clearFavorites(); alert('Favorites cleared!') } } aria-label="Clear Favorites">
-                      Clear Favorites
-                  </a>
-              </td>
-          </tr>
         </table>
-        <canvas bind:this={canvas} class="w-full">
-  
-        </canvas>
 </Container>
+<canvas bind:this={canvas} class="w-full">
+  
+</canvas>

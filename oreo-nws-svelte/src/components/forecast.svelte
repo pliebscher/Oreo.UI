@@ -6,7 +6,7 @@
     export let forecast: nwsForecast | undefined
 
     onMount( () => {		
-        console.info('forecast Mounted...')
+        
 	});
 
 </script>
@@ -31,6 +31,5 @@
         </tr>
         {/each}
     </table>
-
 </Container>
 {/if}

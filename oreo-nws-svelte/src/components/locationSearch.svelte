@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { createEventDispatcher } from 'svelte';
 
-    import { favorites, addFavorite } from "../stores/favoriteStore";
+    import { favorites, addFavorite, setCurrentFav } from "../stores/favoriteStore";
     import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
     import { getLocation, getSuggestions } from "../services/arcGISService";
 
@@ -26,6 +26,9 @@
     async function onLocationClick(suggestion: arcGISSearchSuggestion) {
         // Get the location containing the lat/lon needed for the weather and forecast components...
         const location = await getLocation(suggestion.magicKey)
+        // Set as current favorite...
+        setCurrentFav(suggestion)
+        // Raise the Selected event...
         dispatch('locationSelected', location);
     }
 

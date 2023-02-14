@@ -32,6 +32,7 @@
         if (location?.name) {
             fetching = true    
             forecast =  await getForecast(location.feature.geometry.y, location.feature.geometry.x)
+            console.info(forecast)
             fetching = false
         }            
         
@@ -42,6 +43,7 @@
     async function showFavorite() {
         if ($currentFav?.text) {
             location = await getLocation($currentFav.magicKey)
+            console.info(location)
         }
     }
 
