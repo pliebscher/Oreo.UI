@@ -31,7 +31,7 @@
             <tr>                       
                 <td class="">
                     <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
+                    <a class="" on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
                 </td>
                 <td class="content-end text-right">
                     <!-- svelte-ignore a11y-invalid-attribute -->
