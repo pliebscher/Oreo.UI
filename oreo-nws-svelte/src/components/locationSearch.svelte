@@ -80,7 +80,7 @@
                             w-full                                
                             text-gray-500                                 
                             focus:outline-none " 
-                    placeholder="City [,State]" 
+                    placeholder="City [,State] [Zip]" 
                     aria-label="Search Text" 
                     aria-describedby="search-addon" 
                     bind:value={searchStr}/>

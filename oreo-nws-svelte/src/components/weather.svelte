@@ -38,14 +38,14 @@
                     <img class="rounded-lg p-1" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
                 </td>
                 <td>
-                    <table class="w-full border-collapse ">                
+                    <table class=" border-collapse ">                
                         <tr>
                             <td class="text-2xl">{forecast?.currentobservation.Temp}&deg;</td>
                             <td>
-                                <table class="w-full text-sm">
+                                <table class="w-full text-sm ml-2">
                                     <tr>
                                         <td>
-                                            <img src="wind.svg" alt="Wind" aria-label="Wind" class="" width="18px" />
+                                            <img src="wind.svg" alt="Wind" aria-label="Wind" class="" width="20px" />
                                         </td>
                                         <td>
                                             {forecast?.currentobservation.Winds} MPH
@@ -54,7 +54,7 @@
                                 </table>
                             </td>
                             <td>
-                                <table class="w-full text-sm">
+                                <table class="w-full text-sm ml-2">
                                     <tr>
                                         <td>
                                             <img src="hum.png" alt="Humidity" aria-label="Humidity" class="" width="18px" />
