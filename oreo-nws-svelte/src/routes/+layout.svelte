@@ -19,7 +19,7 @@
 
 	onMount( () => {
 		window.onunhandledrejection = (e) => {
-			console.error('Weather Dog Error: ', e.reason)
+			console.error('Weather Fish Error: ', e.reason)
 			showToast('An unhandled error occured')
 		}
 	})

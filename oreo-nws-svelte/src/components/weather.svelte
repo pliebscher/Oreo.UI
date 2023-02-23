@@ -45,7 +45,7 @@
                                 <table class="w-full text-sm ml-2">
                                     <tr>
                                         <td>
-                                            <img src="wind.svg" alt="Wind" aria-label="Wind" class="" width="20px" />
+                                            <img src="/images/wind.svg" alt="Wind" aria-label="Wind" class="" width="20px" />
                                         </td>
                                         <td>
                                             {forecast?.currentobservation.Winds} MPH
@@ -57,7 +57,7 @@
                                 <table class="w-full text-sm ml-2">
                                     <tr>
                                         <td>
-                                            <img src="hum.png" alt="Humidity" aria-label="Humidity" class="" width="18px" />
+                                            <img src="/images/hum.png" alt="Humidity" aria-label="Humidity" class="" width="18px" />
                                         </td>
                                         <td>
                                             {forecast?.currentobservation.Relh}% Humidity
