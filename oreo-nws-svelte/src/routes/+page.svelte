@@ -12,8 +12,6 @@
 		selectedLocation = event.detail
 	}
 
-
-
 </script>
 
 <LocationSearch on:locationSelected = {onLocationSelected} />
