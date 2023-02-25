@@ -58,3 +58,13 @@ export function clearFavorites() {
         return curFav
     })
 }
+
+export function containsFavorite(favorite:arcGISSearchSuggestion) {
+    let found: boolean = false
+    _favs.forEach(fav => {
+        if (fav.magicKey == favorite.magicKey) {
+            found = true            
+        }    
+    });
+    return found
+}

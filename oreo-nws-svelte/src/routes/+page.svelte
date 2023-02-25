@@ -9,6 +9,7 @@
 	let selectedLocation: arcGISLocation
 
 	function onLocationSelected(event: CustomEvent<arcGISLocation>) {
+		console.info('location selected: ' + event.detail.name)
 		selectedLocation = event.detail
 	}
 

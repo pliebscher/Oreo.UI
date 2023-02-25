@@ -9,7 +9,7 @@
 
     const dispatch = createEventDispatcher();
 
-    async function onLocationClick(suggestion: arcGISSearchSuggestion) {
+    async function onFavoriteClick(suggestion: arcGISSearchSuggestion) {
         // Get the location containing the lat/lon needed for the weather and forecast components...
         const location = await getLocation(suggestion.magicKey)
         // Save the currently selected favorite...
@@ -18,7 +18,7 @@
         dispatch('locationSelected', location)
     }
 
-    function onLocationDelClick(suggestion: arcGISSearchSuggestion) {
+    function onFavoriteDelClick(suggestion: arcGISSearchSuggestion) {
         delFavorite(suggestion)        
     }
 
@@ -31,11 +31,11 @@
             <tr>                       
                 <td class="">
                     <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a class="" on:click={() => onLocationClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
+                    <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
                 </td>
                 <td class="content-end text-right">
                     <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a on:click={() => onLocationDelClick(favorite)} href="#search">🗑️</a>
+                    <a on:click={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
                 </td>                        
             </tr>             
         {/each}

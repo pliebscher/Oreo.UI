@@ -10,17 +10,14 @@
 
     // Locals...
     let lastUpdate: Date = new Date()
+    let raderUrl: string = `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
    
     // Watchers...
     $: {
-        if (forecast)
+        if (forecast) {
             lastUpdate = new Date()
-    }
-
-    // Methods...
-    function getRadarUrl() {
-        // TODO: Return different types of radar urls...
-        return `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
+            raderUrl = raderUrl // trigger reactive update
+        }            
     }
 
     onMount( () => {		
@@ -76,7 +73,7 @@
             </tr>
         </table>
 
-        <img src={ getRadarUrl() } alt="Radar Map" class="w-full rounded-lg p-1" />
+        <img src="{ raderUrl }" alt="Radar Map" class="w-full rounded-lg p-1" />
 
         <div class="border-0 ml-1 mr-3 pb-2 text-sm">
             <section class="flex w-full">

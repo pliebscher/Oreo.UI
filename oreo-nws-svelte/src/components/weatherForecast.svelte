@@ -12,7 +12,6 @@
 	import WeatherComp from "./weather.svelte";
     import ForecastComp from "./forecast.svelte";
 	import Loader from "./loader.svelte";
-
 	  
     // Props...
     export let location: arcGISLocation

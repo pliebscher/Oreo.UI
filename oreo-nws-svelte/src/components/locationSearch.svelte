@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { createEventDispatcher } from 'svelte';
 
-    import { favorites, addFavorite, setCurrentFav } from "../stores/favoriteStore";
+    import { favorites, addFavorite, setCurrentFav, containsFavorite } from "../stores/favoriteStore";
     import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
     import { getLocation, getSuggestions } from "../services/arcGISService";
 
@@ -14,6 +14,11 @@
     let notFound: boolean = false
 
     let suggestions: arcGISSearchSuggestion[] = []
+
+    $: {
+        // Call arcGIS service with each key stroke to populate an auto-suggest list...
+        //console.info(searchStr)
+    }
 
 	async function onSearchClick() {
 
@@ -125,7 +130,7 @@
                 <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text.replace(', USA', '')}</a>
             </td>
             <td class="content-end text-right">
-                {#if !$favorites?.includes(suggestion)}
+                {#if !containsFavorite(suggestion) && !$favorites?.includes(suggestion) }
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a on:click={() => onAddFavoriteClick(suggestion)} href="#">⭐</a>                    
                 {/if}         
