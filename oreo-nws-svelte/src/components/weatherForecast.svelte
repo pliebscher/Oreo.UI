@@ -50,6 +50,7 @@
 		
         showFavorite()
 
+        // Auto update the forecast...
         setInterval(() => {
             if (forecast) 
                 fetchForecast(location)            

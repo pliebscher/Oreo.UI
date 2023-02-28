@@ -9,19 +9,27 @@
     export let forecast: nwsForecast | undefined
 
     // Locals...
+    const baseRaderUrl: string = `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
+    let raderUrl: string = baseRaderUrl 
     let lastUpdate: Date = new Date()
-    let raderUrl: string = `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
+    
    
     // Watchers...
     $: {
         if (forecast) {
             lastUpdate = new Date()
-            raderUrl = raderUrl // trigger reactive update
+            raderUrl = baseRaderUrl + '?' + Math.random().toString() // trigger reactive update
         }            
     }
 
     onMount( () => {		
         
+        // Auto update the weather map...
+        setInterval(() => {
+            if (forecast) 
+                forecast = forecast            
+        }, 300000) // 5 min.
+
 	});
 
 </script>
