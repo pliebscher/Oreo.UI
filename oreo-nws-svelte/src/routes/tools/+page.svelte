@@ -2,7 +2,11 @@
     import { clearFavorites } from "../../stores/favoriteStore";
     import Container from "../../components/container.svelte";
 
+	import Favorites from "../../components/favorites.svelte";
+
 </script>
+
+<Favorites edit={true} />
 
 <Container title="Tools" id="tools">
     <table class="">

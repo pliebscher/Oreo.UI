@@ -7,6 +7,8 @@
 
     import Container from "./container.svelte";
 
+    export let edit: boolean = false
+
     const dispatch = createEventDispatcher();
 
     async function onFavoriteClick(suggestion: arcGISSearchSuggestion) {
@@ -25,13 +27,14 @@
 </script>
 
 {#if $favorites?.length > 0}
-<Container id="favorites">    
-    <table class="w-full">    
+    {#if edit}
+    <Container id="favorites" title="Manage Favorites">
+        <hr class="mt-1" />
+    <table class="w-full mt-1">    
         {#each $favorites as favorite }
             <tr>                       
                 <td class="">
-                    <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
+                    {favorite.text.replace(', USA', '')}
                 </td>
                 <td class="content-end text-right">
                     <!-- svelte-ignore a11y-invalid-attribute -->
@@ -40,5 +43,15 @@
             </tr>             
         {/each}
     </table>
-</Container>
+    </Container>
+    {:else}
+    <Container id="favorites">
+        {#each $favorites as favorite }
+            <div>
+                <!-- svelte-ignore a11y-invalid-attribute -->
+                <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
+            </div>
+        {/each}
+    </Container>
+    {/if}
 {/if}
