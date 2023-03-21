@@ -46,12 +46,16 @@
     </Container>
     {:else}
     <Container id="favorites">
+        <div class="flex flex-wrap">
         {#each $favorites as favorite }
-            <div>
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">{favorite.text.replace(', USA', '')}</a>
-            </div>
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">
+                <div class="border rounded m-0.5 px-1">
+                    {favorite.text.replace(', USA', '')}
+                </div>
+            </a>
         {/each}
+        </div>
     </Container>
     {/if}
 {/if}
