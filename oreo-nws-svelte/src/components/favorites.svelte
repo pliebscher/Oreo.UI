@@ -1,7 +1,7 @@
 <script lang="ts">    
     import { createEventDispatcher } from 'svelte'
 
-    import { favorites, delFavorite, setCurrentFav } from "../stores/favoriteStore";
+    import { favorites, delFavorite, setCurrentFav, currentFav } from "../stores/favoriteStore";
 	import type { arcGISSearchSuggestion } from '../models/arcGISSearchSuggestion';
 	import { getLocation } from '../services/arcGISService';
 
@@ -30,19 +30,19 @@
     {#if edit}
     <Container id="favorites" title="Manage Favorites">
         <hr class="mt-1" />
-    <table class="w-full mt-1">    
-        {#each $favorites as favorite }
-            <tr>                       
-                <td class="">
-                    {favorite.text.replace(', USA', '')}
-                </td>
-                <td class="content-end text-right">
-                    <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a on:click={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
-                </td>                        
-            </tr>             
-        {/each}
-    </table>
+        <table class="w-full mt-1">    
+            {#each $favorites as favorite }
+                <tr>                       
+                    <td class="">
+                        {favorite.text.replace(', USA', '')}
+                    </td>
+                    <td class="content-end text-right">
+                        <!-- svelte-ignore a11y-invalid-attribute -->
+                        <a on:click={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
+                    </td>                        
+                </tr>             
+            {/each}
+        </table>
     </Container>
     {:else}
     <Container id="favorites">
@@ -50,7 +50,7 @@
         {#each $favorites as favorite }
             <!-- svelte-ignore a11y-invalid-attribute -->
             <a class="" on:click={() => onFavoriteClick(favorite)} href="#favorites">
-                <div class="border rounded m-0.5 px-1">
+                <div  class="border rounded m-0.5 px-1 {$currentFav.magicKey == favorite.magicKey ? 'bg-gray-600' : ''}">
                     {favorite.text.replace(', USA', '')}
                 </div>
             </a>

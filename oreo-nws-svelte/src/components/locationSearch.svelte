@@ -16,7 +16,7 @@
     let suggestions: arcGISSearchSuggestion[] = []
 
     $: {
-        // Call arcGIS service with each key stroke to populate an auto-suggest list...
+        // TODO: Call arcGIS service with each key stroke to populate an auto-suggest list...
         //console.info(searchStr)
     }
 
@@ -33,6 +33,8 @@
         const location = await getLocation(suggestion.magicKey)
         // Set as current favorite...
         setCurrentFav(suggestion)
+        // 
+        addFavorite(suggestion)
         // Raise the Selected event...
         dispatch('locationSelected', location);
     }
@@ -43,9 +45,9 @@
         suggestions = []
     }
 
-    function onAddFavoriteClick(suggestion: arcGISSearchSuggestion) {
-        addFavorite(suggestion)
-    }
+    // function onAddFavoriteClick(suggestion: arcGISSearchSuggestion) {
+    //     addFavorite(suggestion)
+    // }
 
     onMount(() => {
         if (import.meta.env.DEV)
@@ -117,7 +119,7 @@
     {#if notFound}
     <div>
         <div>&nbsp;</div>
-        Location Not Found 😢
+        No Locations Found 😢
     </div>
     {/if}
 
@@ -130,10 +132,7 @@
                 <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text.replace(', USA', '')}</a>
             </td>
             <td class="content-end text-right">
-                {#if !containsFavorite(suggestion) && !$favorites?.includes(suggestion) }
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a on:click={() => onAddFavoriteClick(suggestion)} href="#">⭐</a>                    
-                {/if}         
+                &nbsp;        
             </td>
         </tr>
         {/each}

@@ -26,7 +26,8 @@ currentFav.subscribe( (value) => {
 // Add a favorite...
 export function addFavorite(location: arcGISSearchSuggestion) {
     favorites.update((favs) => {
-        favs.push(location)
+        if (!containsFavorite(location))
+            favs.push(location)
         return favs
     })
 }
