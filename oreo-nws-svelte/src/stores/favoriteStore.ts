@@ -26,7 +26,7 @@ currentFav.subscribe( (value) => {
 // Add a favorite...
 export function addFavorite(location: arcGISSearchSuggestion) {
     favorites.update((favs) => {
-        if (!containsFavorite(location))
+        if (!containsFavorite(location)) // Make sure it's only added once
             favs.push(location)
         return favs
     })
@@ -61,11 +61,10 @@ export function clearFavorites() {
 }
 
 export function containsFavorite(favorite:arcGISSearchSuggestion) {
-    let found: boolean = false
     _favs.forEach(fav => {
         if (fav.magicKey == favorite.magicKey) {
-            found = true            
+            return true            
         }    
     });
-    return found
+    return false
 }
