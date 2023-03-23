@@ -18,7 +18,7 @@
             <td>
                 <!-- svelte-ignore a11y-invalid-attribute -->
                 <a href="#" on:click={ () => { clearFavorites() } } aria-label="Clear Favorites">
-                    Clear Favorites
+                    Clear History
                 </a>
             </td>
         </tr>
