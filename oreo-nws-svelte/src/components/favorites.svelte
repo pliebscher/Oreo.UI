@@ -28,7 +28,7 @@
 
 {#if $favorites?.length > 0}
     {#if edit}
-    <Container id="favorites" title="Manage Favorites">
+    <Container id="favorites" title="Manage History">
         <hr class="mt-1" />
         <table class="w-full mt-1">    
             {#each $favorites as favorite }

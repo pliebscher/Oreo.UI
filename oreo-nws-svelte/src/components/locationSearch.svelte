@@ -10,22 +10,38 @@
 
 	const dispatch = createEventDispatcher();
 
-    let searchStr: string = ""
+    let searchStr: string = ''
     let notFound: boolean = false
 
     let suggestions: arcGISSearchSuggestion[] = []
 
+    // Watch the search box for changes...
     $: {
-        // TODO: Call arcGIS service with each key stroke to populate an auto-suggest list...
-        //console.info(searchStr)
+        if (searchStr.length == 0) {
+            clearSearch()
+        } else {
+            search(searchStr)
+        }
+    }
+
+    async function search(criteria: string) {
+        if (searchStr.length > 0) {
+            suggestions = await getSuggestions(criteria)        
+            // Filter non-USA results as they don't work!
+            suggestions = suggestions.filter(loc => loc.text.endsWith(', USA'))
+        }
+
+        notFound = (suggestions.length == 0 && searchStr.length > 1)
     }
 
 	async function onSearchClick() {
+        search(searchStr)
+    }
 
-        if (searchStr.length > 0)
-            suggestions = await getSuggestions(searchStr)
-
-        notFound = (suggestions.length == 0)
+    function clearSearch() {
+        notFound = false
+        searchStr = ''
+        suggestions = []
     }
 
     async function onLocationClick(suggestion: arcGISSearchSuggestion) {
@@ -40,14 +56,8 @@
     }
 
     function onSearchClearClick() {
-        notFound = false
-        searchStr = ''
-        suggestions = []
+        clearSearch()
     }
-
-    // function onAddFavoriteClick(suggestion: arcGISSearchSuggestion) {
-    //     addFavorite(suggestion)
-    // }
 
     onMount(() => {
         if (import.meta.env.DEV)
@@ -116,26 +126,25 @@
         </div>
     </form>
 
-    {#if notFound}
-    <div>
-        <div>&nbsp;</div>
-        No Locations Found 😢
+    {#if suggestions.length > 0}
+    <div class="flex flex-wrap pt-1">
+        {#each suggestions as suggestion}
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a class="" on:click={() => onLocationClick(suggestion)} href="#favorites">
+            <div class="border rounded m-0.5 px-1">
+                {suggestion.text.replace(', USA', '')}
+            </div>
+        </a>
+        {/each}
     </div>
     {/if}
 
-    {#if suggestions.length > 0}
-    <table class="w-full pt-2 mt-3">
-        {#each suggestions as suggestion }
-        <tr >
-            <td class="">
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a on:click={() => onLocationClick(suggestion)} href="#favorites">{suggestion.text.replace(', USA', '')}</a>
-            </td>
-            <td class="content-end text-right">
-                &nbsp;        
-            </td>
-        </tr>
-        {/each}
-    </table>
+    {#if notFound}
+    <div class="flex flex-wrap pt-1">
+        <div class="border rounded m-0.5 px-1">
+            No Locations Found 😢
+        </div>
+    </div>
     {/if}
+
 </Container>

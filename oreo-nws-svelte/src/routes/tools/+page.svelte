@@ -13,11 +13,11 @@
         <tr>
             <td class="p-1">
                 <!-- svelte-ignore a11y-invalid-attribute -->
-                <a href="#" on:click={ () => { clearFavorites(); alert('Favorites cleared!') } }>🗑️</a>
+                <a href="#" on:click={ () => { clearFavorites() } }>🗑️</a>
             </td>
             <td>
                 <!-- svelte-ignore a11y-invalid-attribute -->
-                <a href="#" on:click={ () => { clearFavorites(); alert('Favorites cleared!') } } aria-label="Clear Favorites">
+                <a href="#" on:click={ () => { clearFavorites() } } aria-label="Clear Favorites">
                     Clear Favorites
                 </a>
             </td>
