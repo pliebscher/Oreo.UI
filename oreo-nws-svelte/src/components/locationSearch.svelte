@@ -52,7 +52,9 @@
         // 
         addFavorite(suggestion)
         // Raise the Selected event...
-        dispatch('locationSelected', location);
+        dispatch('locationSelected', location)
+        //
+        clearSearch()
     }
 
     function onSearchClearClick() {
