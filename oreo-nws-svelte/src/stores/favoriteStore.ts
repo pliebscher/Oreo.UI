@@ -25,11 +25,11 @@ currentFav.subscribe( (value) => {
 
 // Add a favorite...
 export function addFavorite(location: arcGISSearchSuggestion) {
-    favorites.update((favs) => {
-        if (!containsFavorite(location)) // Make sure it's only added once
+    if (!containsFavorite(location)) // Make sure it's only added once
+        favorites.update((favs) => {
             favs.push(location)
-        return favs
-    })
+            return favs
+        })
 }
 
 // Remove a favorite...
@@ -60,11 +60,7 @@ export function clearFavorites() {
     })
 }
 
+//
 export function containsFavorite(favorite:arcGISSearchSuggestion) {
-    _favs.forEach(fav => {
-        if (fav.magicKey == favorite.magicKey) {
-            return true            
-        }    
-    });
-    return false
+    return _favs.some(fav => fav.magicKey.trim() === favorite.magicKey.trim())
 }
