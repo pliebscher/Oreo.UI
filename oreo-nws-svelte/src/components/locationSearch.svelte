@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { createEventDispatcher } from 'svelte';
 
-    import { addFavorite, setCurrentFav, containsFavorite } from "../stores/favoriteStore";
+    import { addFavorite, setCurrentFav } from "../stores/favoriteStore";
     import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
     import { getLocation, getSuggestions } from "../services/arcGISService";
 
@@ -50,8 +50,7 @@
         // Set as current favorite...
         setCurrentFav(suggestion)
         // 
-        //if (!containsFavorite(suggestion))
-            addFavorite(suggestion)
+        addFavorite(suggestion)
         // Raise the Selected event...
         dispatch('locationSelected', location)
         //

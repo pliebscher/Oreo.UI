@@ -1,12 +1,12 @@
 <script lang="ts">
-    import "../app.css";
-    import "../toaster.css";
+  import "../app.css";
+  import "../toaster.css";
 
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
-    import Header from "../components/header.svelte"
+  import Header from "../components/header.svelte"
 
-	function showToast(msg: string) {
+  function showToast(msg: string) {
           const x: HTMLElement | null = document.getElementById("toaster")
           if (x) {
             x.innerText =  msg
@@ -17,12 +17,12 @@
           }      
     }
 
-	onMount( () => {
-		window.onunhandledrejection = (e) => {
-			console.error('Weather Fish Error: ', e.reason)
-			showToast('An unhandled error occured')
-		}
-	})
+  onMount( () => {
+    window.onunhandledrejection = (e) => {
+      console.error('Weather Fish Error: ', e.reason)
+      showToast('An unhandled error occured')
+    }
+  })
 
 </script>
   
