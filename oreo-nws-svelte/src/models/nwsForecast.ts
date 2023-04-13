@@ -1,21 +1,21 @@
-import { nwsObservation } from "./nwsObservation"
-import { nwsData } from "./nwsData"
-import { nwsLocation } from "./nwsLocation"
-import { nwsTime } from "./nwsTime"
+import type { nwsObservation } from "./nwsObservation"
+import type { nwsData } from "./nwsData"
+import type { nwsLocation } from "./nwsLocation"
+import type { nwsTime } from "./nwsTime"
 
 // Root
-export class nwsForecast {
+export interface nwsForecast {
 
-    operationalMode: string = ''
-    srsName: string = ''
-    creationDate: string = ''
-    creationDateLocal: string = ''
-    productionCenter: string = ''
-    credit: string = ''
-    moreInformation: string = ''
-    location: nwsLocation = new nwsLocation
-    data: nwsData = new nwsData
-    currentobservation: nwsObservation = new nwsObservation
-    time: nwsTime = new nwsTime
+    operationalMode: string
+    srsName: string
+    creationDate: string
+    creationDateLocal: string
+    productionCenter: string
+    credit: string
+    moreInformation: string
+    location: nwsLocation
+    data: nwsData
+    currentobservation: nwsObservation
+    time: nwsTime
 
 }

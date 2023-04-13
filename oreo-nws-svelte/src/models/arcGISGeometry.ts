@@ -1,4 +1,4 @@
-export class arcGISGeometry {
-    x: string = ''
-    y: string = ''
+export interface arcGISGeometry {
+    x: string
+    y: string
 }

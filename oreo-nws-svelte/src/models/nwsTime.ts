@@ -1,7 +1,7 @@
-export class nwsTime {
+export interface nwsTime {
 
-    startPeriodName: string[] = []
-    startValidTime: string[] = []
-    tempLabel: string[] = []
+    startPeriodName: string[]
+    startValidTime: string[]
+    tempLabel: string[]
 
 }

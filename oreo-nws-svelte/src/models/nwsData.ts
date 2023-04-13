@@ -1,11 +1,11 @@
-export class nwsData {
+export interface nwsData {
 
-    temperature: string[] = []
-    pop: string[] = [] // Prob. of Precip.
-    weather: string[] = []
-    iconLink: string[] = []
-    text: string[] = []
-    hazard: string[] = []
-    hazardUrl: string[] = []
+    temperature: string[]
+    pop: string[] // Prob. of Precip.
+    weather: string[]
+    iconLink: string[]
+    text: string[]
+    hazard: string[]
+    hazardUrl: string[]
     
 }
