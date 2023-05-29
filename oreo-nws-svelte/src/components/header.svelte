@@ -1,26 +1,19 @@
-<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 pr-1 w-full text-ms rounded-br-sm">
-	<table class="w-full">
-		<tr>
-			<td class="px-1 w-7">
-                <a href="/">
-                    <img src="/images/fish.svg" alt="Weather Fish" aria-label="Weather Fish" class="w-full mr-1" />
-                </a>
-			</td>
-			<td>
-				<a href="/">
-					<div class="w-full text-white">Weather Fish</div>
-				</a>                
-            </td>
-			<td class="justify-items-end" align="right">
-				<a href="/tools">
-                    <img src="/images/gear.svg" alt="Tools" aria-label="Tools" class="" width="18px" />
-				</a>
-			</td>
-			<td class="justify-items-end" align="right">
-				<a href="/about">
-                    <img src="/images/info.svg" alt="About" aria-label="About" class="" width="18px" />
-				</a>
-			</td>
-		</tr>
-	</table>
+<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full text-ms rounded-br-sm">
+	<div class="grid grid-rows-1 grid-flow-col gap-4">
+		<div class="pl-1 text-left">
+			<a href="/">
+				<img src="/images/fish.svg" alt="Weather Fish" aria-label="Weather Fish" class="w-7" />
+			</a>
+		</div>
+		<div class="text-center">
+			<a href="/">
+				WEATHER FISH			
+			</a>
+		</div>	
+		<div class="pr-1">
+			<a href="/tools">
+				<img src="/images/gear.svg" alt="Tools" aria-label="Tools" class="w-5 mt-1 float-right" />
+			</a>
+		</div>
+	</div>
 </div>
