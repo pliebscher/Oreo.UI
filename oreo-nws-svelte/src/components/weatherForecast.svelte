@@ -32,6 +32,7 @@
             fetching = true    
             forecast =  await getForecast(location.feature.geometry.y, location.feature.geometry.x)
             fetching = false
+            console.debug(forecast)
         }            
         
         if (!location?.name)
