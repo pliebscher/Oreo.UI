@@ -40,7 +40,7 @@
         <table class="w-full">
             <tr>
                 <td class="content-center text-center border-collapse w-16">
-                    <img class="rounded-lg p-1" width="60px" height="60px" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
+                    <img class="rounded-lg p-0.5" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
                 </td>
                 <td>
                     <table class=" border-collapse ">                
