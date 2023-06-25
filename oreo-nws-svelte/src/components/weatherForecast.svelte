@@ -10,9 +10,11 @@
     import { currentFav } from "../stores/favoriteStore";
 
 	import WeatherComp from "./weather.svelte";
+    import Hazard from "./hazard.svelte";
     import ForecastComp from "./forecast.svelte";
 	import Loader from "./loader.svelte";
-	import AdComp from "./ad.svelte";
+	import Forecast from "./forecast.svelte";
+	//import AdComp from "./ad.svelte";
 	  
     // Props...
     export let location: arcGISLocation
@@ -65,6 +67,7 @@
     <Loader />
     {:else}
     <WeatherComp location={location} forecast={forecast} />
+    <Hazard forecast={forecast} />
     <ForecastComp forecast={forecast} />
     {/if}
 </div>
