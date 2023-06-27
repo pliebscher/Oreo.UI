@@ -2,7 +2,7 @@
 	<div class="grid grid-rows-1 grid-flow-col gap-4">
 		<div class="pl-1 text-left">
 			<a href="/">
-				<img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-7 mt-1" />
+				<img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-7" />
 			</a>
 		</div>
 		<div class="text-center pt-0.5">
@@ -12,7 +12,7 @@
 		</div>	
 		<div class="pr-1">
 			<a href="/tools">
-				<img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-6 mt-1 mb-1 float-right" />
+				<img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-6 mt-0.5 float-right" />
 			</a>
 		</div>
 	</div>
