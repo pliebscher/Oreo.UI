@@ -5,7 +5,7 @@
 				<img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-7 mt-1" />
 			</a>
 		</div>
-		<div class="text-center">
+		<div class="text-center pt-0.5">
 			<a href="/">
 				WEATHER FISH			
 			</a>
