@@ -2,17 +2,17 @@
 	<div class="grid grid-rows-1 grid-flow-col gap-4">
 		<div class="pl-1 text-left">
 			<a href="/">
-				<img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-7" />
+				<img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-8" />
 			</a>
 		</div>
-		<div class="text-center pt-0.5">
+		<div class="text-center pt-1">
 			<a href="/">
 				WEATHER FISH			
 			</a>
 		</div>	
 		<div class="pr-1">
 			<a href="/tools">
-				<img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-6 mt-0.5 float-right" />
+				<img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-8 my-0.5 float-right" />
 			</a>
 		</div>
 	</div>

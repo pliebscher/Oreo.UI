@@ -18,3 +18,23 @@ a {
     transition: 0.4s;
     border-width: 0;
 }
+
+@media (min-width: 1024px) {
+    /* Styles for desktop */
+    /* Add your desktop-specific CSS here */
+    /* body {
+        width: 1024px;
+        
+    } */
+
+}
+  
+@media (max-width: 767px) {
+    /* Styles for mobile */
+    /* Add your mobile-specific CSS here */
+    /* To make the page full screen on mobile, you can use the following CSS */
+    /* html, body {
+      width: 100%;
+    } */
+}
+  

@@ -3,6 +3,7 @@
 	import { onMount } from "svelte";    
     import type { nwsForecast } from "../models/nwsForecast";    
     import Container from "./container.svelte";
+	import Loader from "./loader.svelte";
 	
     // Props...
     export let location: arcGISLocation
@@ -95,4 +96,6 @@
         </div>
     </div>    
 </Container>
+{:else}
+<Loader />
 {/if}
