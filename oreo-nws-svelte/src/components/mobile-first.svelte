@@ -6,7 +6,6 @@
   
     onMount(() => {
       const userAgent = navigator.userAgent.toLowerCase();
-      console.info(userAgent)
       isMobile = /mobile|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
     });
 

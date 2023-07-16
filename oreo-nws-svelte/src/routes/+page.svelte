@@ -15,6 +15,7 @@
 
 	function onLocationSelected(event: CustomEvent<arcGISLocation>) {
 		selectedLocation = event.detail
+		console.log(selectedLocation)
 	}
 
 	function onFeatureChanged(event: CustomEvent<string>) {
@@ -31,7 +32,7 @@
 {#if selectedFeature == "weather"}
 	<Weatherforecast location = {selectedLocation} />
 {:else if selectedFeature == "tide"}
-	<TideForecast />
+	<TideForecast location = {selectedLocation} />
 {:else}
 	Invalid Feature!
 {/if}
