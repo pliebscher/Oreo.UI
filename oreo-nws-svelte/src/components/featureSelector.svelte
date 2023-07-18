@@ -8,7 +8,7 @@
     let selectedFeature = 'weather'
 
     function onFeatureChanged(name: string) {
-        console.info('onFeatureChanged: ' + name)
+        console.debug('onFeatureChanged: ' + name)
         selectedFeature = name
         dispatch('featureChanged', name)
     }

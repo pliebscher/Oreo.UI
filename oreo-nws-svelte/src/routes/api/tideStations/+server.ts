@@ -17,9 +17,7 @@ export async function GET(event) {
 
 	// 37.83, -122.22 Piedmont
 	const coords = getBoundingRect((lat ? parseFloat(lat) : 0), (lon ? parseFloat(lon) : 0), 1)
-	console.log(coords)
 	const coordsParam = `${coords[0][0]},${coords[0][1]},${coords[1][0]},${coords[1][1]}`
-
 	const response = json({
 		success: true,
 		data: await getTideStations(coordsParam),

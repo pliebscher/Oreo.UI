@@ -11,15 +11,15 @@
 	import type { arcGISLocation } from "src/models/arcGISLocation";
 
 	let selectedLocation: arcGISLocation
-	let selectedFeature = 'tide'
+	let selectedFeature = 'weather'
 
 	function onLocationSelected(event: CustomEvent<arcGISLocation>) {
 		selectedLocation = event.detail
 		console.log(selectedLocation)
 	}
 
-	function onFeatureChanged(event: CustomEvent<string>) {
-		console.debug('selectedFeature: ' + event.detail)
+	async function onFeatureChanged(event: CustomEvent<string>) {
+		console.debug('selectedFeature: ' + event.detail)		
 		selectedFeature = event.detail
 	}
 
@@ -29,16 +29,14 @@
 <LocationSearch on:locationSelected = {onLocationSelected} />
 <Favorites on:locationSelected = {onLocationSelected} />
 <FeatureSelector on:featureChanged = {onFeatureChanged} />
+
 {#if selectedFeature == "weather"}
 	<Weatherforecast location = {selectedLocation} />
 {:else if selectedFeature == "tide"}
-	<TideForecast location = {selectedLocation} />
+	<TideForecast />
 {:else}
 	Invalid Feature!
 {/if}
-
-
-
 
 <Footer />
 
