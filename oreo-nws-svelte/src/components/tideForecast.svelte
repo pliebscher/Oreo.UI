@@ -6,12 +6,12 @@
     import { getLocation } from '../services/arcGISService';
     import { getTideStations } from "../services/noaaProxyService";
 
-	import type { arcGISLocation } from "src/models/arcGISLocation";
 	import type { noaaStation } from "src/models/noaaStationData";
 
     //export let location: arcGISLocation
-    let stations: noaaStation[]
+    let stations: noaaStation[] | undefined
     let selectedStation: noaaStation
+    let loading  = false
 
     // Wathcers...
     $: {
@@ -23,18 +23,21 @@
     }
 
      onMount( () => {
-        console.debug('onMount -> getStations')
-		getStations()
+
 	});
 
     async function getStations() {
 
+        loading = true
+
         // TODO: Dont re-fetch the current location...
         const currentLocation = await getLocation($currentFav.magicKey)
-
         // Get the NOAA stations for the current location...
         stations = await getTideStations(currentLocation)
-       
+        //stations = stations.filter((station) => {return station.id.startsWith('COOP')}).slice(0, 1)
+
+        loading = false
+
         console.debug('getStations -->')
         console.debug(stations)
 
@@ -47,16 +50,21 @@
 </script>
 
 <Container title='Tide Forecast' id='tides'>
-{#if stations }
+{#if  loading}
+    <div>Loading...</div>
+{:else if stations }
 <div class="flex flex-wrap">
-    {#each stations as station }
-        <a class="" on:click={() => onStationClick(station)} href="#favorites">
-            <div  class="border rounded m-0.5 px-1 {true ? 'bg-gray-600' : ''}">
-                {station.name}
-            </div>
-        </a>
-    {/each}
+    {#if stations.length >=1 }
+        {#each stations as station }
+        <div  class="border rounded m-0.5 px-1 bg-gray-600 w-full">
+            {station.name} ({station.id})
+        </div>
+        {/each}
+    {:else}
+        <div>Station Not Found</div>
+    {/if}
 </div>
+{:else }
+    <div>Station Not Found</div>
 {/if}
-
 </Container>

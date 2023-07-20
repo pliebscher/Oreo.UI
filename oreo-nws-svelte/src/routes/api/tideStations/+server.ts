@@ -30,7 +30,8 @@ async function getTideStations(coords: string) {
 
     const params = {
         extent: coords,
-        radius: 5,
+        radius: 1,
+		//datatypeid: 'EMNT&datatypeid=EMXT&datatypeid=HTMN',
     };
     
 	const headers = {
