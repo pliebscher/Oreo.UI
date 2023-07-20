@@ -17,9 +17,3 @@ export async function getTideStations(location: arcGISLocation) {
     console.debug(query)
     return (await wfClient.get<noaaStationsResult>(query)).data.data.results
 }
-
-
-
-
-
-
