@@ -28,6 +28,8 @@ export async function GET(event) {
 
 async function getTideStations(coords: string) {
 
+console.debug(coords)
+
     const params = {
         extent: coords,
         radius: 1,
