@@ -6,7 +6,7 @@ import axios from 'axios';
 const apiUrl = 'https://www.ncei.noaa.gov/cdo-web/api/v2/stations';
 const apiKey = 'picpvejsjAiQUKUgLifyIkWojGYdFYkj' // TODO: Move to secrets.ts
 
-export async function GET(event) {
+export async function GET(event: { url: { searchParams: any; }; }) {
 
 	const params = event.url.searchParams
 
