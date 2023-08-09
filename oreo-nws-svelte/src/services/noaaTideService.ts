@@ -2,9 +2,11 @@ import axios from 'axios'
 import type { arcGISLocation } from 'src/models/arcGISLocation';
 import type { noaaStationsResult } from 'src/models/noaaStationData';
 
+import type { station } from 'src/models/noaa/station';
+
 const _baseUrl: string = '/api/' // Weather Fish API route
 
-const wfClient = axios.create({
+const apiClient = axios.create({
     baseURL: _baseUrl,
     headers: {
         'Accept': 'application/json',
@@ -13,7 +15,11 @@ const wfClient = axios.create({
 })
 
 export async function getTideStations(location: arcGISLocation) {
-    const query = `tideStations?lat=${location.feature.geometry.y}&lon=${location.feature.geometry.x}`
-    console.debug(query)
-    return (await wfClient.get<noaaStationsResult>(query)).data.data.results
+    const query = `tide/stations?lat=${location.feature.geometry.y}&lon=${location.feature.geometry.x}`
+    return (await apiClient.get<station[]>(query)).data
+}
+
+export async function getTideStation(stationId: number) {
+    const query = `tide/station/${stationId}`
+    return (await apiClient.get<station>(query)).data
 }

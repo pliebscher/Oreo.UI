@@ -4,12 +4,13 @@
 
     import { currentFav } from "../stores/favoriteStore";
     import { getLocation } from '../services/arcGISService';
-    import { getTideStations } from "../services/noaaProxyService";
+    import { getTideStations } from "../services/noaaTideService";
 
 	import type { noaaStation } from "src/models/noaaStationData";
+    import type { station } from 'src/models/noaa/station';
 
     //export let location: arcGISLocation
-    let stations: noaaStation[] | undefined
+    let stations: station[] | undefined
     let selectedStation: noaaStation
     let loading  = false
 
