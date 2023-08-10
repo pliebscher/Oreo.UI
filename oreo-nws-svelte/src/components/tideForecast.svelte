@@ -48,22 +48,32 @@
 
 </script>
 
+{#if loading}
 <Container title='Tide Forecast' id='tides'>
-{#if  loading}
     <div>Loading nearest tide station data...</div>
-{:else if selectedStation }
-<div class="flex flex-wrap">
-
-        {selectedStation.name}
-        <br>
-        {#if predictions }
-            {#each predictions as p }
-                [{p.type}] {p.v}, {p.t}<br>
-            {/each}            
-        {/if}
-
-</div>
-{:else }
-    <div>No tide stations nearby.</div>
-{/if}
 </Container>
+{:else}
+    {#if selectedStation }
+    <Container title={selectedStation.name} id='tides'>
+        <div class="flex flex-wrap">
+
+                {#if predictions }
+                    {#each predictions as p }
+                        [{p.type}] {p.v}, {p.t}<br>
+                    {/each}            
+                {/if}
+
+        </div>
+    </Container>
+    {:else }
+    <Container>
+        <div>No tide stations nearby.</div>
+    </Container>
+    {/if}
+{/if}
+
+
+
+
+
+
