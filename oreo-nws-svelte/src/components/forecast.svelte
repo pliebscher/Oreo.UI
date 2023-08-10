@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { nwsForecast } from "src/models/nwsForecast";
+    import type { nwsForecast } from "../models/nwsForecast";
 	import { onMount } from "svelte";
     import Container from "./container.svelte";
 

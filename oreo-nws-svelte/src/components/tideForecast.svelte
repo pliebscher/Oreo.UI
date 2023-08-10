@@ -4,67 +4,66 @@
 
     import { currentFav } from "../stores/favoriteStore";
     import { getLocation } from '../services/arcGISService';
-    import { getTideStations } from "../services/noaaTideService";
+    import { getTideStations, getTidePredictions } from "../services/noaaTideService";
 
-	import type { noaaStation } from "../models/noaaStationData";
     import type { station } from '../models/noaa/station';
+	import type { tidePrediction } from "../models/noaa/tidePrediction";
+	import { each } from "svelte/internal";
 
-    //export let location: arcGISLocation
     let stations: station[] | undefined
-    let selectedStation: noaaStation
+    let selectedStation: station
+    let predictions: tidePrediction[]
     let loading  = false
 
     // Wathcers...
     $: {
         if ($currentFav)
-            console.debug('$currentFav changed --> getLocations')
-            getStations()
+
+            loading = true
+
+            getNearestStation()
+
+            loading = false
     }
 
-     onMount( () => {
+    async function getNearestStation() {
 
-	});
-
-    async function getStations() {
-
-        loading = true
+        //loading = true
 
         // TODO: Dont re-fetch the current location...
         const currentLocation = await getLocation($currentFav.magicKey)
+
         // Get the NOAA stations for the current location...
         stations = await getTideStations(currentLocation)
+
         // Grab the first one... for now at least
-        stations = stations.slice(0, 1)
+        selectedStation = stations.slice(0, 1)[0] 
 
-        loading = false
+        if (selectedStation?.id)
+            predictions = await getTidePredictions(selectedStation.id)
 
-        console.debug('getStations -->')
-        console.debug(stations)
+        console.debug(predictions)
 
     }
-
-	function onStationClick(station: noaaStation): any {
-		selectedStation = station
-	}
 
 </script>
 
 <Container title='Tide Forecast' id='tides'>
 {#if  loading}
-    <div>Loading...</div>
-{:else if stations }
+    <div>Loading nearest tide station data...</div>
+{:else if selectedStation }
 <div class="flex flex-wrap">
-    {#if stations.length >=1 }
-        {#each stations as station }
-        <div  class="border rounded m-0.5 px-1 bg-gray-600 w-full">
-            {station.name} ({station.id})
-        </div>
-        {/each}
-    {:else}
-        <div>Station Not Found</div>
-    {/if}
+
+        {selectedStation.name}
+        <br>
+        {#if predictions }
+            {#each predictions as p }
+                [{p.type}] {p.v}, {p.t}<br>
+            {/each}            
+        {/if}
+
 </div>
 {:else }
-    <div>Station Not Found</div>
+    <div>No tide stations nearby.</div>
 {/if}
 </Container>

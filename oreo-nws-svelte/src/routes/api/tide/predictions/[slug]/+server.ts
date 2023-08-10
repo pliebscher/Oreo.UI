@@ -26,6 +26,7 @@ export async function GET(event) {
         // This is bad, I know, but NOAA returns 200 even if the station is not found which should generally not be the case from the front-end UI
     }   
 
+    console.debug(response)
     return json(response)
 
 }

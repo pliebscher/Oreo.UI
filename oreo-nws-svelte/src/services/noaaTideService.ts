@@ -19,7 +19,7 @@ export async function getTideStations(location: arcGISLocation) {
     return (await apiClient.get<station[]>(query)).data
 }
 
-export async function getTidePredictions(stationId: number) {
+export async function getTidePredictions(stationId: string) {
     const query = `tide/predictions/${stationId}`
     return (await apiClient.get<tidePrediction[]>(query)).data
 }
