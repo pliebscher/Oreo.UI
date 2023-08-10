@@ -18,17 +18,12 @@
     // Wathcers...
     $: {
         if ($currentFav)
-
-            loading = true
-
             getNearestStation()
-
-            loading = false
     }
 
     async function getNearestStation() {
 
-        //loading = true
+        loading = true
 
         // TODO: Dont re-fetch the current location...
         const currentLocation = await getLocation($currentFav.magicKey)
@@ -41,6 +36,8 @@
 
         if (selectedStation?.id)
             predictions = await getTidePredictions(selectedStation.id)
+
+        loading = false
 
         console.debug(predictions)
 
@@ -55,15 +52,30 @@
 {:else}
     {#if selectedStation }
     <Container title={selectedStation.name} id='tides'>
-        <div class="flex flex-wrap">
 
-                {#if predictions }
-                    {#each predictions as p }
-                        [{p.type}] {p.v} ft. {p.t.split(' ')[1]}<br>
-                    {/each}            
-                {/if}
+        {#if predictions }
+        <table class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
+            <tbody>
+            {#each predictions as p }
+                <tr class="shadow-lg rounded-lg align-top">
+                    <td class="pl-2 w-16">
+                        {p.t.split(' ')[1]}
+                    </td>
+                    <td>
+                        [{p.type}]
+                    </td>
+                    <td>
+                        {p.v} ft.
+                    </td>
+                </tr>
+            {/each}
+            </tbody>
+        </table>        
+        {/if}
 
-        </div>
+
+ 
+
     </Container>
     {:else }
     <Container>
@@ -71,6 +83,10 @@
     </Container>
     {/if}
 {/if}
+
+
+
+
 
 
 

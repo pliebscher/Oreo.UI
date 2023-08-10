@@ -12,7 +12,7 @@ import axios from 'axios';
 const fromDate = new Date().toISOString().substring(0, 10).replaceAll('-', '');
 
 // http://localhost:5173/api/tide/predictions/8669346
-export async function GET(event) {
+export async function GET(event: { params: { slug: any; }; }) {
 
     const stationId = event.params.slug
     const apiUrl = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${fromDate}&end_date=${fromDate}&datum=MLLW&station=${stationId}&time_zone=lst_ldt&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`

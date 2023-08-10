@@ -9,7 +9,9 @@ import axios from 'axios';
 
 // 1. ALL - tide stations... 3321... Needs caching
 // GET https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=tidepredictions
+// TODO: This is a nasty API call and should be cached server-side!
 const apiUrl: string = 'https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=tidepredictions'
+const searchRadius = 5 // the area in miles around the given lat/long to look for stations
 
 // http://localhost:5173/api/tide/stations
 export async function GET(event) {
@@ -34,7 +36,7 @@ export async function GET(event) {
 
     for (const station of response.stations) {
 
-        if (areCoordinatesInRadius(lat1, lon1, station.lat, station.lng, 2))
+        if (areCoordinatesInRadius(lat1, lon1, station.lat, station.lng, searchRadius))
             stationsInRange.push(station)
     }
 
