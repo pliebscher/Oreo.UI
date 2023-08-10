@@ -1,5 +1,5 @@
-import type { stationsResponse } from 'src/models/noaa/stationsResponse';
-import type { station } from 'src/models/noaa/station';
+import type { stationsResponse } from '../../../../models/noaa/stationsResponse';
+import type { station } from '../../../../models/noaa/station';
 
 import { fail, json } from '@sveltejs/kit';
 import axios from 'axios';

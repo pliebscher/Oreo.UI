@@ -6,8 +6,8 @@
     import { getLocation } from '../services/arcGISService';
     import { getTideStations } from "../services/noaaTideService";
 
-	import type { noaaStation } from "src/models/noaaStationData";
-    import type { station } from 'src/models/noaa/station';
+	import type { noaaStation } from "../models/noaaStationData";
+    import type { station } from '../models/noaa/station';
 
     //export let location: arcGISLocation
     let stations: station[] | undefined
@@ -19,8 +19,6 @@
         if ($currentFav)
             console.debug('$currentFav changed --> getLocations')
             getStations()
-            console.debug('Location changed -->')
-            console.debug(location)
     }
 
      onMount( () => {
@@ -35,7 +33,8 @@
         const currentLocation = await getLocation($currentFav.magicKey)
         // Get the NOAA stations for the current location...
         stations = await getTideStations(currentLocation)
-        //stations = stations.filter((station) => {return station.id.startsWith('COOP')}).slice(0, 1)
+        // Grab the first one... for now at least
+        stations = stations.slice(0, 1)
 
         loading = false
 

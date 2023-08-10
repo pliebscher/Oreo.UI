@@ -1,8 +1,8 @@
 import axios from 'axios'
-import type { arcGISLocation } from 'src/models/arcGISLocation';
-import type { noaaStationsResult } from 'src/models/noaaStationData';
 
-import type { station } from 'src/models/noaa/station';
+import type { arcGISLocation } from '../models/arcGISLocation';
+import type { station } from '../models/noaa/station';
+import type { tidePrediction } from '../models/noaa/tidePrediction';
 
 const _baseUrl: string = '/api/' // Weather Fish API route
 
@@ -19,7 +19,7 @@ export async function getTideStations(location: arcGISLocation) {
     return (await apiClient.get<station[]>(query)).data
 }
 
-export async function getTideStation(stationId: number) {
-    const query = `tide/station/${stationId}`
-    return (await apiClient.get<station>(query)).data
+export async function getTidePredictions(stationId: number) {
+    const query = `tide/predictions/${stationId}`
+    return (await apiClient.get<tidePrediction[]>(query)).data
 }
