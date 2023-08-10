@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import Container from "./container.svelte";
 
     import { currentFav } from "../stores/favoriteStore";
@@ -8,7 +7,6 @@
 
     import type { station } from '../models/noaa/station';
 	import type { tidePrediction } from "../models/noaa/tidePrediction";
-	import { each } from "svelte/internal";
 
     let stations: station[] | undefined
     let selectedStation: station
