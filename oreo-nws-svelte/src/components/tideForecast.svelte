@@ -51,7 +51,6 @@
 {:else}
     {#if selectedStation }
     <Container title={selectedStation.name} id='tides'>
-
         {#if predictions }
         <table class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
             <tbody>
@@ -60,7 +59,7 @@
                     <td class="pl-2 w-28">
                         {formatTimeTo12Hour(p.t.split(' ')[1])}
                     </td>
-                    <td>
+                    <td class="pl-2 border-l border-l-black">
                         [{p.type == 'L' ? 'Low' : 'High'}]
                     </td>
                     <td>
@@ -71,7 +70,6 @@
             </tbody>
         </table>        
         {/if}
-
     </Container>
     {:else }
     <Container>
