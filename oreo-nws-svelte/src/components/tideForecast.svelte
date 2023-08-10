@@ -59,7 +59,7 @@
 
                 {#if predictions }
                     {#each predictions as p }
-                        [{p.type}] {p.v}, {p.t}<br>
+                        [{p.type}] {p.v} ft. {p.t.split(' ')[1]}<br>
                     {/each}            
                 {/if}
 
