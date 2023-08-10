@@ -4,6 +4,7 @@
     import { currentFav } from "../stores/favoriteStore";
     import { getLocation } from '../services/arcGISService';
     import { getTideStations, getTidePredictions } from "../services/noaaTideService";
+    import { formatTimeTo12Hour } from "./utils";
 
     import type { station } from '../models/noaa/station';
 	import type { tidePrediction } from "../models/noaa/tidePrediction";
@@ -56,11 +57,11 @@
             <tbody>
             {#each predictions as p }
                 <tr class="shadow-lg rounded-lg align-top">
-                    <td class="pl-2 w-16">
-                        {p.t.split(' ')[1]}
+                    <td class="pl-2 w-28">
+                        {formatTimeTo12Hour(p.t.split(' ')[1])}
                     </td>
                     <td>
-                        [{p.type}]
+                        [{p.type == 'L' ? 'Low' : 'High'}]
                     </td>
                     <td>
                         {p.v} ft.
@@ -70,9 +71,6 @@
             </tbody>
         </table>        
         {/if}
-
-
- 
 
     </Container>
     {:else }
