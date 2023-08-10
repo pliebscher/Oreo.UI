@@ -13,6 +13,8 @@ import axios from 'axios';
 const apiUrl: string = 'https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=tidepredictions'
 const searchRadius = 5 // the area in miles around the given lat/long to look for stations
 
+let response: stationsResponse // This lets us cache the response for this instance of the API
+
 // http://localhost:5173/api/tide/stations
 export async function GET(event) {
 
@@ -30,13 +32,16 @@ export async function GET(event) {
     if (lon)
         lon1 = parseFloat(lon)
 
-    const response = (await axios.get<stationsResponse>(apiUrl)).data;
+    if (!response) {
+        console.debug('Fetching NOAA Tide Station List...')
+        response = (await axios.get<stationsResponse>(apiUrl)).data;
+    }    
 
     const stationsInRange: station[] = []
 
     for (const station of response.stations) {
 
-        if (areCoordinatesInRadius(lat1, lon1, station.lat, station.lng, searchRadius))
+        if (areCoordinatesInRange(lat1, lon1, station.lat, station.lng, searchRadius))
             stationsInRange.push(station)
     }
 
@@ -44,7 +49,7 @@ export async function GET(event) {
 
 }
 
-// Credit ChatGPT: "provide a typescript function that determines of two sets of latitude and longitude are in a 5 mile radius"
+// Credit ChatGPT: "provide a typescript function that determines if two sets of latitude and longitude are in a (n) mile radius"
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const earthRadiusInMiles = 3958.8; // Earth's radius in miles
 
@@ -65,7 +70,7 @@ function degToRad(deg: number): number {
     return deg * (Math.PI / 180);
 }
   
-function areCoordinatesInRadius(lat1: number, lon1: number, lat2: number, lon2: number, radius: number): boolean {
+function areCoordinatesInRange(lat1: number, lon1: number, lat2: number, lon2: number, radius: number): boolean {
     const distance = calculateDistance(lat1, lon1, lat2, lon2);
     return distance <= radius;
 }

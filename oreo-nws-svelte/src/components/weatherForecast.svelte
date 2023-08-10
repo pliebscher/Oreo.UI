@@ -13,8 +13,6 @@
     import Hazard from "./hazard.svelte";
     import ForecastComp from "./forecast.svelte";
 	import Loader from "./loader.svelte";
-	import Forecast from "./forecast.svelte";
-	//import AdComp from "./ad.svelte";
 	  
     // Props...
     export let location: arcGISLocation
@@ -35,7 +33,6 @@
             fetching = true    
             forecast =  await getForecast(location.feature.geometry.y, location.feature.geometry.x)
             fetching = false
-            console.debug(forecast)
         }            
         
         if (!location?.name)
