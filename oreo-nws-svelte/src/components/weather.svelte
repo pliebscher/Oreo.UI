@@ -29,7 +29,7 @@
         setInterval(() => {
             if (forecast) 
                 forecast = forecast            
-        }, 300000) // 5 min.
+        }, 1800000) // 30 min.
 
 	});
 
