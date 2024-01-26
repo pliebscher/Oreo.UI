@@ -16,7 +16,7 @@ const searchRadius = 5 // the area in miles around the given lat/long to look fo
 let response: stationsResponse // This lets us cache the response for this instance of the API
 
 // http://localhost:5173/api/tide/stations
-export async function GET(event) {
+export async function GET(event: { url: { searchParams: any; }; }) {
 
     const params = event.url.searchParams
 

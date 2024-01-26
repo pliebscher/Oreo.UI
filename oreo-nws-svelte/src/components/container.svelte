@@ -11,7 +11,9 @@
     <div class="text-xl font-medium">
         {title}
         {#if seperator}
-        <hr />
+        <div class="w-full">
+            <hr />
+        </div>
         {/if}
     </div>
     {/if}                        

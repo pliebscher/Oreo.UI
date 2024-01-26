@@ -7,69 +7,71 @@
     import { formatTimeTo12Hour } from "./utils";
 
     import type { station } from '../models/noaa/station';
-	import type { tidePrediction } from "../models/noaa/tidePrediction";
 
-    let stations: station[] | undefined
-    let selectedStation: station
-    let predictions: tidePrediction[]
+    let stations: station[] 
     let loading  = false
+    let lastft = 0
 
     // Wathcers...
     $: {
         if ($currentFav)
-            getNearestStation()
+            getStations()
     }
 
-    async function getNearestStation() {
+    async function getStations() {
 
         loading = true
 
-        // TODO: Dont re-fetch the current location...
         const currentLocation = await getLocation($currentFav.magicKey)
 
         // Get the NOAA stations for the current location...
         stations = await getTideStations(currentLocation)
 
-        // Grab the first one... for now at least
-        selectedStation = stations.slice(0, 1)[0] 
-
-        if (selectedStation?.id)
-            predictions = await getTidePredictions(selectedStation.id)
-
         loading = false
 
-        console.debug(predictions)
+    }
 
+    function setLastHight(height: number) {
+        lastft = height
     }
 
 </script>
 
 {#if loading}
-<Container title='Tide Forecast' id='tides'>
+<Container id='tides'>
     <div>Loading nearest tide station data...</div>
 </Container>
 {:else}
-    {#if selectedStation }
-    <Container title={selectedStation.name} id='tides'>
-        {#if predictions }
-        <table class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
-            <tbody>
-            {#each predictions as p }
-                <tr class="shadow-lg rounded-lg align-top">
-                    <td class="pl-2 w-28">
-                        {formatTimeTo12Hour(p.t.split(' ')[1])}
-                    </td>
-                    <td class="pl-2 border-l border-l-black">
-                        [{p.type == 'L' ? 'Low' : 'High'}]
-                    </td>
-                    <td>
-                        {p.v} ft.
-                    </td>
-                </tr>
+    {#if stations.length > 0 }
+    <Container id='tides'>
+
+            {#each stations as station}
+            <p>{station.name}</p>
+
+                {#await getTidePredictions(station.id)}
+                    &nbsp;
+                {:then predictions}
+                    <table class="w-full shadow-lg rounded-lg bg-sky-700 mt-2">
+                        <tbody>
+                        {#each predictions as p }
+                            <tr class="shadow-lg rounded-lg align-top">
+                                <td class="pl-2 w-28">
+                                    {formatTimeTo12Hour(p.t.split(' ')[1])}
+                                </td>
+                                <td class="pl-2 border-l border-l-black">
+                                    [{p.type == 'L' ? 'Low' : 'High'}]
+                                </td>
+                                <td>
+                                    {p.v} ft.
+                                </td>
+                            </tr>
+                        {/each}
+                        </tbody>
+                    </table>  
+                {/await}
+
             {/each}
-            </tbody>
-        </table>        
-        {/if}
+
     </Container>
     {:else }
     <Container>
