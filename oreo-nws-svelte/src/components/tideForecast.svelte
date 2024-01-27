@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
 	import Container from "./container.svelte";
 
     import { currentFav } from "../stores/favoriteStore";
@@ -28,12 +30,15 @@
         stations = await getTideStations(currentLocation)
 
         loading = false
-
     }
 
-    function setLastHight(height: number) {
-        lastft = height
-    }
+    onMount( () => {		
+        // Auto update the forecast...
+        setInterval(() => {
+            if (stations) 
+            getStations()            
+        }, 600000) // 10 min.
+	});
 
 </script>
 
@@ -78,7 +83,11 @@
         <div>No tide stations nearby.</div>
     </Container>
     {/if}
+    <Container>
+        <div class=" text-gray-300 text-xs">Updated: {new Date().toLocaleString()}</div>
+    </Container>
 {/if}
+
 
 
 
