@@ -36,7 +36,7 @@
         setInterval(() => {
             if (stations) 
             getStations()            
-        }, (60 * 60 * 1000) * 6)
+        }, 900000)
 	});
 
 </script>

@@ -53,7 +53,7 @@
         setInterval(() => {
             if (forecast) 
                 fetchForecast(location)            
-        }, 600000) // 10 min.
+        }, (60 * 60 * 1000) * 15) 
 
 	});
 
