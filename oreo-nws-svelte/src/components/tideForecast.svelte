@@ -12,7 +12,6 @@
 
     let stations: station[] 
     let loading  = false
-    let lastft = 0
 
     // Wathcers...
     $: {
@@ -33,11 +32,11 @@
     }
 
     onMount( () => {		
-        // Auto update the forecast...
+        // Auto update the tide forecast...
         setInterval(() => {
             if (stations) 
             getStations()            
-        }, 600000) // 10 min.
+        }, (60 * 60 * 1000) * 6)
 	});
 
 </script>
@@ -84,17 +83,6 @@
     </Container>
     {/if}
     <Container>
-        <div class=" text-gray-300 text-xs">Updated: {new Date().toLocaleString()}</div>
+        <div class=" text-gray-300 text-xs">Updated: {new Date().toLocaleString()} (Upaded every 6 hrs.)</div>
     </Container>
 {/if}
-
-
-
-
-
-
-
-
-
-
-
