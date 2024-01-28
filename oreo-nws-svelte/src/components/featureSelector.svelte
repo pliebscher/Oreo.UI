@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
-
+    import { currentFav } from "../stores/favoriteStore";
 	import Container from "./container.svelte";
 
     const dispatch = createEventDispatcher();
@@ -15,7 +15,8 @@
 
 </script>
 
-<Container id="hazard">
+{#if $currentFav?.magicKey }
+<Container id="featureSelector">
 <div class="flex flex-wrap pt-0">
     <a href="#favorites" on:click={() => onFeatureChanged('weather')}>
         <div class="border rounded m-0.5 px-1 {selectedFeature == 'weather' ? 'bg-gray-600' : ''}">
@@ -29,3 +30,4 @@
     </a>
 </div>
 </Container>
+{/if}
