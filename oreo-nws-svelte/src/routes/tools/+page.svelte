@@ -9,18 +9,20 @@
 <Favorites edit={true} />
 
 <Container title="Tools" id="tools">
-    <table class="">
-        <tr>
-            <td class="p-1">
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a href="#" on:click={ () => { clearFavorites() } }>🗑️</a>
-            </td>
-            <td>
-                <!-- svelte-ignore a11y-invalid-attribute -->
-                <a href="#" on:click={ () => { clearFavorites() } } aria-label="Clear Favorites">
-                    Clear History
-                </a>
-            </td>
-        </tr>
+    <table class="w-full">
+        <tbody>
+            <tr>
+                <td class="p-1">
+                        <!-- svelte-ignore a11y-invalid-attribute -->
+                        <a href="#" on:click={ () => { clearFavorites() } }>🗑️</a>
+                </td>
+                <td>
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a href="#" on:click={ () => { clearFavorites() } } aria-label="Clear Favorites">
+                        Clear History
+                    </a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </Container>
