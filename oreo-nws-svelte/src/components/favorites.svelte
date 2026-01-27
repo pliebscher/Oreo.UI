@@ -30,18 +30,20 @@
     {#if edit}
     <Container id="favorites" title="Manage History">
         <hr class="mt-1" />
-        <table class="w-full mt-1">    
-            {#each $favorites as favorite }
-                <tr>                       
-                    <td class="">
-                        {favorite.text.replace(', USA', '')}
-                    </td>
-                    <td class="content-end text-right">
-                        <!-- svelte-ignore a11y-invalid-attribute -->
-                        <a on:click={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
-                    </td>                        
-                </tr>             
-            {/each}
+        <table class="w-full mt-1">
+            <tbody>
+                {#each $favorites as favorite }
+                    <tr>                       
+                        <td class="">
+                            {favorite.text.replace(', USA', '')}
+                        </td>
+                        <td class="content-end text-right">
+                            <!-- svelte-ignore a11y-invalid-attribute -->
+                            <a on:click={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
+                        </td>                        
+                    </tr>             
+                {/each}
+            </tbody>
         </table>
     </Container>
     {:else}
