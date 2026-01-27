@@ -30,7 +30,7 @@
     {#if edit}
     <Container id="favorites" title="Manage History">
         <hr class="mt-1" />
-        <table class="w-full mt-1">
+        <table class="w-full mt-1">    
             <tbody>
                 {#each $favorites as favorite }
                     <tr>                       
