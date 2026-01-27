@@ -82,7 +82,4 @@
         <div>No tide stations nearby.</div>
     </Container>
     {/if}
-    <Container>
-        <div class=" text-gray-300 text-xs">Updated: {new Date().toLocaleString()} (Updated every 6 hrs.)</div>
-    </Container>
 {/if}

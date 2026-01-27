@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
- scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -11,7 +11,7 @@ body {
     font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;  
 }
-  
+
 a {
     text-decoration: none;
     color: hsla(160, 100%, 37%, 1);
@@ -19,22 +19,11 @@ a {
     border-width: 0;
 }
 
-@media (min-width: 1024px) {
-    /* Styles for desktop */
-    /* Add your desktop-specific CSS here */
-    /* body {
-        width: 1024px;
-        
-    } */
-
+/* Desktop: center content at fixed width */
+@media (min-width: 768px) {
+    body {
+        max-width: 480px;  /* Mobile-like width on desktop */
+        margin: 0 auto;    /* Center horizontally */
+        box-shadow: 0 0 20px rgba(233, 230, 230, 0.1);
+    }
 }
-  
-@media (max-width: 767px) {
-    /* Styles for mobile */
-    /* Add your mobile-specific CSS here */
-    /* To make the page full screen on mobile, you can use the following CSS */
-    /* html, body {
-      width: 100%;
-    } */
-}
-  
