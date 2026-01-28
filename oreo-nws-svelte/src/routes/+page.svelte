@@ -8,7 +8,7 @@
 	import FeatureSelector from "../components/featureSelector.svelte";
 	import TideForecast from "../components/tideForecast.svelte";
 
-	import type { arcGISLocation } from "src/models/arcGISLocation";
+	import type { arcGISLocation } from "../models/arcGISLocation";
 
 	let selectedLocation: arcGISLocation
 	let selectedFeature = 'weather'
