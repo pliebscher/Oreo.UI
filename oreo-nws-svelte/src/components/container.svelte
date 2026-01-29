@@ -1,9 +1,11 @@
 <script lang="ts">
-
-    export let title: string = ''
-    export let seperator: boolean = false
-    export let id: string = ''
-
+    interface Props {
+        title?: string;
+        seperator?: boolean;
+        id?: string;
+    }
+    
+    let { title = '', seperator = false, id = '' }: Props = $props();
 </script>
 
 <div id={id} class="w-full rounded border-2 p-2 mt-1 bg-gradient-to-r from-gray-900 to-blue-700">

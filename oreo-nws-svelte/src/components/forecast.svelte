@@ -1,14 +1,17 @@
 <script lang="ts">
     import type { nwsForecast } from "../models/nwsForecast";
-	import { onMount } from "svelte";
+    import { onMount } from "svelte";
     import Container from "./container.svelte";
-
-    export let forecast: nwsForecast | undefined
-
-    onMount( () => {		
+    
+    interface Props {
+        forecast?: nwsForecast;
+    }
+    
+    let { forecast }: Props = $props();
+    
+    onMount(() => {        
         
-	});
-
+    });
 </script>
 
 {#if forecast?.creationDate}

@@ -1,8 +1,14 @@
 <script lang="ts">
-    import type { nwsForecast } from "src/models/nwsForecast";
+    import type { nwsForecast } from "../models/nwsForecast";
     import Container from "./container.svelte";
-    export let forecast: nwsForecast | undefined
+    
+    interface Props {
+        forecast?: nwsForecast;
+    }
+    
+    let { forecast }: Props = $props();
 </script>
+
 {#if forecast?.data.hazard[0]}
 <Container id="hazard">
     <table class="w-full rounded  p-2 bg-gradient-to-r from-gray-900 to-orange-500">

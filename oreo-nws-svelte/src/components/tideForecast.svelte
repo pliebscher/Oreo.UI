@@ -1,44 +1,37 @@
 <script lang="ts">
     import { onMount } from "svelte";
-
-	import Container from "./container.svelte";
-
+    import Container from "./container.svelte";
     import { currentFav } from "../stores/favoriteStore";
     import { getLocation } from '../services/arcGISService';
     import { getTideStations, getTidePredictions } from "../services/noaaTideService";
     import { formatTimeTo12Hour } from "./utils";
-
     import type { station } from '../models/noaa/station';
-
-    let stations: station[] 
-    let loading  = false
-
-    // Wathcers...
-    $: {
-        if ($currentFav)
-            getStations()
-    }
-
+    
+    let stations = $state<station[]>([]);
+    let loading = $state(false);
+    
+    // Watch currentFav changes using $effect...
+    $effect(() => {
+        if ($currentFav) {
+            getStations();
+        }
+    });
+    
     async function getStations() {
-
-        loading = true
-
-        const currentLocation = await getLocation($currentFav.magicKey)
-
+        loading = true;
+        const currentLocation = await getLocation($currentFav.magicKey);
         // Get the NOAA stations for the current location...
-        stations = await getTideStations(currentLocation)
-
-        loading = false
+        stations = await getTideStations(currentLocation);
+        loading = false;
     }
-
-    onMount( () => {		
+    
+    onMount(() => {        
         // Auto update the tide forecast...
         setInterval(() => {
             if (stations) 
-            getStations()            
-        }, 900000)
-	});
-
+                getStations();
+        }, 900000);
+    });
 </script>
 
 {#if loading}
@@ -48,10 +41,8 @@
 {:else}
     {#if stations.length > 0 }
     <Container id='tides'>
-
             {#each stations as station}
             <p>{station.name}</p>
-
                 {#await getTidePredictions(station.id)}
                     &nbsp;
                 {:then predictions}
@@ -73,9 +64,7 @@
                         </tbody>
                     </table>  
                 {/await}
-
             {/each}
-
     </Container>
     {:else }
     <Container>
