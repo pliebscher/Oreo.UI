@@ -5,6 +5,9 @@ const config = {
     preprocess: vitePreprocess(),
     kit: {
         adapter: adapter()
-    }
+    },
+	compilerOptions: {
+		runes: true // Enable Svelte runes support
+	}
 };
 export default config;

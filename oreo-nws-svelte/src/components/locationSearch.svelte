@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { createEventDispatcher } from 'svelte';
 
     import { addFavorite, setCurrentFav } from "../stores/favoriteStore";
     import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
@@ -8,68 +7,71 @@
 
     import Container from "./container.svelte";	
 
-	const dispatch = createEventDispatcher();
-
-    let searchStr: string = ''
-    let notFound: boolean = false
-
-    let suggestions: arcGISSearchSuggestion[] = []
-
-    // Watch the search box for changes...
-    $: {
-        if (searchStr.length == 0) {
-            clearSearch()
-        } else {
-            search(searchStr)
-        }
+    interface Props {
+        onLocationSelected?: (location: any) => void;
     }
+
+    let { onLocationSelected }: Props = $props();
+
+    let searchStr = $state('');
+    let notFound = $state(false);
+    let suggestions = $state<arcGISSearchSuggestion[]>([]);
+
+    // Watch the search box for changes using $effect...
+    $effect(() => {
+        if (searchStr.length == 0) {
+            clearSearch();
+        } else {
+            search(searchStr);
+        }
+    });
 
     async function search(criteria: string) {
         if (searchStr.length > 0) {
-            suggestions = await getSuggestions(criteria)        
+            suggestions = await getSuggestions(criteria);
             // Filter non-USA results as they don't work!
-            suggestions = suggestions.filter(loc => loc.text.endsWith(', USA'))
+            suggestions = suggestions.filter(loc => loc.text.endsWith(', USA'));
         }
 
-        notFound = (suggestions.length == 0 && searchStr.length > 1)
+        notFound = (suggestions.length == 0 && searchStr.length > 1);
     }
 
-	async function onSearchClick() {
-        search(searchStr)
+    async function onSearchClick() {
+        search(searchStr);
     }
 
     function clearSearch() {
-        notFound = false
-        searchStr = ''
-        suggestions = []
+        notFound = false;
+        searchStr = '';
+        suggestions = [];
     }
 
     async function onLocationClick(suggestion: arcGISSearchSuggestion) {
         // Get the location containing the lat/lon needed for the weather and forecast components...
-        const location = await getLocation(suggestion.magicKey)
+        const location = await getLocation(suggestion.magicKey);
         // Set as current favorite...
-        setCurrentFav(suggestion)
+        setCurrentFav(suggestion);
         // 
-        addFavorite(suggestion)
+        addFavorite(suggestion);
         // Raise the Selected event...
-        dispatch('locationSelected', location)
+        onLocationSelected?.(location);
         //
-        clearSearch()
+        clearSearch();
     }
 
     function onSearchClearClick() {
-        clearSearch()
+        clearSearch();
     }
 
     onMount(() => {
         // if (import.meta.env.DEV)
         //     searchStr = 'Piedmont'
-    })
+    });
 
 </script>
 
 <Container id="search">
-    <form on:submit|preventDefault={onSearchClick}>
+    <form onsubmit={(e) => { e.preventDefault(); onSearchClick(); }}>
         <div class="bg-white flex rounded p-.5 border-slate-50">
             <button type="button" 
                     id="searchBtn"
@@ -80,7 +82,7 @@
                            bg-white 
                            leading-tight
                            cursor-pointer" 
-                           on:click={onSearchClick}> 
+                           onclick={onSearchClick}> 
                 <svg xmlns="http://www.w3.org/2000/svg" aria-label="Search"
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                         xml:space="preserve"
@@ -111,7 +113,7 @@
                           bg-white
                             rounded 
                             cursor-pointer"
-                            on:click={onSearchClearClick}>
+                            onclick={onSearchClearClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" 
                         width="20" 
                         height="20" 
@@ -131,8 +133,8 @@
     {#if suggestions.length > 0}
     <div class="flex flex-wrap pt-1">
         {#each suggestions as suggestion}
-        <!-- svelte-ignore a11y-invalid-attribute -->
-        <a class="" on:click={() => onLocationClick(suggestion)} href="#favorites">
+        <!-- svelte-ignore a11y_invalid_attribute -->
+        <a class="" onclick={() => onLocationClick(suggestion)} href="#favorites">
             <div class="border rounded m-0.5 px-1">
                 {suggestion.text.replace(', USA', '')}
             </div>

@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
 	import Container from './container.svelte';
   
-    let isMobile = false;
+    let isMobile = $state(false);
   
     onMount(() => {
       const userAgent = navigator.userAgent.toLowerCase();

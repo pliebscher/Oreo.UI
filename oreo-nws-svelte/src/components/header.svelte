@@ -1,4 +1,4 @@
-<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full max-w-[480px] left-1/2 -translate-x-1/2 text-ms rounded-br-sm">
+<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full max-w-[640px] left-1/2 -translate-x-1/2 text-ms rounded-br-sm">
     <div class="grid grid-rows-1 grid-flow-col gap-4">
         <div class="pl-1 text-left">
             <a href="/">
