@@ -5,33 +5,34 @@
     import Container from "./container.svelte";
 	import Loader from "./loader.svelte";
 	
-    // Props...
-    export let location: arcGISLocation
-    export let forecast: nwsForecast | undefined
-
-    // Locals...
-    const baseRaderUrl: string = `https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`
-    let raderUrl: string = baseRaderUrl 
-    let lastUpdate: Date = new Date()
-    
-   
-    // Watchers...
-    $: {
-        if (forecast) {
-            lastUpdate = new Date()
-            raderUrl = baseRaderUrl + '?' + Math.random().toString() // trigger reactive update
-        }            
+    interface Props {
+        location?: arcGISLocation;
+        forecast?: nwsForecast;
     }
+    
+    let { location, forecast }: Props = $props();
+    
+    const baseRaderUrl = $derived(`https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`);
+    let raderUrl = $state(baseRaderUrl);
+    let lastUpdate = $state(new Date());
+    
+    // Watch forecast changes using $effect...
+    $effect(() => {
+        if (forecast) {
+            lastUpdate = new Date();
+            raderUrl = baseRaderUrl + '?' + Math.random().toString(); // trigger reactive update
+        }
+    });
 
-    onMount( () => {		
-        
+    onMount(() => {
         // Auto update the weather map...
         setInterval(() => {
-            if (forecast) 
-                forecast = forecast            
-        }, 1800000) // 30 min.
-
-	});
+            if (forecast) {
+                // Force reactivity by reassigning
+                forecast = forecast;
+            }
+        }, 1800000); // 30 min.
+    });
 
 </script>
    
