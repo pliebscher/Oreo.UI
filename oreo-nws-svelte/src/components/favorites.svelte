@@ -37,7 +37,7 @@
                             {favorite.text.replace(', USA', '')}
                         </td>
                         <td class="content-end text-right">
-                            <!-- svelte-ignore a11y-invalid-attribute -->
+                            <!-- svelte-ignore a11y_invalid_attribute -->
                             <a onclick={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
                         </td>                        
                     </tr>             
@@ -49,7 +49,7 @@
     <Container id="favorites">
         <div class="flex flex-wrap">
         {#each $favorites as favorite }
-            <!-- svelte-ignore a11y-invalid-attribute -->
+            <!-- svelte-ignore a11y_invalid_attribute -->
             <a class="" onclick={() => onFavoriteClick(favorite)} href="#favorites">
                 <div  class="border rounded m-0.5 px-1 {$currentFav.magicKey == favorite.magicKey ? 'bg-gray-600' : ''}">
                     {favorite.text.replace(', USA', '')}

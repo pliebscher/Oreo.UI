@@ -5,24 +5,24 @@
     import Container from "./container.svelte";
 	import Loader from "./loader.svelte";
 	
-    interface Props {
-        location?: arcGISLocation;
-        forecast?: nwsForecast;
+interface Props {
+    location?: arcGISLocation;
+    forecast?: nwsForecast;
+}
+
+let { location, forecast }: Props = $props();
+
+const baseRaderUrl = $derived(`https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`);
+let rederUrl = $state('');
+let lastUpdate = $state(new Date());
+
+// Watch forecast changes using $effect...
+$effect(() => {
+    if (forecast) {
+        lastUpdate = new Date();
+        rederUrl = baseRaderUrl + '?' + Math.random().toString(); // trigger reactive update
     }
-    
-    let { location, forecast }: Props = $props();
-    
-    const baseRaderUrl = $derived(`https://radar.weather.gov/ridge/standard/${forecast?.location.radar}_0.gif`);
-    let raderUrl = $state(baseRaderUrl);
-    let lastUpdate = $state(new Date());
-    
-    // Watch forecast changes using $effect...
-    $effect(() => {
-        if (forecast) {
-            lastUpdate = new Date();
-            raderUrl = baseRaderUrl + '?' + Math.random().toString(); // trigger reactive update
-        }
-    });
+});
 
     onMount(() => {
         // Auto update the weather map...
@@ -37,7 +37,7 @@
 </script>
    
 {#if forecast?.currentobservation}
-<Container title="{location?.name}" id="weather">
+<Container title={location?.name} id="weather">
     <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2 mb-0">        
         <table class="w-full">
             <tbody>
@@ -91,7 +91,7 @@
             </tbody>
         </table>
 
-        <img src="{ raderUrl }" alt="Radar Map" class="w-full rounded-lg p-1" />
+        <img src="{ rederUrl }" alt="Radar Map" class="w-full rounded-lg p-1" />
 
         <div class="border-0 ml-1 mr-3 pb-2 text-sm">
             <section class="flex w-full">

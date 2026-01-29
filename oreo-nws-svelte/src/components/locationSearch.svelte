@@ -133,7 +133,7 @@
     {#if suggestions.length > 0}
     <div class="flex flex-wrap pt-1">
         {#each suggestions as suggestion}
-        <!-- svelte-ignore a11y-invalid-attribute -->
+        <!-- svelte-ignore a11y_invalid_attribute -->
         <a class="" onclick={() => onLocationClick(suggestion)} href="#favorites">
             <div class="border rounded m-0.5 px-1">
                 {suggestion.text.replace(', USA', '')}
