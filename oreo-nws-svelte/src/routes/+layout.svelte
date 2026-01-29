@@ -1,35 +1,37 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import "../app.css";
   import "../toaster.css";
-
   import { onMount } from "svelte";
-
   import Header from "../components/header.svelte"
-
+  
+  interface Props {
+    children?: Snippet;
+  }
+  
+  let { children }: Props = $props();
+  
   function showToast(msg: string) {
-          const x: HTMLElement | null = document.getElementById("toaster")
-          if (x) {
-            x.innerText =  msg
-            x.className = "show"
-            setTimeout(() => { 
-              x.className = x.className.replace("show", "")
-            }, 3000)
-          }      
-    }
-
-  onMount( () => {
+    const x: HTMLElement | null = document.getElementById("toaster")
+    if (x) {
+      x.innerText = msg
+      x.className = "show"
+      setTimeout(() => { 
+        x.className = x.className.replace("show", "")
+      }, 3000)
+    }      
+  }
+  
+  onMount(() => {
     window.onunhandledrejection = (e) => {
       console.error('Weather Fish Error: ', e.reason)
       showToast('An unhandled error occured')
     }
   })
-
 </script>
   
 <Header />
-
 <div class="w-full mt-8">
-    <slot />
+    {@render children?.()}
     <div id="toaster" class=""></div> 
 </div>
-
