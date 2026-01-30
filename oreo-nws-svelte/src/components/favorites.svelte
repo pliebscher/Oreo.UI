@@ -38,7 +38,7 @@
                         </td>
                         <td class="content-end text-right">
                             <!-- svelte-ignore a11y_invalid_attribute -->
-                            <a onclick={() => onFavoriteDelClick(favorite)} href="#search">🗑️</a>
+                            <a onclick={() => onFavoriteDelClick(favorite)} href="#">🗑️</a>
                         </td>                        
                     </tr>             
                 {/each}
@@ -46,17 +46,24 @@
         </table>
     </Container>
     {:else}
-    <Container id="favorites">
-        <div class="flex flex-wrap">
-        {#each $favorites as favorite }
-            <!-- svelte-ignore a11y_invalid_attribute -->
-            <a class="" onclick={() => onFavoriteClick(favorite)} href="#favorites">
-                <div  class="border rounded m-0.5 px-1 {$currentFav.magicKey == favorite.magicKey ? 'bg-gray-600' : ''}">
-                    {favorite.text.replace(', USA', '')}
-                </div>
-            </a>
-        {/each}
-        </div>
+    <Container>
+<div class="flex flex-wrap gap-2">
+    {#each $favorites as favorite }
+        <!-- svelte-ignore a11y_invalid_attribute -->
+        <a class="group" onclick={() => onFavoriteClick(favorite)} href="#">
+            <div class="
+                border-2 rounded-md px-3 py-1.5
+                transition-all duration-200 ease-in-out
+                cursor-pointer
+                {$currentFav.magicKey == favorite.magicKey 
+                    ? 'border-blue-400 bg-blue-500/20 text-blue-100 shadow-lg shadow-blue-500/20' 
+                    : 'border-blue-500/40 bg-slate-800/50 text-gray-200 hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-md hover:shadow-blue-500/10'}
+            ">
+                {favorite.text.replace(', USA', '')}
+            </div>
+        </a>
+    {/each}
+</div>
     </Container>
     {/if}
 {/if}

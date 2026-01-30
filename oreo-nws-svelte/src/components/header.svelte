@@ -1,18 +1,18 @@
-<div class="-mt-0 fixed bg-gradient-to-r from-gray-900 to-blue-700 shadow-md z-50 w-full max-w-[640px] left-1/2 -translate-x-1/2 text-ms rounded-br-sm">
-    <div class="grid grid-rows-1 grid-flow-col gap-4">
-        <div class="pl-1 text-left">
-            <a href="/">
-                <img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-8" />
+<div class="fixed top-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900/50 shadow-xl border-b border-blue-500/30 z-50 w-full max-w-[480px] left-1/2 -translate-x-1/2 text-sm rounded-b-lg backdrop-blur-sm">
+    <div class="grid grid-cols-3 items-center px-2 py-0.5">
+        <div class="text-left">
+            <a href="/" class="inline-block transition-all duration-200 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
+                <img src="/images/fish.png" alt="Weather Fish" aria-label="Weather Fish" class="w-7 h-7" />
             </a>
         </div>
-        <div class="text-center pt-1">
-            <a href="/">
+        <div class="text-center">
+            <a href="/" class="text-white font-semibold tracking-wide text-sm transition-all duration-200 hover:text-blue-300">
                 WEATHER FISH            
             </a>
         </div>  
-        <div class="pr-1">
-            <a href="/tools">
-                <img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-8 my-0.5 float-right" />
+        <div class="text-right">
+            <a href="/tools" class="inline-block transition-all duration-200 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
+                <img src="/images/gears.png" alt="Tools" aria-label="Tools" class="w-7 h-7" />
             </a>
         </div>
     </div>
