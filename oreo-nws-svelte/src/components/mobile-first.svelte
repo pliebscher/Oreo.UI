@@ -13,17 +13,20 @@
 
 {#if !isMobile}
 <Container id="mobile-first">
-    <table class="w-full shadow-lg rounded-sm bg-sky-700 mt-0 mb-0">
-        <tbody>
-            <tr>
-                <td class="w-7 align-top">
-                    <img src="/images/info.png" alt="Mobile App" aria-label="This is a mobile-first app." class="w-6 align-top" />
-                </td>
-                <td class="text-yellow-100 p-2">
-                    This site is designed to be mobile-first. Please use a phone or tablet for the best experience.
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="w-full shadow-lg rounded-lg border-2 border-blue-500/40 bg-gradient-to-br from-slate-800 to-blue-900/60 mt-0 mb-0 backdrop-blur-sm">
+    <div class="flex items-start gap-3 p-3">
+        <div class="flex-shrink-0 mt-0.5">
+            <img 
+                src="/images/info.png" 
+                alt="Mobile App" 
+                aria-label="This is a mobile-first app." 
+                class="w-6 transition-all duration-200 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" 
+            />
+        </div>
+        <div class="flex-1 text-blue-100 text-sm leading-relaxed">
+            This site is designed to be mobile-first. Please use a phone or tablet for the best experience.
+        </div>
+    </div>
+</div>
 </Container>
 {/if}

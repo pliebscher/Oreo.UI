@@ -22,7 +22,7 @@ a {
 /* Desktop: center content at fixed width */
 @media (min-width: 768px) {
     body {
-        max-width: 640px;  /* Mobile-like width on desktop */
+        max-width: 480px;  /* Mobile-like width on desktop */
         margin: 0 auto;    /* Center horizontally */
         box-shadow: 0 0 20px rgba(233, 230, 230, 0.1);
     }

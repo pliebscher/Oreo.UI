@@ -38,72 +38,59 @@ $effect(() => {
    
 {#if forecast?.currentobservation}
 <Container title={location?.name} id="weather">
-    <div class="w-full shadow-lg rounded-lg bg-sky-700 mt-2 mb-0">        
-        <table class="w-full">
-            <tbody>
-                <tr>
-                    <td class="content-center text-center border-collapse w-16">
-                        <img class="rounded-lg p-0.5" src="{forecast?.data.iconLink[0]}" alt="{forecast?.data.weather[0]}" />
-                    </td>
-                    <td>
-                        <table class=" border-collapse ">
-                            <tbody>            
-                                <tr>
-                                    <td class="text-2xl">{forecast?.currentobservation.Temp}&deg;</td>
-                                    <td>
-                                        <table class="w-full text-sm ml-2">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="/images/wind.svg" alt="Wind" aria-label="Wind" class="" width="20px" />
-                                                    </td>
-                                                    <td>
-                                                        {forecast?.currentobservation.Winds} MPH
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table class="w-full text-sm ml-2">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="/images/hum.png" alt="Humidity" aria-label="Humidity" class="" width="18px" />
-                                                    </td>
-                                                    <td>
-                                                        {forecast?.currentobservation.Relh}% Humidity
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        {forecast?.data.weather[0].split(' then')[0].replace('Slight', '')}
-                                    </td>
-                                </tr>
-                             </tbody>                       
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <img src="{ rederUrl }" alt="Radar Map" class="w-full rounded-lg p-1" />
-
-        <div class="border-0 ml-1 mr-3 pb-2 text-sm">
-            <section class="flex w-full">
-                <div class="w-1/2">
-                    {forecast?.currentobservation.Date}
-                </div>
-                <div class="w-1/2 text-right">
-                    Updated {lastUpdate.toLocaleTimeString()}
-                </div>
-            </section>
+<div class="w-full shadow-lg rounded-lg border-2 border-blue-500/40 bg-gradient-to-br from-slate-800 to-blue-900/60 mt-2 mb-0 backdrop-blur-sm overflow-hidden">        
+<div class="p-4">
+    <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+            <img 
+                class="rounded-lg w-20 h-20 border-2 border-blue-500/30 shadow-md" 
+                src="{forecast?.data.iconLink[0]}" 
+                alt="{forecast?.data.weather[0]}" 
+            />
         </div>
-    </div>    
+        <div class="flex-1">
+            <div class="mb-2">
+                <div class="text-5xl font-bold text-white mb-2">
+                    {forecast?.currentobservation.Temp}&deg;
+                </div>
+                <div class="text-blue-100 text-base">
+                    {forecast?.data.weather[0].split(' then')[0].replace('Slight', '')}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex gap-6 mt-3 text-base">
+        <div class="flex items-center gap-2 text-gray-200">
+            <img src="/images/wind.svg" alt="Wind" aria-label="Wind" width="32px" class="opacity-90" />
+            <span class="font-semibold">{forecast?.currentobservation.Winds} MPH</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-200">
+            <img src="/images/hum.png" alt="Humidity" aria-label="Humidity" width="32px" class="opacity-90" />
+            <span class="font-semibold">{forecast?.currentobservation.Relh}% Humidity</span>
+        </div>
+    </div>
+</div>
+    
+    <div class="px-1 pb-1">
+        <img 
+            src="{ rederUrl }" 
+            alt="Radar Map" 
+            class="w-full rounded-lg border-2 border-blue-500/30 shadow-md" 
+        />
+    </div>
+    
+    <div class="px-4 pb-3 text-sm text-gray-300">
+        <div class="flex justify-between items-center">
+            <div>
+                {forecast?.currentobservation.Date}
+            </div>
+            <div class="text-blue-200">
+                Updated {lastUpdate.toLocaleTimeString()}
+            </div>
+        </div>
+    </div>
+</div>
 </Container>
 {:else}
 <Loader />

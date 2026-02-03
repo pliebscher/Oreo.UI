@@ -11,18 +11,18 @@
     let { title = '', seperator = false, id = '', children }: Props = $props();
 </script>
 
-<div id={id} class="w-full rounded border-2 p-2 mt-1 bg-gradient-to-r from-gray-900 to-blue-700">
+<div id={id} class="w-full rounded-lg border border-blue-500/30 p-4 mt-2 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900/50 shadow-lg backdrop-blur-sm">
     {#if title?.length > 0 || undefined}
-    <div class="text-xl font-medium">
+    <div class="text-lg font-semibold text-white mb-3">
         {title}
         {#if seperator}
-        <div class="w-full">
-            <hr />
+        <div class="w-full mt-2">
+            <hr class="border-blue-500/20" />
         </div>
         {/if}
     </div>
     {/if}                        
-    <div class="">
+    <div>
         {@render children?.()}
     </div>
 </div>
