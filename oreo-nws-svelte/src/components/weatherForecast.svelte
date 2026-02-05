@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import type { nwsForecast } from "../models/nwsForecast";
-    import type { arcGISLocation } from "../models/arcGISLocation";
+    import type { nwsForecast } from "../models/nws/nwsForecast";
+    import type { arcGISLocation } from "../models/arcGIS/arcGISLocation";
     import { getLocation } from "../services/arcGISService";
     import { getForecast } from "../services/nwsForecastService";
     import { currentFav } from "../stores/favoriteStore";

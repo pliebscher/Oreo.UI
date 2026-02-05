@@ -1,7 +1,7 @@
 // TODO: Not working with ssr!
 import { browser } from '$app/environment'
 import { writable, type Writable } from 'svelte/store'
-import type { arcGISSearchSuggestion } from '../models/arcGISSearchSuggestion';
+import type { arcGISSearchSuggestion } from '../models/arcGIS/arcGISSearchSuggestion';
 
 const FAV_KEY: string = 'FAVORITES'
 const CUR_KEY: string = 'SELECTED_FAVORITE'

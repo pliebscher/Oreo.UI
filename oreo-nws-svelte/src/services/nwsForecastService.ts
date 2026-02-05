@@ -1,6 +1,6 @@
 import nwsClient from './nwsClient';
 
-import type { nwsForecast } from '../models/nwsForecast';
+import type { nwsForecast } from '../models/nws/nwsForecast';
 
 // https://forecast.weather.gov/MapClick.php?=&lat=37.82&lon=-122.23&FcstType=json
 export async function getForecast(lat: string, lon: string) {

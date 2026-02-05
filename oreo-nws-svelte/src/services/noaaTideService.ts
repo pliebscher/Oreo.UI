@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import type { arcGISLocation } from '../models/arcGISLocation';
+import type { arcGISLocation } from '../models/arcGIS/arcGISLocation';
 import type { station } from '../models/noaa/station';
 import type { tidePrediction } from '../models/noaa/tidePrediction';
 
