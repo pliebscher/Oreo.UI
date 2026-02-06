@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { arcGISLocation } from "../models/arcGISLocation";
+	import type { arcGISLocation } from "../models/arcGIS/arcGISLocation";
 	import { onMount } from "svelte";    
-    import type { nwsForecast } from "../models/nwsForecast";    
+    import type { nwsForecast } from "../models/nws/nwsForecast";    
     import Container from "./container.svelte";
 	import Loader from "./loader.svelte";
 	

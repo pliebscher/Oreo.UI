@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
 
     import { addFavorite, setCurrentFav } from "../stores/favoriteStore";
-    import type { arcGISSearchSuggestion } from "../models/arcGISSearchSuggestion";
+    import type { arcGISSearchSuggestion } from "../models/arcGIS/arcGISSearchSuggestion";
     import { getLocation, getSuggestions } from "../services/arcGISService";
 
     import Container from "./container.svelte";	
